@@ -1,4 +1,4 @@
-// Simon J Cleary — author website schema (SQLite)
+// Simon J Cleary — author website schema (postgresql)
 // Docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
