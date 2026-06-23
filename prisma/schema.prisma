@@ -1,0 +1,86 @@
+// Simon J Cleary — author website schema (SQLite)
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  source    String   @default("website")
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  series      String   @default("Mike Savage")
+  seriesIndex Int
+  subtitle    String?
+  tagline     String?
+  description String
+  excerpt     String?
+  releaseDate DateTime?
+  status      String   @default("published") // published | forthcoming
+  coverUrl    String
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model JournalPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  body        String
+  category    String   @default("Dispatch")
+  date        DateTime @default(now())
+  readMinutes Int      @default(4)
+}
+
+model EventItem {
+  id        String   @id @default(cuid())
+  title     String
+  venue     String
+  city      String
+  date      DateTime
+  type      String   @default("Reading")
+  url       String?
+  past      Boolean  @default(false)
+}
+
+model PressItem {
+  id     String @id @default(cuid())
+  quote  String
+  source String
+  author String?
+  url    String?
+  rating Int?
+}
+
+model Podcast {
+  id            String   @id @default(cuid())
+  title         String
+  episodeNumber Int
+  description   String
+  audioUrl      String
+  duration      String?
+  publishedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+}

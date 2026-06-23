@@ -1,0 +1,536 @@
+     1→     1→     1→# Worklog — Simon J Cleary Author Website
+     2→     2→     2→
+     3→     3→     3→This is the **shared worklog / brief** for all agents. Read this BEFORE you start.
+     4→     4→     4→Append your own section at the end (see template at bottom of this file).
+     5→     5→     5→
+     6→     6→     6→---
+     7→     7→     7→
+     8→     8→     8→## 0. Project Overview
+     9→     9→     9→
+    10→    10→    10→Build a **top-rated author website** for **Simon J Cleary**, a noir novelist.
+    11→    11→    11→Acting as the author with full creative control ("carte blanche").
+    12→    12→    12→
+    13→    13→    13→**The author**: Simon J Cleary — bald, warm genuine smile, black blazer + white
+    14→    14→    14→button-down shirt. Approachable yet authoritative. Photo at
+    15→    15→    15→`/public/images/author-simon-cleary.jpg`.
+    16→    16→    16→
+    17→    17→    17→**The flagship book** (real cover provided): **"GHOSTS IN THE ASH — A Mike Savage
+    18→    18→    18→Novel"**. Gritty Baltimore noir detective thriller with a supernatural edge
+    19→    19→    19→(ghosts, haunted pasts). Monochrome B&W cover, distressed serif type, rain-slicked
+    20→    20→    20→streets, silhouetted figures. Real cover image at
+    21→    21→    21→`/public/images/books/ghosts-in-the-ash.jpg`.
+    22→    22→    22→
+    23→    23→    23→**Brand direction**: *Baltimore noir with a ghost in every shadow.* Dark,
+    24→    24→    24→atmospheric, literary, cinematic. Monochrome with a single warm **ember/amber**
+    25→    25→    25→accent. Case-file / evidence-tag aesthetics (monospace labels, redaction bars,
+    26→    26→    26→stamped dates). Sophisticated, not gimmicky.
+    27→    27→    27→
+    28→    28→    28→The site is a **single page** at `/` (the only user-visible route) composed of
+    29→    29→    29→anchored sections with a sticky nav.
+    30→    30→    30→
+    31→    31→    31→---
+    32→    32→    32→
+    33→    33→    33→## 1. The Mike Savage Series (books data)
+    34→    34→    34→
+    35→    35→    35→All books share series name **"Mike Savage"**. Book 3 is the real provided cover.
+    36→    36→    36→
+    37→    37→    37→1. **The Long Dark Pier** (2021) — Book 1
+    38→    38→    38→   - Tagline: *"A body on the old recreation pier. A cop who can't let the dead rest."*
+    39→    39→    39→   - Description: "The night the dredge crew pulled a lawyer's body from the water off the old Broadway Pier, Mike Savage was three months from retirement and half a bottle past caring. By morning he'd picked up a case no one wanted and a sound only he could hear — a low, wet knocking that wouldn't stop until the river gave back what it had taken."
+    40→    40→    40→   - Cover art: `/public/images/books/the-long-dark-pier.jpg` (generated; art only, overlay title via CSS)
+    41→    41→    41→
+    42→    42→    42→2. **Ash & Iron** (2023) — Book 2
+    43→    43→    43→   - Tagline: *"When a steelworker's son turns up dead at Sparrows Point, Savage follows the rust all the way home."*
+    44→    44→    44→   - Description: "Sparrows Point built Baltimore, then Baltimore forgot it. When a third-shift foreman's boy is found in the gutted belly of the old cold-mill, Savage walks the catwalks of a dead industry and finds that some furnaces never stopped burning — they just went underground."
+    45→    45→    45→   - Cover art: `/public/images/books/ash-and-iron.jpg` (generated; art only)
+    46→    46→    46→
+    47→    47→    47→3. **Ghosts in the Ash** (2026) — Book 3 — **NEW / FEATURED**
+    48→    48→    48→   - Tagline: *"Six weeks after the fire that swallowed the East Baltimore warehouse district, the ash won't stop talking."*
+    49→    49→    49→   - Description: "Six weeks after the fire that swallowed the East Baltimore warehouse district, the ash is still warm and the city would rather forget. But Detective Mike Savage can't forget the sound he heard in the flames — and when a second body turns up marked with the same impossible burns, he'll walk the thin line between an arson case and something the case files were never meant to hold."
+    50→    50→    50→   - Cover: `/public/images/books/ghosts-in-the-ash.jpg` (REAL cover, use as-is)
+    51→    51→    51→   - Excerpt (opening of Chapter 1 — used in Excerpt section + free chapter lead magnet):
+    52→    52→    52→     "The ash came up between his shoes like it was trying to remember the shape of a foot.
+    53→    53→    53→     Savage stood at the edge of where the warehouse had been and listened to the quiet that fire leaves behind — not silence, never silence, but a low patient hum, the way a held breath hums in the throat of someone who knows they shouldn't be there.
+    54→    54→    54→     Six weeks since the night the sky went orange over East Baltimore and half of Thames Street ran to the river. Six weeks, and the ground was still warm at three in the morning.
+    55→    55→    55→     He didn't believe in ghosts. He believed in the dead, which was different, and the dead, in his experience, were less interested in being believed in than in being heard.
+    56→    56→    56→     Something, down in the ash, was trying to be heard."
+    57→    57→    57→
+    58→    58→    58→4. **The Hollow Tide** (Forthcoming, 2027) — Book 4 — **FORTHCOMING**
+    59→    59→    59→   - Tagline: *"Savage goes off the grid. The tide brings everything back."*
+    60→    60→    60→   - Description: "Coming 2027. When Savage disappears into the marshes of the lower Patapsco, the department writes him off. The river doesn't. The fourth Mike Savage novel takes our haunted detective to the edge of the map — and the edge of himself."
+    61→    61→    61→   - Cover art: `/public/images/books/the-hollow-tide.jpg` (generated; art only)
+    62→    62→    62→
+    63→    63→    63→**Buy links** (use these exact hrefs — they resolve to real retailer search pages):
+    64→    64→    64→- Amazon: `https://www.amazon.com/s?k=simon+j+cleary`
+    65→    65→    65→- Bookshop.org: `https://bookshop.org/search?keywords=simon+j+cleary`
+    66→    66→    66→- Signed copy (direct): `#newsletter` (scrolls to newsletter — "join the list for signed-copy drops")
+    67→    67→    67→- Audible: `https://www.audible.com/search?keywords=simon+j+cleary`
+    68→    68→    68→
+    69→    69→    69→For each published book show: Amazon, Bookshop.org, Audible. For featured also show "Signed copy".
+    70→    70→    70→For forthcoming: show a "Notify me" button → `#newsletter`.
+    71→    71→    71→
+    72→    72→    72→---
+    73→    73→    73→
+    74→    74→    74→## 2. About the Author (bio + credentials)
+    75→    75→    75→
+    76→    76→    76→**Short bio (for About section)**:
+    77→    77→    77→"Simon J Cleary writes noir fiction set in the rain-slicked streets of Baltimore — a city of stubborn beauty, hollowed-out industries, and ghosts that refuse to stay buried. His Mike Savage series follows a homicide detective who hears the dead the way other cops hear rumors: faintly, and always a little too late.
+    78→    78→    78→
+    79→    79→    79→Before turning to fiction, Cleary spent fifteen years as a court reporter in the city's criminal courts, where he learned that the strangest cases never make the paper. He lives in a narrow rowhouse in Fells Point with too many books, one indifferent cat named Marlowe, and a habit of walking the harbor at hours no one should be walking it."
+    80→    80→    80→
+    81→    81→    81→**One-line bio (for hero/footer)**:
+    82→    82→    82→"Noir novelist of the haunted city."
+    83→    83→    83→
+    84→    84→    84→**Credentials / social proof (used as press blurbs)**:
+    85→    85→    85→- "Razor-wire prose with a heartbeat." — *The Baltimore Sun*
+    86→    86→    86→- "The most assured noir debut in a decade." — *Mystery Tribune*
+    87→    87→    87→- "Cleary writes Baltimore like no one since Pelecanos wrote D.C." — *Crimespree Magazine*
+    88→    88→    88→- "Ghosts in the Ash is a haunted, unforgettable ride — Cleary is the real thing." — Julia Spencer-Fleming, *New York Times* bestselling author
+    89→    89→    89→- "A voice that cuts clean to the bone. Savage belongs on the shelf with the great haunted detectives." — *Mystery Scene*
+    90→    90→    90→- "Atmospheric, brutal, and strangely tender. I read it in one sitting." — *Literary Hub*
+    91→    91→    91→
+    92→    92→    92→**Appearances / stats (sprinkle in About or Press)**:
+    93→    93→    93→- "15 years as a court reporter in Baltimore's criminal courts."
+    94→    94→    94→- "Former reporter, *Baltimore City Paper*."
+    95→    95→    95→- "Macavity Award nominee, Best First Novel."
+    96→    96→    96→
+    97→    97→    97→---
+    98→    98→    98→
+    99→    99→    99→## 3. Journal / News (recent posts)
+   100→   100→   100→
+   101→   101→   101→Format: { title, category, date, readMinutes, excerpt, body }
+   102→   102→   102→
+   103→   103→   103→1. **"On Hearing the Dead: Writing Mike Savage"** — *Craft* — 2026-05-12 — 6 min
+   104→   104→   104→   - Excerpt: "People ask where the ghost stuff comes from. The honest answer is the criminal courts, where I spent fifteen years listening to the dead testify through other people's mouths."
+   105→   105→   105→   - Body: 3 short paragraphs (write in Simon's voice — first person, reflective, concrete, Baltimore-specific). End with: "Savage hears what the city won't say out loud. My job is only to get out of the way."
+   106→   106→   106→
+   107→   107→   107→2. **"Five Baltimore Places That Ruin Me"** — *Dispatch* — 2026-04-03 — 5 min
+   108→   108→   108→   - Excerpt: "A walking tour of the corners I can't stop writing about."
+   109→   109→   109→   - Body: a numbered list — (1) The old Broadway Pier, (2) Sparrows Point at dusk, (3) Greenmount Cemetery in November, (4) The pattycake light of Fells Point at 3 a.m., (5) The Amtrak bridge where the trains make the river flinch. One sentence of atmosphere each.
+   110→   110→   110→
+   111→   111→   111→3. **"The Warehouse Fire That Started Ghosts in the Ash"** — *Craft* — 2026-02-18 — 7 min
+   112→   112→   112→   - Excerpt: "Every book begins with a real thing I can't stop seeing. This one began with a fire I could smell from my kitchen."
+   113→   113→   113→   - Body: 3 paragraphs about a real-feeling warehouse fire in East Baltimore, the smell, the way the city moved on, and how that became the novel's opening image.
+   114→   114→   114→
+   115→   115→   115→4. **"Tour Notes: Reading Chapter One Aloud"** — *Tour* — 2026-01-20 — 4 min
+   116→   116→   116→   - Excerpt: "What happens when you say 'ash' out loud forty times in a room full of strangers."
+   117→   117→   117→   - Body: short, funny, slightly tender account of the first reading on tour.
+   118→   118→   118→
+   119→   119→   119→Use ISO date strings. Body is plain text with `\n\n` between paragraphs; the frontend should render paragraphs.
+   120→   120→   120→
+   121→   121→   121→---
+   122→   122→   122→
+   123→   123→   123→## 4. Events
+   124→   124→   124→
+   125→   125→   125→Upcoming (2026):
+   126→   126→   126→- **2026-09-18 19:00** — "Ghosts in the Ash — Launch Reading & Signing" — *The Ivy Bookshop*, Baltimore, MD — type: Reading — url: `https://www.theivybookshop.com`
+   127→   127→   127→- **2026-10-04 14:00** — "Baltimore Book Festival — Noir Panel" — *Inner Harbor*, Baltimore, MD — type: Festival — url: `#`
+   128→   128→   128→- **2026-10-22 18:30** — "In Conversation with Julia Spencer-Fleming" — *Enoch Pratt Free Library*, Baltimore, MD — type: Interview — url: `https://www.prattlibrary.org`
+   129→   129→   129→- **2026-11-08 15:00** — "Writing the Haunted City — Craft Workshop" — *The Ivy Bookshop*, Baltimore, MD — type: Workshop — url: `#`
+   130→   130→   130→
+   131→   131→   131→Past (2025):
+   132→   132→   132→- **2025-11-15** — "Crime on the Chesapeake — Panel" — *Annapolis Maritime Museum*, Annapolis, MD — type: Festival
+   133→   133→   133→- **2025-09-30** — "Ash & Iron Paperback Launch" — *The Ivy Bookshop*, Baltimore, MD — type: Reading
+   134→   134→   134→
+   135→   135→   135→Mark past ones `past: true`. Display date as "Sep 18, 2026". Display upcoming distinctly (highlight next event).
+   136→   136→   136→
+   137→   137→   137→---
+   138→   138→   138→
+   139→   139→   139→## 5. Case File: Mike Savage (world-building extra)
+   140→   140→   140→
+   141→   141→   141→A dossier-style section. Present as a stamped "case file" card.
+   142→   142→   142→
+   143→   143→   143→- **Name**: Det. Michael T. "Mike" Savage
+   144→   144→   144→- **Badge**: Baltimore PD, Homicide, Shield #4471
+   145→   145→   145→- **Precinct**: Eastern District
+   146→   146→   146→- **Years on the force**: 22
+   147→   147→   147→- **The thing he won't say out loud**: He hears the dead. Not words — sounds. A knocking. A wet breath. The hum a held silence makes when someone is trying to be heard.
+   148→   148→   148→- **Carry**: A '94 Crown Vic he won't retire, a notebook that never closes flat, one unlit cigarette he's been "quitting" since 2009.
+   149→   149→   149→- **Home**: A ground-floor apartment in Highlandtown with a radiator that knocks like it's trying to tell him something.
+   150→   150→   150→- **Quirk**: Won't cross under the Amtrak bridge at the river without nodding.
+   151→   151→   151→
+   152→   152→   152→**Baltimore: The Map** (locations featured across the series) — present as a list/grid:
+   153→   153→   153→- Fells Point — cobblestones, water that doesn't sleep, where Simon lives.
+   154→   154→   154→- Sparrows Point — the dead steelmill, rust that remembers fire.
+   155→   155→   155→- Greenmount Cemetery — stone angels and older griefs.
+   156→   156→   156→- Broadway Pier — where Book 1 begins.
+   157→   157→   157→- East Baltimore Warehouse District — where Book 3 begins.
+   158→   158→   158→- The Patapsco marshes — where Book 4 ends.
+   159→   159→   159→
+   160→   160→   160→---
+   161→   161→   161→
+   162→   162→   162→## 6. The Savage Engine (AI Story Lab — signature interactive feature)
+   163→   163→   163→
+   164→   164→   164→**Concept**: A visitor picks a Baltimore setting, an hour of night, and a mood.
+   165→   165→   165→The site generates an original ~100-word noir passage "in the spirit of the Mike
+   166→   166→   166→Savage novels." This is the signature AI showcase. Include a clear, tasteful
+   167→   167→   167→disclaimer: *"Generated by the Savage Engine — an AI writing experiment in Simon's
+   168→   168→   168→voice. Not an actual excerpt from the books."*
+   169→   169→   169→
+   170→   170→   170→**Inputs** (use shadcn RadioGroups / Select / ToggleGroup):
+   171→   171→   171→- Setting: Fells Point · Sparrows Point · The Harbor · Greenmount Ave · The Marshes
+   172→   172→   172→- Hour: Dusk · 3 a.m. · First light
+   173→   173→   173→- Mood: Rain · Grief · Rage · Stillness
+   174→   174→   174→
+   175→   175→   175→**Output**: a single passage (60–120 words), first or third person, present or
+   176→   176→   176→past tense, atmospheric, sensory (rain, ash, rust, breath), no graphic violence,
+   177→   177→   177→ends on a haunting image. Voice: literary noir, clipped, concrete, a little
+   178→   178→   178→tender. Must feel like Simon's prose.
+   179→   179→   179→
+   180→   180→   180→**Backend**: `POST /api/story-lab` body `{ setting, hour, mood }` → `{ story }`.
+   181→   181→   181→Uses `z-ai-web-dev-sdk` LLM (chat completions) with a strong system prompt that
+   182→   182→   182→encodes Simon's voice + the Mike Savage world + the rules above. See §10.
+   183→   183→   183→
+   184→   184→   184→---
+   185→   185→   185→
+   186→   186→   186→## 7. Newsletter (lead magnet — ESSENTIAL)
+   187→   187→   187→
+   188→   188→   188→**Offer**: "Read the first chapter of *Ghosts in the Ash* — free."
+   189→   189→   189→**Secondary**: "Plus *The Savage Dispatch*, a sporadic letter from Simon on craft,
+   190→   190→   190→Baltimore, and what's haunting the desk. No spam. Unsubscribe anytime."
+   191→   191→   191→
+   192→   192→   192→**Form**: name (optional) + email (required). Submit → `POST /api/newsletter/subscribe`.
+   193→   193→   193→On success: a tasteful confirmation state ("Check your inbox — Chapter 1 is on its way.").
+   194→   194→   194→Validate email client + server. Store in `Subscriber` table.
+   195→   195→   195→
+   196→   196→   196→---
+   197→   197→   197→
+   198→   198→   198→## 8. Contact
+   199→   199→   199→
+   200→   200→   200→Form: name, email, subject, message → `POST /api/contact`. Store in `ContactMessage`.
+   201→   201→   201→On success: "Message received. Simon reads everything, replies to most." Also list a
+   202→   202→   202→publicist contact line: "For rights, press, and events, contact: agent@simonjcleary.com (fictional)."
+   203→   203→   203→
+   204→   204→   204→---
+   205→   205→   205→
+   206→   206→   206→## 9. Prisma Schema (SQLite)
+   207→   207→   207→
+   208→   208→   208→Replace `prisma/schema.prisma` entirely with this (keep generator + datasource):
+   209→   209→   209→
+   210→   210→   210→```prisma
+   211→   211→   211→generator client {
+   212→   212→   212→  provider = "prisma-client-js"
+   213→   213→   213→}
+   214→   214→   214→
+   215→   215→   215→datasource db {
+   216→   216→   216→  provider = "sqlite"
+   217→   217→   217→  url      = env("DATABASE_URL")
+   218→   218→   218→}
+   219→   219→   219→
+   220→   220→   220→model Subscriber {
+   221→   221→   221→  id        String   @id @default(cuid())
+   222→   222→   222→  email     String   @unique
+   223→   223→   223→  name      String?
+   224→   224→   224→  source    String   @default("website")
+   225→   225→   225→  createdAt DateTime @default(now())
+   226→   226→   226→}
+   227→   227→   227→
+   228→   228→   228→model ContactMessage {
+   229→   229→   229→  id        String   @id @default(cuid())
+   230→   230→   230→  name      String
+   231→   231→   231→  email     String
+   232→   232→   232→  subject   String?
+   233→   233→   233→  message   String
+   234→   234→   234→  createdAt DateTime @default(now())
+   235→   235→   235→}
+   236→   236→   236→
+   237→   237→   237→model Book {
+   238→   238→   238→  id          String   @id @default(cuid())
+   239→   239→   239→  title       String
+   240→   240→   240→  series      String   @default("Mike Savage")
+   241→   241→   241→  seriesIndex Int
+   242→   242→   242→  subtitle    String?
+   243→   243→   243→  tagline     String?
+   244→   244→   244→  description String
+   245→   245→   245→  excerpt     String?
+   246→   246→   246→  releaseDate DateTime?
+   247→   247→   247→  status      String   @default("published") // published | forthcoming
+   248→   248→   248→  coverUrl    String
+   249→   249→   249→  featured    Boolean  @default(false)
+   250→   250→   250→  createdAt   DateTime @default(now())
+   251→   251→   251→}
+   252→   252→   252→
+   253→   253→   253→model JournalPost {
+   254→   254→   254→  id          String   @id @default(cuid())
+   255→   255→   255→  title       String
+   256→   256→   256→  slug        String   @unique
+   257→   257→   257→  excerpt     String
+   258→   258→   258→  body        String
+   259→   259→   259→  category    String   @default("Dispatch")
+   260→   260→   260→  date        DateTime @default(now())
+   261→   261→   261→  readMinutes Int      @default(4)
+   262→   262→   262→}
+   263→   263→   263→
+   264→   264→   264→model EventItem {
+   265→   265→   265→  id        String   @id @default(cuid())
+   266→   266→   266→  title     String
+   267→   267→   267→  venue     String
+   268→   268→   268→  city      String
+   269→   269→   269→  date      DateTime
+   270→   270→   270→  type      String   @default("Reading")
+   271→   271→   271→  url       String?
+   272→   272→   272→  past      Boolean  @default(false)
+   273→   273→   273→}
+   274→   274→   274→
+   275→   275→   275→model PressItem {
+   276→   276→   276→  id     String @id @default(cuid())
+   277→   277→   277→  quote  String
+   278→   278→   278→  source String
+   279→   279→   279→  author String?
+   280→   280→   280→  url    String?
+   281→   281→   281→  rating Int?
+   282→   282→   282→}
+   283→   283→   283→```
+   284→   284→   284→
+   285→   285→   285→NOTE: SQLite cannot store arrays/maps. Buy links are derived in code (see §1) keyed
+   286→   286→   286→by book title/slug, NOT stored in DB. The frontend maps `book.title` → buy links.
+   287→   287→   287→
+   288→   288→   288→---
+   289→   289→   289→
+   290→   290→   290→## 10. API Contracts (backend agent implements)
+   291→   291→   291→
+   292→   292→   292→Base path: relative `/api/...`. All responses JSON.
+   293→   293→   293→
+   294→   294→   294→1. `POST /api/newsletter/subscribe`
+   295→   295→   295→   - Body: `{ email: string, name?: string }`
+   296→   296→   296→   - 200: `{ ok: true, id: string }` (dedupe on email — if exists, still return ok)
+   297→   297→   297→   - 400: `{ ok: false, error: "Invalid email" }`
+   298→   298→   298→   - Use zod to validate. Insert into `Subscriber`.
+   299→   299→   299→
+   300→   300→   300→2. `POST /api/contact`
+   301→   301→   301→   - Body: `{ name, email, subject?, message }` (all strings)
+   302→   302→   302→   - 200: `{ ok: true, id }`; 400 on validation fail.
+   303→   303→   303→   - Insert into `ContactMessage`.
+   304→   304→   304→
+   305→   305→   305→3. `POST /api/story-lab`
+   306→   306→   306→   - Body: `{ setting: string, hour: string, mood: string }` (validate against allowed lists)
+   307→   307→   307→   - 200: `{ ok: true, story: string }`
+   308→   308→   308→   - Uses `z-ai-web-dev-sdk`:
+   309→   309→   309→     ```ts
+   310→   310→   310→     import ZAI from 'z-ai-web-dev-sdk';
+   311→   311→   311→     const zai = await ZAI.create();
+   312→   312→   312→     const response = await zai.chat.completions.create({
+   313→   313→   313→       model: 'glm-4.6', // or whatever the default chat model is; use create() default
+   314→   314→   314→       messages: [
+   315→   315→   315→         { role: 'system', content: SYSTEM_PROMPT },
+   316→   316→   316→         { role: 'user', content: `Setting: ${setting}\nHour: ${hour}\nMood: ${mood}\n\nWrite the passage.` }
+   317→   317→   317→       ],
+   318→   318→   318→       thinking: { type: 'disabled' },
+   319→   319→   319→       temperature: 0.9,
+   320→   320→   320→       max_tokens: 300,
+   321→   321→   321→     });
+   322→   322→   322→     ```
+   323→   323→   323→   - SYSTEM_PROMPT (exact): 
+   324→   324→   324→     "You are Simon J Cleary, a Baltimore noir novelist and author of the Mike Savage detective series (The Long Dark Pier, Ash & Iron, Ghosts in the Ash). Write a single original noir passage of 60–120 words in Simon's voice: literary, clipped, concrete, sensory (rain, ash, rust, breath, wet light), quietly tender, no graphic violence, ending on a haunting image. It may evoke detective Mike Savage or the city of Baltimore but must NOT quote or summarize the actual books. Write fresh prose. No headings, no preamble, no quotation marks around the whole thing, no meta commentary — just the passage."
+   325→   325→   325→   - Trim the returned story. If empty, return a graceful fallback passage.
+   326→   326→   326→   - NOTE: the SDK must run server-side only. This route must NOT be imported by client code; the client fetches `/api/story-lab` via `fetch`.
+   327→   327→   327→
+   328→   328→   328→**Reads**: The frontend `page.tsx` (a Server Component) reads directly from Prisma via `import { db } from '@/lib/db'`. NO read API routes needed. The three POST routes above are the only API routes.
+   329→   329→   329→
+   330→   330→   330→---
+   331→   331→   331→
+   332→   332→   332→## 11. Seed Data
+   333→   333→   333→
+   334→   334→   334→`prisma/seed.ts` — a script run via `bun run prisma:seed` (add script to package.json:
+   335→   335→   335→`"prisma:seed": "bun prisma/seed.ts"`). It should:
+   336→   336→   336→- Upsert all 4 books (see §1). coverUrl = the public path. featured = true for Ghosts in the Ash. status "forthcoming" for The Hollow Tide. releaseDate as ISO for the three dated ones; The Hollow Tide releaseDate = 2027-03-01.
+   337→   337→   337→- Upsert all 4 journal posts (see §3). slug = kebab of title. date ISO. body with `\n\n`.
+   338→   338→   338→- Upsert all 6 events (see §4). past flags as specified.
+   339→   339→   339→- Upsert all 6 press items (see §2). 
+   340→   340→   340→- Clear tables first (deleteMany) then createMany, so re-running is idempotent.
+   341→   341→   341→
+   342→   342→   342→Book buy links are NOT seeded — derived in frontend from title.
+   343→   343→   343→
+   344→   344→   344→---
+   345→   345→   345→
+   346→   346→   346→## 12. Design System (frontend agent implements)
+   347→   347→   347→
+   348→   348→   348→### Fonts (next/font/google)
+   349→   349→   349→- **Display (serif)**: `Fraunces` — weights 400, 500, 600, 700, 9pt..144pt optical, with `opsz`. Use for h1/h2/book titles. Variable `--font-serif`.
+   350→   350→   350→- **Body/UI (sans)**: `Inter` — variable `--font-sans`.
+   351→   351→   351→- **Mono (labels/case-file)**: `JetBrains Mono` — variable `--font-mono`. Use for evidence tags, dates, file labels, eyebrows.
+   352→   352→   352→
+   353→   353→   353→Wire all three into `layout.tsx` and expose as CSS vars; reference in `@theme inline` of globals.css (`--font-sans`, `--font-serif`, `--font-mono`).
+   354→   354→   354→
+   355→   355→   355→### Theme: dark-first with light "paper" mode (next-themes, defaultTheme="dark")
+   356→   356→   356→Use `oklch` tokens. Dark = noir; Light = warm cream paper.
+   357→   357→   357→
+   358→   358→   358→Dark (`:root` / `.dark`):
+   359→   359→   359→- `--background`: oklch(0.14 0.006 75)   /* near-black warm charcoal */
+   360→   360→   360→- `--foreground`: oklch(0.93 0.012 80)   /* bone */
+   361→   361→   361→- `--card`:        oklch(0.18 0.008 75)
+   362→   362→   362→- `--card-foreground`: oklch(0.93 0.012 80)
+   363→   363→   363→- `--popover`: oklch(0.16 0.008 75)
+   364→   364→   364→- `--popover-foreground`: oklch(0.93 0.012 80)
+   365→   365→   365→- `--primary`: oklch(0.93 0.012 80)      /* bone on dark */
+   366→   366→   366→- `--primary-foreground`: oklch(0.14 0.006 75)
+   367→   367→   367→- `--secondary`: oklch(0.22 0.01 75)
+   368→   368→   368→- `--secondary-foreground`: oklch(0.93 0.012 80)
+   369→   369→   369→- `--muted`: oklch(0.22 0.01 75)
+   370→   370→   370→- `--muted-foreground`: oklch(0.66 0.012 80)
+   371→   371→   371→- `--accent`: oklch(0.68 0.14 55)        /* EMBER/amber — the signature accent */
+   372→   372→   372→- `--accent-foreground`: oklch(0.14 0.006 75)
+   373→   373→   373→- `--destructive`: oklch(0.62 0.19 25)
+   374→   374→   374→- `--border`: oklch(0.93 0.012 80 / 12%)
+   375→   375→   375→- `--input`: oklch(0.93 0.012 80 / 14%)
+   376→   376→   376→- `--ring`: oklch(0.68 0.14 55)          /* ring = ember */
+   377→   377→   377→- `--radius`: 0.5rem
+   378→   378→   378→
+   379→   379→   379→Light (paper) (`:root` without `.dark` — but we default to dark, so light is the alt):
+   380→   380→   380→- `--background`: oklch(0.96 0.012 85)   /* warm cream */
+   381→   381→   381→- `--foreground`: oklch(0.22 0.01 60)    /* ink */
+   382→   382→   382→- `--card`: oklch(0.98 0.01 85)
+   383→   383→   383→- `--card-foreground`: oklch(0.22 0.01 60)
+   384→   384→   384→- `--popover`: oklch(0.98 0.01 85)
+   385→   385→   385→- `--popover-foreground`: oklch(0.22 0.01 60)
+   386→   386→   386→- `--primary`: oklch(0.22 0.01 60)
+   387→   387→   387→- `--primary-foreground`: oklch(0.96 0.012 85)
+   388→   388→   388→- `--secondary`: oklch(0.92 0.012 85)
+   389→   389→   389→- `--secondary-foreground`: oklch(0.22 0.01 60)
+   390→   390→   390→- `--muted`: oklch(0.92 0.012 85)
+   391→   391→   391→- `--muted-foreground`: oklch(0.48 0.012 60)
+   392→   392→   392→- `--accent`: oklch(0.58 0.15 40)        /* deeper ember/rust on paper */
+   393→   393→   393→- `--accent-foreground`: oklch(0.96 0.012 85)
+   394→   394→   394→- `--destructive`: oklch(0.55 0.2 25)
+   395→   395→   395→- `--border`: oklch(0.22 0.01 60 / 14%)
+   396→   396→   396→- `--input`: oklch(0.22 0.01 60 / 16%)
+   397→   397→   397→- `--ring`: oklch(0.58 0.15 40)
+   398→   398→   398→
+   399→   399→   399→Add a custom token `--ash` for a cool ash-gray used in redaction bars / dividers:
+   400→   400→   400→- dark: oklch(0.4 0.004 75); light: oklch(0.6 0.004 75)
+   401→   401→   401→
+   402→   402→   402→### Motifs / atmosphere
+   403→   403→   403→- **Film grain overlay**: a fixed, pointer-events-none full-screen layer with an SVG turbulence noise data-URI at low opacity (~0.05 dark / 0.04 light), `mix-blend-mode: overlay` or `soft-light`. Subtle.
+   404→   404→   404→- **Vignette**: radial-gradient fixed overlay, darker at edges, very subtle.
+   405→   405→   405→- **Ember hairline**: 1px accent rules under section eyebrows.
+   406→   406→   406→- **Case-file labels**: monospace uppercase, letter-spaced, muted-foreground, with a leading `//` or `FILE 003 —`. e.g. `// MIKE SAVAGE · BOOK 03`.
+   407→   407→   407→- **Redaction bar**: a solid `--ash` block used sparingly in the Case File section to "redact" a word, with the word hidden.
+   408→   408→   408→- **Distressed texture**: optional subtle `bg-blend` on the hero only.
+   409→   409→   409→- **Subtle motion**: framer-motion fade+blur-up on sections (opacity 0→1, y 16→0, 0.5s ease). Respect `prefers-reduced-motion`.
+   410→   410→   410→- **Scroll**: smooth via `scroll-behavior: smooth` + `scroll-margin-top` on sections for the sticky header offset.
+   411→   411→   411→
+   412→   412→   412→### Layout / structure
+   413→   413→   413→- Root wrapper: `<div className="min-h-screen flex flex-col">` with `<SiteFooter className="mt-auto" />` so footer sticks to bottom on short content and pushes down on long content (MANDATORY sticky-footer rule).
+   414→   414→   414→- Sticky header (~64px). Section `scroll-mt-20`.
+   415→   415→   415→- Max content width `max-w-6xl` (1152px) for most; `max-w-4xl` for prose (excerpt/journal body); `max-w-7xl` for the books grid.
+   416→   416→   416→- Generous vertical rhythm; sections `py-20 md:py-28`.
+   417→   417→   417→
+   418→   418→   418→### Sections (top → bottom) on `/`
+   419→   419→   419→1. **Header** (sticky): wordmark "SIMON J CLEARY" (Fraunces) + nav (Books, About, Journal, Events, Savage Engine) + "Free Chapter" button + theme toggle + mobile menu (Sheet).
+   420→   420→   420→2. **Hero**: split layout. Left: eyebrow `// THE NEW MIKE SAVAGE NOVEL`, giant Fraunces headline "Ghosts in the Ash", tagline, short hook, CTAs (Buy the book [opens buy sheet] · Read Chapter 1 free [#newsletter]). Right: the real book cover with a soft shadow + ember glow + grain. Atmospheric background (vignette + grain). Include a thin marquee/strip of press logos or a single standout blurb.
+   421→   421→   421→3. **Press strip / Praise**: a row/grid of pull-quotes (the 6 press items) — large serif quotes, source in mono. Could be a marquee or a 3-col grid.
+   422→   422→   422→4. **The Books** (`#books`): "The Mike Savage Series" — eyebrow, heading, intro line. Grid of 4 book cards (cover + title + series index + tagline + description (clamped) + buy buttons). Featured book (Ghosts) gets a "NEW" badge; Hollow Tide gets "FORTHCOMING" + Notify me. Buy buttons open a `Sheet` (buy drawer) per book with Amazon/Bookshop/Audible/Signed options. Use the buy-link map from §1.
+   423→   423→   423→5. **About** (`#about`): author photo (the real one) + bio (paragraphs) + a small "vital stats" list (court reporter 15 yrs, former City Paper, Macavity nominee, lives in Fells Point) + social links (placeholders: Twitter/X, Instagram, Goodreads, Substack — use `#`).
+   424→   424→   424→6. **Excerpt** (`#excerpt`): "An excerpt from Ghosts in the Ash" — the Chapter 1 opening (from §1) rendered as elegant book prose (max-w-3xl, serif, generous leading, drop cap on first letter). A "Read the rest — free" CTA → #newsletter.
+   425→   425→   425→7. **Case File: Mike Savage** (`#casefile`): the dossier (§5) as a stamped card with mono labels + redaction bars + the Baltimore map list. World-building extra.
+   426→   426→   426→8. **The Savage Engine** (`#engine`): the AI Story Lab (§6). Three input groups + a "Generate" button + output area with disclaimer. Loading state while generating. This is a client component.
+   427→   427→   427→9. **Journal** (`#journal`): "The Dispatch" — list of the 4 posts (date in mono, category badge, title, excerpt, read time). Each expands or opens a Dialog with the full body. Keep simple: a list with a "Read" affordance that opens a Dialog.
+   428→   428→   428→10. **Events** (`#events`): upcoming events list (date block + title + venue + type badge + link). Past events in a collapsed/smaller list below.
+   429→   429→   429→11. **Newsletter** (`#newsletter`): the lead-magnet capture (§7). Strong visual: ember accent, the offer, the form, trust line. This is THE conversion section — make it beautiful.
+   430→   430→   430→12. **Contact** (`#contact`): contact form (§8) + publicist line.
+   431→   431→   431→13. **Footer** (sticky bottom): wordmark, short bio line, nav links, social, "© 2026 Simon J Cleary. Site set in Fraunces & Inter." + a tiny "Made with rain and ash." easter egg.
+   432→   432→   432→
+   433→   433→   433→### Components to create (under `src/components/site/`)
+   434→   434→   434→- `site-header.tsx` (client — mobile menu + theme toggle + active-section highlight)
+   435→   435→   435→- `theme-toggle.tsx` (client)
+   436→   436→   436→- `hero.tsx`
+   437→   437→   437→- `press-strip.tsx`
+   438→   438→   438→- `books-section.tsx` (client — buy sheet state)
+   439→   439→   439→- `buy-sheet.tsx` (client — Sheet with retailer links, driven by book title)
+   440→   440→   440→- `about-section.tsx`
+   441→   441→   441→- `excerpt-section.tsx`
+   442→   442→   442→- `case-file-section.tsx`
+   443→   443→   443→- `story-lab.tsx` (client — fetch /api/story-lab)
+   444→   444→   444→- `journal-section.tsx` (client — Dialog for full post body)
+   445→   445→   445→- `events-section.tsx`
+   446→   446→   446→- `newsletter-form.tsx` (client — fetch /api/newsletter/subscribe, sonner toast)
+   447→   447→   447→- `contact-form.tsx` (client — fetch /api/contact, sonner toast)
+   448→   448→   448→- `site-footer.tsx`
+   449→   449→   449→- `section.tsx` (small helper: eyebrow + heading wrapper)
+   450→   450→   450→- `grain.tsx` (the fixed grain+vignette overlay)
+   451→   451→   451→- `marquee.tsx` (optional, for press)
+   452→   452→   452→
+   453→   453→   453→Use existing shadcn/ui components in `src/components/ui/*`. Do NOT recreate them.
+   454→   454→   454→Use `sonner` (already installed) for toasts — there is `src/components/ui/sonner.tsx`.
+   455→   455→   455→Ensure the Toaster is rendered (layout already renders `<Toaster />` from `@/components/ui/toaster`; switch to sonner's `<Toaster />` if you prefer — pick one).
+   456→   456→   456→
+   457→   457→   457→### Buy-link map (frontend constant)
+   458→   458→   458→```ts
+   459→   459→   459→export const BUY_LINKS: Record<string, { amazon: string; bookshop: string; audible: string; signed: string }> = {
+   460→   460→   460→  "Ghosts in the Ash": {
+   461→   461→   461→    amazon: "https://www.amazon.com/s?k=simon+j+cleary",
+   462→   462→   462→    bookshop: "https://bookshop.org/search?keywords=simon+j+cleary",
+   463→   463→   463→    audible: "https://www.audible.com/search?keywords=simon+j+cleary",
+   464→   464→   464→    signed: "#newsletter",
+   465→   465→   465→  },
+   466→   466→   466→  // for the other published books, reuse the same search URLs
+   467→   467→   467→  "The Long Dark Pier": { amazon: "https://www.amazon.com/s?k=simon+j+cleary", bookshop: "https://bookshop.org/search?keywords=simon+j+cleary", audible: "https://www.audible.com/search?keywords=simon+j+cleary", signed: "#newsletter" },
+   468→   468→   468→  "Ash & Iron": { amazon: "https://www.amazon.com/s?k=simon+j+cleary", bookshop: "https://bookshop.org/search?keywords=simon+j+cleary", audible: "https://www.audible.com/search?keywords=simon+j+cleary", signed: "#newsletter" },
+   469→   469→   469→};
+   470→   470→   470→```
+   471→   471→   471→
+   472→   472→   472→### Cover rendering
+   473→   473→   473→- Ghosts in the Ash: render the real image as-is (`/images/books/ghosts-in-the-ash.jpg`).
+   474→   474→   474→- The 3 generated covers: render the art image with a CSS overlay (absolute, bottom) containing the title in Fraunces + "A MIKE SAVAGE NOVEL" in mono + "SIMON J CLEARY" — so they read as book covers consistent with the brand. Wrap in an aspect-[2/3] container with `shadow-2xl`. If a generated image is missing, fall back to a CSS-only cover (gradient + title).
+   475→   475→   475→
+   476→   476→   476→### Image generation (Task C agent)
+   477→   477→   477→Generate 3 portrait (2:3) noir artworks, NO text in image, monochrome, Baltimore:
+   478→   478→   478→- `the-long-dark-pier.jpg` — a rain-slicked wooden pier at night, lone silhouetted figure, wet reflections, fog, moody B&W.
+   479→   479→   479→- `ash-and-iron.jpg` — abandoned steel mill (Sparrows Point), rusted gantries, smoke, rain, B&W, ominous.
+   480→   480→   480→- `the-hollow-tide.jpg` — dark marshland at the river's edge, reeds, distant industrial skyline, low fog, B&W, eerie.
+   481→   481→   481→Save to `/public/images/books/`. Use the image-generation skill (CLI or SDK). 1024x1536 or similar portrait.
+   482→   482→   482→
+   483→   483→   483→---
+   484→   484→   484→
+   485→   485→   485→## 13. File Ownership (avoid conflicts)
+   486→   486→   486→
+   487→   487→   487→- **Backend agent** owns: `prisma/schema.prisma`, `prisma/seed.ts`, `src/lib/db.ts` (already exists — keep/extend), `src/lib/ai.ts` (optional helper for story-lab), `src/app/api/newsletter/subscribe/route.ts`, `src/app/api/contact/route.ts`, `src/app/api/story-lab/route.ts`. Also add `"prisma:seed": "bun prisma/seed.ts"` to package.json scripts. Remove the old `src/app/api/route.ts` if it conflicts (it's a placeholder — safe to delete or leave).
+   488→   488→   488→- **Frontend agent** owns: `src/app/layout.tsx`, `src/app/globals.css`, `src/app/page.tsx`, `src/components/site/**`, `tailwind.config.ts` (only if needed). Does NOT touch prisma or api.
+   489→   489→   489→- **Image agent** owns: only writes files under `/public/images/books/` (the 3 generated jpgs). Reads nothing else.
+   490→   490→   490→- **Shared (read-only)**: `src/components/ui/*`, `src/lib/utils.ts`, `src/lib/db.ts`, `src/hooks/*`.
+   491→   491→   491→
+   492→   492→   492→Both backend & frontend may need types for Book/JournalPost/EventItem/PressItem. Define them inline where needed (small duplication is fine) OR frontend can import the Prisma-generated types: `import type { Book, JournalPost, EventItem, PressItem } from '@prisma/client'`. Prefer importing from `@prisma/client` to avoid drift. NOTE: Prisma types include Date objects; when passing from Server Component to Client Component, serialize dates to ISO strings (Next.js will warn otherwise). Simplest: in page.tsx, map DB rows to plain objects with `date.toISOString()` and `releaseDate?.toISOString() ?? null` before passing to client components. The presentational components can accept `string` dates and format with `date-fns` (already installed).
+   493→   493→   493→
+   494→   494→   494→---
+   495→   495→   495→
+   496→   496→   496→## 14. Non-negotiables / rules
+   497→   497→   497→- Next.js 16 App Router, TypeScript. No other routes visible except `/`.
+   498→   498→   498→- `use api instead of server action` — mutations go through `/api/*` routes, NOT server actions.
+   499→   499→   499→- `z-ai-web-dev-sdk` ONLY on the server (story-lab route).
+   500→   500→   500→- Sticky footer: `min-h-screen flex flex-col` + footer `mt-auto`.
+   501→   501→   501→- Responsive + mobile-first; mobile menu; touch targets ≥44px.
+   502→   502→   502→- Accessibility: semantic HTML, aria labels, alt text, keyboard nav, focus states.
+   503→   503→   503→- Respect `prefers-reduced-motion`.
+   504→   504→   504→- NO indigo/blue colors. Ember/amber accent only.
+   505→   505→   505→- Default theme dark.
+   506→   506→   506→- Loading states for all async (story-lab, forms). Toast feedback for forms (sonner).
+   507→   507→   507→- Keep it FAST: no heavy client bundles, lazy-load the Story Lab / dialogs where sensible.
+   508→   508→   508→
+   509→   509→   509→---
+   510→   510→   510→
+   511→   511→   511→## 15. Agent Task Assignments
+   512→   512→   512→
+   513→   513→   513→- **Task C** (image-generation, parallel) — generate the 3 book artworks.
+   514→   514→   514→- **Task B** (backend, parallel) — Prisma schema, db, seed, 3 API routes.
+   515→   515→   515→- **Task A** (frontend, parallel) — layout, theme, globals, page + all components.
+   516→   516→   516→
+   517→   517→   517→After A+B+C complete, the orchestrator will: `bun run db:push`, `bun run db:generate`, `bun run prisma:seed`, `bun run lint`, then verify with Agent Browser and fix.
+   518→   518→   518→
+   519→   519→   519→---
+   520→   520→   520→
+   521→   521→   521→## Worklog entry template (append your section below)
+   522→   522→   522→
+   523→   523→   523→```
+   524→   524→   524→---
+   525→   525→   525→Task ID: <e.g. B>
+   526→   526→   526→Agent: <name>
+   527→   527→   527→Task: <what you were asked to do>
+   528→   528→   528→
+   529→   529→   529→Work Log:
+   530→   530→   530→- <step>
+   531→   531→   531→- ...
+   532→   532→   532→
+   533→   533→   533→Stage Summary:
+   534→   534→   534→- <results / artifacts / decisions>
+   535→   535→   535→```
+   536→   536→   536→

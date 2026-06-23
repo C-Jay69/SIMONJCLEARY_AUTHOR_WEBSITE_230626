@@ -1,0 +1,665 @@
+     1→     1→"use client";
+     2→     2→
+     3→     3→import * as React from "react";
+     4→     4→import { create } from "zustand";
+     5→     5→import { persist } from "zustand/middleware";
+     6→     6→
+     7→     7→// ─────────────────────────────────────────────────────────────────────
+     8→     8→// Languages
+     9→     9→// ─────────────────────────────────────────────────────────────────────
+    10→    10→
+    11→    11→export type Lang = "en" | "es" | "fr" | "zh";
+    12→    12→
+    13→    13→export const LANGUAGES: { code: Lang; label: string; flag: string }[] = [
+    14→    14→  { code: "en", label: "English", flag: "EN" },
+    15→    15→  { code: "es", label: "Español", flag: "ES" },
+    16→    16→  { code: "fr", label: "Français", flag: "FR" },
+    17→    17→  { code: "zh", label: "简体中文", flag: "中" },
+    18→    18→];
+    19→    19→
+    20→    20→// ─────────────────────────────────────────────────────────────────────
+    21→    21→// Dictionary
+    22→    22→// ─────────────────────────────────────────────────────────────────────
+    23→    23→
+    24→    24→type Dict = Record<string, string>;
+    25→    25→
+    26→    26→const en: Dict = {
+    27→    27→  // Header / nav
+    28→    28→  "nav.books": "Books",
+    29→    29→  "nav.about": "About",
+    30→    30→  "nav.journal": "Journal",
+    31→    31→  "nav.events": "Events",
+    32→    32→  "nav.freeChapter": "Free Chapter",
+    33→    33→  "nav.menu": "Menu",
+    34→    34→  "nav.readChapterFree": "Read Chapter 1 free",
+    35→    35→  "nav.noSpam": "No spam · Unsubscribe anytime",
+    36→    36→
+    37→    37→  // Hero
+    38→    38→  "hero.eyebrow": "// THE DEBUT DUKE SAVAGE NOVEL",
+    39→    39→  "hero.comingSoon": "Coming soon",
+    40→    40→  "hero.readChapterFree": "Read Chapter 1 free",
+    41→    41→  "hero.seriesTag": "The Duke Savage Trilogy · Book 01 of 03",
+    42→    42→  "hero.fileTag": "FILE 001 · DUKE SAVAGE · DEBUT",
+    43→    43→
+    44→    44→  // Books
+    45→    45→  "books.eyebrow": "// THE BOOKS",
+    46→    46→  "books.title": "The Duke Savage Trilogy",
+    47→    47→  "books.intro": "Three novels. One investigator. A mechanism that learns to hide.",
+    48→    48→  "books.new": "NEW",
+    49→    49→  "books.forthcoming": "FORTHCOMING",
+    50→    50→  "books.book": "Book",
+    51→    51→  "books.comingSoon": "Coming soon",
+    52→    52→  "books.notifyMe": "Notify me",
+    53→    53→
+    54→    54→  // About
+    55→    55→  "about.eyebrow": "// ABOUT THE AUTHOR",
+    56→    56→  "about.title": "Irish-born. Los Angeles-set. Writing the system.",
+    57→    57→  "about.intro": "A debut novelist exploring how power learns to be invisible.",
+    58→    58→  "about.born": "Born",
+    59→    59→  "about.background": "Background",
+    60→    60→  "about.debut": "Debut",
+    61→    61→  "about.series": "Series",
+    62→    62→  "about.setting": "Setting",
+    63→    63→  "about.caption": "Simon J Cleary · Author photo",
+    64→    64→  "about.bornValue": "Ireland",
+    65→    65→  "about.backgroundValue": "Writer & entrepreneur",
+    66→    66→  "about.debutValue": "Ghosts in the Ash — 27 drafts",
+    67→    67→  "about.seriesValue": "The Duke Savage Trilogy",
+    68→    68→  "about.settingValue": "Los Angeles · Baltimore · Arlington",
+    69→    69→
+    70→    70→  // Excerpt
+    71→    71→  "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
+    72→    72→  "excerpt.title": "The prologue from Ghosts in the Ash",
+    73→    73→  "excerpt.intro": "The origin of everything that follows. The lamp that never goes out.",
+    74→    74→  "excerpt.cta": "Like what you read? The first chapter is on the house.",
+    75→    75→  "excerpt.button": "Read the rest — free",
+    76→    76→
+    77→    77→  // Case file
+    78→    78→  "casefile.eyebrow": "// CASE FILE 001",
+    79→    79→  "casefile.intro": "A working dossier on the investigator at the center of the trilogy. Compiled from case files, bar napkins, and the occasional 3 a.m. phone call.",
+    80→    80→  "casefile.confidential": "Confidential",
+    81→    81→  "casefile.pi": "Private Investigator",
+    82→    82→  "casefile.subjectProfile": "Subject Profile",
+    83→    83→  "casefile.fileTag": "FILE 001 · SAVAGE",
+    84→    84→  "casefile.name": "Name",
+    85→    85→  "casefile.age": "Age",
+    86→    86→  "casefile.formerly": "Formerly",
+    87→    87→  "casefile.now": "Now",
+    88→    88→  "casefile.broke": "What broke him",
+    89→    89→  "casefile.kryptonite": "Kryptonite",
+    90→    90→  "casefile.motivation": "Motivation",
+    91→    91→  "casefile.voice": "Voice",
+    92→    92→  "casefile.theCase": "The case",
+    93→    93→  "casefile.territory": "The Territory",
+    94→    94→  "casefile.territoryIntro": "Locations featured across the trilogy. A mechanism that runs from a desk in the Arts District to a footnote in a federal policy report.",
+    95→    95→  "casefile.updated": "Updated",
+    96→    96→  "casefile.status": "Status",
+    97→    97→  "casefile.active": "Active",
+    98→    98→
+    99→    99→  // Podcast
+   100→   100→  "podcast.eyebrow": "// THE DISPATCH · AUDIO",
+   101→   101→  "podcast.title": "The Podcast",
+   102→   102→  "podcast.intro": "Conversations on craft, the system, and what the city won't say out loud. Hosted by Simon J. Cleary.",
+   103→   103→  "podcast.episode": "Episode",
+   104→   104→  "podcast.latest": "Latest",
+   105→   105→  "podcast.comingSoon": "Coming soon.",
+   106→   106→  "podcast.comingSoonDesc": "Episodes will appear here as they are published. Join the dispatch below to be notified when the first one drops.",
+   107→   107→
+   108→   108→  // Events
+   109→   109→  "events.eyebrow": "// APPEARANCES",
+   110→   110→  "events.title": "Events",
+   111→   111→  "events.intro": "Readings, panels, and the occasional workshop. To be announced.",
+   112→   112→  "events.upcoming": "Upcoming",
+   113→   113→  "events.past": "Past",
+   114→   114→  "events.tba": "T.B.A.",
+   115→   115→  "events.tbaDesc": "Appearances, readings, and festival dates for the Ghosts in the Ash launch will be posted here as they are confirmed. Join the dispatch below to be the first to know.",
+   116→   116→  "events.upcomingTba": "Upcoming · T.B.A.",
+   117→   117→  "events.upcomingTbaDesc": "New appearances will be posted here as they are confirmed.",
+   118→   118→
+   119→   119→  // Journal
+   120→   120→  "journal.eyebrow": "// THE DISPATCH",
+   121→   121→  "journal.title": "Journal",
+   122→   122→  "journal.intro": "Notes on craft, the writing life, and what the system is doing now. Sporadic. No spam.",
+   123→   123→  "journal.minRead": "MIN READ",
+   124→   124→
+   125→   125→  // Newsletter
+   126→   126→  "newsletter.title": "Read the opening of Ghosts in the Ash — free.",
+   127→   127→  "newsletter.intro": "Plus The Savage Dispatch, a sporadic letter from Simon on craft, the writing life, and what the system is doing now. No spam. Unsubscribe anytime.",
+   128→   128→  "newsletter.name": "NAME (OPTIONAL)",
+   129→   129→  "newsletter.email": "EMAIL *",
+   130→   130→  "newsletter.namePlaceholder": "Savage, Duke (allegedly)",
+   131→   131→  "newsletter.button": "Send me the opening",
+   132→   132→  "newsletter.sending": "Sending…",
+   133→   133→  "newsletter.success": "Check your inbox",
+   134→   134→  "newsletter.successDesc": "The opening of Ghosts in the Ash is on its way. Look for a message from Simon in the next few minutes.",
+   135→   135→  "newsletter.sendAnother": "Send another",
+   136→   136→  "newsletter.emailRequired": "Email is required",
+   137→   137→  "newsletter.emailRequiredDesc": "We need somewhere to send the opening.",
+   138→   138→  "newsletter.emailInvalid": "That email doesn't look right",
+   139→   139→  "newsletter.emailInvalidDesc": "Try again — we promise not to share it.",
+   140→   140→  "newsletter.whatYouGet.opening": "The complete opening of Ghosts in the Ash, as a PDF.",
+   141→   141→  "newsletter.whatYouGet.dispatch": "The Savage Dispatch — a sporadic letter from Simon on craft and the writing life.",
+   142→   142→  "newsletter.whatYouGet.signed": "First crack at signed-copy drops and tour dates.",
+   143→   143→
+   144→   144→  // Contact
+   145→   145→  "contact.title": "Get in touch",
+   146→   146→  "contact.intro": "For press, rights, events, or just to say hello.",
+   147→   147→  "contact.name": "NAME *",
+   148→   148→  "contact.email": "EMAIL *",
+   149→   149→  "contact.subject": "SUBJECT",
+   150→   150→  "contact.message": "MESSAGE",
+   151→   151→  "contact.button": "Send message",
+   152→   152→  "contact.sending": "Sending…",
+   153→   153→  "contact.success": "Message received",
+   154→   154→  "contact.successDesc": "Simon reads everything, replies to most.",
+   155→   155→  "contact.error": "Something went wrong",
+   156→   156→  "contact.errorDesc": "Please try again in a moment.",
+   157→   157→
+   158→   158→  // Footer
+   159→   159→  "footer.tagline": "Literary crime. The system as a weapon.",
+   160→   160→  "footer.bio": "The Duke Savage trilogy. Los Angeles, Baltimore, Arlington — and the mechanism that learns to hide.",
+   161→   161→  "footer.index": "// Index",
+   162→   162→  "footer.elsewhere": "// Elsewhere",
+   163→   163→  "footer.copyright": "Site set in Fraunces & Inter",
+   164→   164→  "footer.madeWith": "Made with rain and ash.",
+   165→   165→  "footer.admin": "Admin",
+   166→   166→
+   167→   167→  // Theme toggle
+   168→   168→  "theme.toLight": "Switch to light (paper) theme",
+   169→   169→  "theme.toDark": "Switch to dark (noir) theme",
+   170→   170→
+   171→   171→  // Language
+   172→   172→  "lang.label": "Language",
+   173→   173→  "lang.switch": "Switch language",
+   174→   174→};
+   175→   175→
+   176→   176→const es: Dict = {
+   177→   177→  // Header / nav
+   178→   178→  "nav.books": "Libros",
+   179→   179→  "nav.about": "Biografía",
+   180→   180→  "nav.journal": "Diario",
+   181→   181→  "nav.events": "Eventos",
+   182→   182→  "nav.freeChapter": "Capítulo gratis",
+   183→   183→  "nav.menu": "Menú",
+   184→   184→  "nav.readChapterFree": "Lee el capítulo 1 gratis",
+   185→   185→  "nav.noSpam": "Nada de spam · Cancela cuando quieras",
+   186→   186→
+   187→   187→  // Hero
+   188→   188→  "hero.eyebrow": "// LA PRIMERA NOVELA DE DUKE SAVAGE",
+   189→   189→  "hero.comingSoon": "Próximamente",
+   190→   190→  "hero.readChapterFree": "Lee el capítulo 1 gratis",
+   191→   191→  "hero.seriesTag": "La trilogía de Duke Savage · Libro 01 de 03",
+   192→   192→  "hero.fileTag": "EXPEDIENTE 001 · DUKE SAVAGE · DEBUT",
+   193→   193→
+   194→   194→  // Books
+   195→   195→  "books.eyebrow": "// LOS LIBROS",
+   196→   196→  "books.title": "La trilogía de Duke Savage",
+   197→   197→  "books.intro": "Tres novelas. Un investigador. Un mecanismo que aprende a ocultarse.",
+   198→   198→  "books.new": "NUEVO",
+   199→   199→  "books.forthcoming": "PRÓXIMAMENTE",
+   200→   200→  "books.book": "Libro",
+   201→   201→  "books.comingSoon": "Próximamente",
+   202→   202→  "books.notifyMe": "Avísame",
+   203→   203→
+   204→   204→  // About
+   205→   205→  "about.eyebrow": "// SOBRE EL AUTOR",
+   206→   206→  "about.title": "Nacido en Irlanda. Ambientada en Los Ángeles. Escribiendo el sistema.",
+   207→   207→  "about.intro": "Un novelista debut que explora cómo el poder aprende a hacerse invisible.",
+   208→   208→  "about.born": "Nacido en",
+   209→   209→  "about.background": "Formación",
+   210→   210→  "about.debut": "Debut",
+   211→   211→  "about.series": "Serie",
+   212→   212→  "about.setting": "Ambientación",
+   213→   213→  "about.caption": "Simon J Cleary · Foto del autor",
+   214→   214→  "about.bornValue": "Irlanda",
+   215→   215→  "about.backgroundValue": "Escritor y empresario",
+   216→   216→  "about.debutValue": "Ghosts in the Ash — 27 borradores",
+   217→   217→  "about.seriesValue": "La trilogía de Duke Savage",
+   218→   218→  "about.settingValue": "Los Ángeles · Baltimore · Arlington",
+   219→   219→
+   220→   220→  // Excerpt
+   221→   221→  "excerpt.eyebrow": "// PRÓLOGO · OMAHA, 1999",
+   222→   222→  "excerpt.title": "El prólogo de Ghosts in the Ash",
+   223→   223→  "excerpt.intro": "El origen de todo lo que sigue. La lámpara que nunca se apaga.",
+   224→   224→  "excerpt.cta": "¿Te gustó? El primer capítulo va por cuenta de la casa.",
+   225→   225→  "excerpt.button": "Lee el resto — gratis",
+   226→   226→
+   227→   227→  // Case file
+   228→   228→  "casefile.eyebrow": "// EXPEDIENTE 001",
+   229→   229→  "casefile.intro": "Un dosier de trabajo sobre el investigador en el centro de la trilogía. Recopilado a partir de archivos, servilletas de bar y alguna que otra llamada a las 3 de la madrugada.",
+   230→   230→  "casefile.confidential": "Confidencial",
+   231→   231→  "casefile.pi": "Investigador privado",
+   232→   232→  "casefile.subjectProfile": "Perfil del sujeto",
+   233→   233→  "casefile.fileTag": "EXPEDIENTE 001 · SAVAGE",
+   234→   234→  "casefile.name": "Nombre",
+   235→   235→  "casefile.age": "Edad",
+   236→   236→  "casefile.formerly": "Anteriormente",
+   237→   237→  "casefile.now": "Ahora",
+   238→   238→  "casefile.broke": "Lo que lo quebró",
+   239→   239→  "casefile.kryptonite": "Kryptonita",
+   240→   240→  "casefile.motivation": "Motivación",
+   241→   241→  "casefile.voice": "Voz",
+   242→   242→  "casefile.theCase": "El caso",
+   243→   243→  "casefile.territory": "El territorio",
+   244→   244→  "casefile.territoryIntro": "Localizaciones destacadas en la trilogía. Un mecanismo que va de un escritorio en el Arts District a una nota al pie en un informe de política federal.",
+   245→   245→  "casefile.updated": "Actualizado",
+   246→   246→  "casefile.status": "Estado",
+   247→   247→  "casefile.active": "Activo",
+   248→   248→
+   249→   249→  // Podcast
+   250→   250→  "podcast.eyebrow": "// EL DISPATCH · AUDIO",
+   251→   251→  "podcast.title": "El pódcast",
+   252→   252→  "podcast.intro": "Conversaciones sobre el oficio, el sistema y lo que la ciudad no dice en voz alta. Presentado por Simon J. Cleary.",
+   253→   253→  "podcast.episode": "Episodio",
+   254→   254→  "podcast.latest": "Último",
+   255→   255→  "podcast.comingSoon": "Próximamente.",
+   256→   256→  "podcast.comingSoonDesc": "Los episodios aparecerán aquí a medida que se publiquen. Únete al dispatch para ser el primero en saber cuándo sale el primero.",
+   257→   257→
+   258→   258→  // Events
+   259→   259→  "events.eyebrow": "// APARICIONES",
+   260→   260→  "events.title": "Eventos",
+   261→   261→  "events.intro": "Lecturas, paneles y algún que otro taller. Por anunciar.",
+   262→   262→  "events.upcoming": "Próximos",
+   263→   263→  "events.past": "Pasados",
+   264→   264→  "events.tba": "P. A. C.",
+   265→   265→  "events.tbaDesc": "Las apariciones, lecturas y fechas de festivales para el lanzamiento de Ghosts in the Ash se publicarán aquí a medida que se confirmen. Únete al dispatch para ser el primero en saberlo.",
+   266→   266→  "events.upcomingTba": "Próximos · P. A. C.",
+   267→   267→  "events.upcomingTbaDesc": "Las nuevas apariciones se publicarán aquí a medida que se confirmen.",
+   268→   268→
+   269→   269→  // Journal
+   270→   270→  "journal.eyebrow": "// EL DISPATCH",
+   271→   271→  "journal.title": "Diario",
+   272→   272→  "journal.intro": "Notas sobre el oficio, la vida de escritor y lo que hace ahora el sistema. Esporádico. Nada de spam.",
+   273→   273→  "journal.minRead": "MIN DE LECTURA",
+   274→   274→
+   275→   275→  // Newsletter
+   276→   276→  "newsletter.title": "Lee el inicio de Ghosts in the Ash — gratis.",
+   277→   277→  "newsletter.intro": "Además, The Savage Dispatch, una carta esporádica de Simon sobre el oficio, la vida de escritor y lo que hace ahora el sistema. Nada de spam. Cancela cuando quieras.",
+   278→   278→  "newsletter.name": "NOMBRE (OPCIONAL)",
+   279→   279→  "newsletter.email": "CORREO *",
+   280→   280→  "newsletter.namePlaceholder": "Savage, Duke (presuntamente)",
+   281→   281→  "newsletter.button": "Envíenme el inicio",
+   282→   282→  "newsletter.sending": "Enviando…",
+   283→   283→  "newsletter.success": "Revisa tu bandeja de entrada",
+   284→   284→  "newsletter.successDesc": "El inicio de Ghosts in the Ash va de camino. Busca un mensaje de Simon en los próximos minutos.",
+   285→   285→  "newsletter.sendAnother": "Enviar otro",
+   286→   286→  "newsletter.emailRequired": "El correo es obligatorio",
+   287→   287→  "newsletter.emailRequiredDesc": "Necesitamos un lugar donde enviar el inicio.",
+   288→   288→  "newsletter.emailInvalid": "Ese correo no parece correcto",
+   289→   289→  "newsletter.emailInvalidDesc": "Inténtalo de nuevo — prometemos no compartirlo.",
+   290→   290→  "newsletter.whatYouGet.opening": "El inicio completo de Ghosts in the Ash, en PDF.",
+   291→   291→  "newsletter.whatYouGet.dispatch": "The Savage Dispatch — una carta esporádica de Simon sobre el oficio y la vida de escritor.",
+   292→   292→  "newsletter.whatYouGet.signed": "Primer acceso a copias firmadas y fechas de gira.",
+   293→   293→
+   294→   294→  // Contact
+   295→   295→  "contact.title": "Ponte en contacto",
+   296→   296→  "contact.intro": "Para prensa, derechos, eventos o simplemente para saludar.",
+   297→   297→  "contact.name": "NOMBRE *",
+   298→   298→  "contact.email": "CORREO *",
+   299→   299→  "contact.subject": "ASUNTO",
+   300→   300→  "contact.message": "MENSAJE",
+   301→   301→  "contact.button": "Enviar mensaje",
+   302→   302→  "contact.sending": "Enviando…",
+   303→   303→  "contact.success": "Mensaje recibido",
+   304→   304→  "contact.successDesc": "Simon lo lee todo, responde a la mayoría.",
+   305→   305→  "contact.error": "Algo salió mal",
+   306→   306→  "contact.errorDesc": "Por favor, inténtalo de nuevo en un momento.",
+   307→   307→
+   308→   308→  // Footer
+   309→   309→  "footer.tagline": "Novela negra literaria. El sistema como arma.",
+   310→   310→  "footer.bio": "La trilogía de Duke Savage. Los Ángeles, Baltimore, Arlington — y el mecanismo que aprende a ocultarse.",
+   311→   311→  "footer.index": "// Índice",
+   312→   312→  "footer.elsewhere": "// En otros sitios",
+   313→   313→  "footer.copyright": "Sitio en Fraunces e Inter",
+   314→   314→  "footer.madeWith": "Hecho con lluvia y ceniza.",
+   315→   315→  "footer.admin": "Admin",
+   316→   316→
+   317→   317→  // Theme toggle
+   318→   318→  "theme.toLight": "Cambiar a tema claro (papel)",
+   319→   319→  "theme.toDark": "Cambiar a tema oscuro (noir)",
+   320→   320→
+   321→   321→  // Language
+   322→   322→  "lang.label": "Idioma",
+   323→   323→  "lang.switch": "Cambiar idioma",
+   324→   324→};
+   325→   325→
+   326→   326→const fr: Dict = {
+   327→   327→  // Header / nav
+   328→   328→  "nav.books": "Livres",
+   329→   329→  "nav.about": "Biographie",
+   330→   330→  "nav.journal": "Journal",
+   331→   331→  "nav.events": "Événements",
+   332→   332→  "nav.freeChapter": "Chapitre gratuit",
+   333→   333→  "nav.menu": "Menu",
+   334→   334→  "nav.readChapterFree": "Lire le chapitre 1 gratuitement",
+   335→   335→  "nav.noSpam": "Pas de spam · Désabonnement à tout moment",
+   336→   336→
+   337→   337→  // Hero
+   338→   338→  "hero.eyebrow": "// LE PREMIER ROMAN DE DUKE SAVAGE",
+   339→   339→  "hero.comingSoon": "Bientôt disponible",
+   340→   340→  "hero.readChapterFree": "Lire le chapitre 1 gratuitement",
+   341→   341→  "hero.seriesTag": "La trilogie Duke Savage · Livre 01 sur 03",
+   342→   342→  "hero.fileTag": "DOSSIER 001 · DUKE SAVAGE · PREMIER ROMAN",
+   343→   343→
+   344→   344→  // Books
+   345→   345→  "books.eyebrow": "// LES LIVRES",
+   346→   346→  "books.title": "La trilogie Duke Savage",
+   347→   347→  "books.intro": "Trois romans. Un enquêteur. Un mécanisme qui apprend à se cacher.",
+   348→   348→  "books.new": "NOUVEAU",
+   349→   349→  "books.forthcoming": "À PARAÎTRE",
+   350→   350→  "books.book": "Livre",
+   351→   351→  "books.comingSoon": "Bientôt disponible",
+   352→   352→  "books.notifyMe": "Prévenez-moi",
+   353→   353→
+   354→   354→  // About
+   355→   355→  "about.eyebrow": "// L'AUTEUR",
+   356→   356→  "about.title": "Né en Irlande. L'action à Los Angeles. Écrire le système.",
+   357→   357→  "about.intro": "Un romancier du premier roman qui explore comment le pouvoir apprend à devenir invisible.",
+   358→   358→  "about.born": "Né en",
+   359→   359→  "about.background": "Parcours",
+   360→   360→  "about.debut": "Premier roman",
+   361→   361→  "about.series": "Série",
+   362→   362→  "about.setting": "Décors",
+   363→   363→  "about.caption": "Simon J Cleary · Photo de l'auteur",
+   364→   364→  "about.bornValue": "Irlande",
+   365→   365→  "about.backgroundValue": "Écrivain et entrepreneur",
+   366→   366→  "about.debutValue": "Ghosts in the Ash — 27 versions",
+   367→   367→  "about.seriesValue": "La trilogie Duke Savage",
+   368→   368→  "about.settingValue": "Los Angeles · Baltimore · Arlington",
+   369→   369→
+   370→   370→  // Excerpt
+   371→   371→  "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
+   372→   372→  "excerpt.title": "Le prologue de Ghosts in the Ash",
+   373→   373→  "excerpt.intro": "L'origine de tout ce qui suit. La lampe qui ne s'éteint jamais.",
+   374→   374→  "excerpt.cta": "Ça vous plaît ? Le premier chapitre est offert.",
+   375→   375→  "excerpt.button": "Lire la suite — gratuitement",
+   376→   376→
+   377→   377→  // Case file
+   378→   378→  "casefile.eyebrow": "// DOSSIER 001",
+   379→   379→  "casefile.intro": "Un dossier de travail sur l'enquêteur au cœur de la trilogie. Compilé à partir de dossiers, de serviettes de bar et de quelques appels à 3 heures du matin.",
+   380→   380→  "casefile.confidential": "Confidentiel",
+   381→   381→  "casefile.pi": "Détective privé",
+   382→   382→  "casefile.subjectProfile": "Profil du sujet",
+   383→   383→  "casefile.fileTag": "DOSSIER 001 · SAVAGE",
+   384→   384→  "casefile.name": "Nom",
+   385→   385→  "casefile.age": "Âge",
+   386→   386→  "casefile.formerly": "Auparavant",
+   387→   387→  "casefile.now": "Actuellement",
+   388→   388→  "casefile.broke": "Ce qui l'a brisé",
+   389→   389→  "casefile.kryptonite": "Kryptonite",
+   390→   390→  "casefile.motivation": "Motivation",
+   391→   391→  "casefile.voice": "Voix",
+   392→   392→  "casefile.theCase": "L'affaire",
+   393→   393→  "casefile.territory": "Le territoire",
+   394→   394→  "casefile.territoryIntro": "Lieux emblématiques de la trilogie. Un mécanisme qui va d'un bureau du Arts District à une note de bas de page dans un rapport de politique fédérale.",
+   395→   395→  "casefile.updated": "Mis à jour",
+   396→   396→  "casefile.status": "Statut",
+   397→   397→  "casefile.active": "Actif",
+   398→   398→
+   399→   399→  // Podcast
+   400→   400→  "podcast.eyebrow": "// LE DISPATCH · AUDIO",
+   401→   401→  "podcast.title": "Le podcast",
+   402→   402→  "podcast.intro": "Conversations sur l'art, le système et ce que la ville ne dit pas à voix haute. Présenté par Simon J. Cleary.",
+   403→   403→  "podcast.episode": "Épisode",
+   404→   404→  "podcast.latest": "Dernier",
+   405→   405→  "podcast.comingSoon": "Bientôt disponible.",
+   406→   406→  "podcast.comingSoonDesc": "Les épisodes apparaîtront ici au fur et à mesure de leur publication. Inscrivez-vous au dispatch pour être averti de la sortie du premier.",
+   407→   407→
+   408→   408→  // Events
+   409→   409→  "events.eyebrow": "// APPARITIONS",
+   410→   410→  "events.title": "Événements",
+   411→   411→  "events.intro": "Lectures, tables rondes et quelques ateliers. À annoncer.",
+   412→   412→  "events.upcoming": "À venir",
+   413→   413→  "events.past": "Passés",
+   414→   414→  "events.tba": "À annoncer",
+   415→   415→  "events.tbaDesc": "Les apparitions, lectures et dates de festivals pour le lancement de Ghosts in the Ash seront publiées ici au fur et à mesure de leur confirmation. Inscrivez-vous au dispatch pour être le premier informé.",
+   416→   416→  "events.upcomingTba": "À venir · À annoncer",
+   417→   417→  "events.upcomingTbaDesc": "Les nouvelles apparitions seront publiées ici au fur et à mesure de leur confirmation.",
+   418→   418→
+   419→   419→  // Journal
+   420→   420→  "journal.eyebrow": "// LE DISPATCH",
+   421→   421→  "journal.title": "Journal",
+   422→   422→  "journal.intro": "Notes sur l'art, la vie d'écrivain et ce que fait le système maintenant. Sporadique. Pas de spam.",
+   423→   423→  "journal.minRead": "MIN DE LECTURE",
+   424→   424→
+   425→   425→  // Newsletter
+   426→   426→  "newsletter.title": "Lire le début de Ghosts in the Ash — gratuitement.",
+   427→   427→  "newsletter.intro": "Plus The Savage Dispatch, une lettre sporadique de Simon sur l'art, la vie d'écrivain et ce que fait le système maintenant. Pas de spam. Désabonnement à tout moment.",
+   428→   428→  "newsletter.name": "NOM (FACULTATIF)",
+   429→   429→  "newsletter.email": "E-MAIL *",
+   430→   430→  "newsletter.namePlaceholder": "Savage, Duke (soi-disant)",
+   431→   431→  "newsletter.button": "Envoyez-moi le début",
+   432→   432→  "newsletter.sending": "Envoi…",
+   433→   433→  "newsletter.success": "Vérifiez votre boîte de réception",
+   434→   434→  "newsletter.successDesc": "Le début de Ghosts in the Ash est en route. Cherchez un message de Simon dans les prochaines minutes.",
+   435→   435→  "newsletter.sendAnother": "En envoyer un autre",
+   436→   436→  "newsletter.emailRequired": "L'e-mail est requis",
+   437→   437→  "newsletter.emailRequiredDesc": "Nous avons besoin d'un endroit où envoyer le début.",
+   438→   438→  "newsletter.emailInvalid": "Cet e-mail n'a pas l'air correct",
+   439→   439→  "newsletter.emailInvalidDesc": "Réessayez — nous promettons de ne pas le partager.",
+   440→   440→  "newsletter.whatYouGet.opening": "Le début complet de Ghosts in the Ash, en PDF.",
+   441→   441→  "newsletter.whatYouGet.dispatch": "The Savage Dispatch — une lettre sporadique de Simon sur l'art et la vie d'écrivain.",
+   442→   442→  "newsletter.whatYouGet.signed": "Accès en avant-première aux exemplaires dédicacés et aux dates de tournée.",
+   443→   443→
+   444→   444→  // Contact
+   445→   445→  "contact.title": "Prendre contact",
+   446→   446→  "contact.intro": "Pour la presse, les droits, les événements ou simplement pour dire bonjour.",
+   447→   447→  "contact.name": "NOM *",
+   448→   448→  "contact.email": "E-MAIL *",
+   449→   449→  "contact.subject": "SUJET",
+   450→   450→  "contact.message": "MESSAGE",
+   451→   451→  "contact.button": "Envoyer le message",
+   452→   452→  "contact.sending": "Envoi…",
+   453→   453→  "contact.success": "Message reçu",
+   454→   454→  "contact.successDesc": "Simon lit tout, répond à la plupart.",
+   455→   455→  "contact.error": "Une erreur s'est produite",
+   456→   456→  "contact.errorDesc": "Veuillez réessayer dans un instant.",
+   457→   457→
+   458→   458→  // Footer
+   459→   459→  "footer.tagline": "Roman noir littéraire. Le système comme arme.",
+   460→   460→  "footer.bio": "La trilogie Duke Savage. Los Angeles, Baltimore, Arlington — et le mécanisme qui apprend à se cacher.",
+   461→   461→  "footer.index": "// Index",
+   462→   462→  "footer.elsewhere": "// Ailleurs",
+   463→   463→  "footer.copyright": "Site en Fraunces et Inter",
+   464→   464→  "footer.madeWith": "Fait avec de la pluie et des cendres.",
+   465→   465→  "footer.admin": "Admin",
+   466→   466→
+   467→   467→  // Theme toggle
+   468→   468→  "theme.toLight": "Passer au thème clair (papier)",
+   469→   469→  "theme.toDark": "Passer au thème sombre (noir)",
+   470→   470→
+   471→   471→  // Language
+   472→   472→  "lang.label": "Langue",
+   473→   473→  "lang.switch": "Changer de langue",
+   474→   474→};
+   475→   475→
+   476→   476→const zh: Dict = {
+   477→   477→  // Header / nav
+   478→   478→  "nav.books": "作品",
+   479→   479→  "nav.about": "作者",
+   480→   480→  "nav.journal": "手记",
+   481→   481→  "nav.events": "活动",
+   482→   482→  "nav.freeChapter": "免费章节",
+   483→   483→  "nav.menu": "菜单",
+   484→   484→  "nav.readChapterFree": "免费阅读第一章",
+   485→   485→  "nav.noSpam": "不发垃圾邮件 · 随时取消订阅",
+   486→   486→
+   487→   487→  // Hero
+   488→   488→  "hero.eyebrow": "// 杜克·萨维奇首部小说",
+   489→   489→  "hero.comingSoon": "即将上市",
+   490→   490→  "hero.readChapterFree": "免费阅读第一章",
+   491→   491→  "hero.seriesTag": "杜克·萨维奇三部曲 · 第 01 卷 / 共 03 卷",
+   492→   492→  "hero.fileTag": "档案 001 · 杜克·萨维奇 · 处女作",
+   493→   493→
+   494→   494→  // Books
+   495→   495→  "books.eyebrow": "// 作品",
+   496→   496→  "books.title": "杜克·萨维奇三部曲",
+   497→   497→  "books.intro": "三部小说。一个调查者。一个学会隐匿的机制。",
+   498→   498→  "books.new": "新作",
+   499→   499→  "books.forthcoming": "即将出版",
+   500→   500→  "books.book": "第",
+   501→   501→  "books.comingSoon": "即将上市",
+   502→   502→  "books.notifyMe": "到货通知",
+   503→   503→
+   504→   504→  // About
+   505→   505→  "about.eyebrow": "// 关于作者",
+   506→   506→  "about.title": "生于爱尔兰。以洛杉矶为背景。书写体制。",
+   507→   507→  "about.intro": "一位探索权力如何学会隐形的处女作小说家。",
+   508→   508→  "about.born": "出生地",
+   509→   509→  "about.background": "背景",
+   510→   510→  "about.debut": "处女作",
+   511→   511→  "about.series": "系列",
+   512→   512→  "about.setting": "背景地",
+   513→   513→  "about.caption": "西蒙·J·克莱瑞 · 作者照片",
+   514→   514→  "about.bornValue": "爱尔兰",
+   515→   515→  "about.backgroundValue": "作家与企业家",
+   516→   516→  "about.debutValue": "《Ghosts in the Ash》—— 27 稿",
+   517→   517→  "about.seriesValue": "杜克·萨维奇三部曲",
+   518→   518→  "about.settingValue": "洛杉矶 · 巴尔的摩 · 阿灵顿",
+   519→   519→
+   520→   520→  // Excerpt
+   521→   521→  "excerpt.eyebrow": "// 序章 · 奥马哈，1999",
+   522→   522→  "excerpt.title": "《Ghosts in the Ash》序章",
+   523→   523→  "excerpt.intro": "一切后续的起源。那盏永不熄灭的灯。",
+   524→   524→  "excerpt.cta": "喜欢吗？第一章免费奉送。",
+   525→   525→  "excerpt.button": "继续阅读 —— 免费",
+   526→   526→
+   527→   527→  // Case file
+   528→   528→  "casefile.eyebrow": "// 档案 001",
+   529→   529→  "casefile.intro": "三部曲核心调查者的工作档案。取材自案件卷宗、酒吧餐巾纸，以及偶尔凌晨三点的电话。",
+   530→   530→  "casefile.confidential": "机密",
+   531→   531→  "casefile.pi": "私家侦探",
+   532→   532→  "casefile.subjectProfile": "目标档案",
+   533→   533→  "casefile.fileTag": "档案 001 · 萨维奇",
+   534→   534→  "casefile.name": "姓名",
+   535→   535→  "casefile.age": "年龄",
+   536→   536→  "casefile.formerly": "曾任",
+   537→   537→  "casefile.now": "现状",
+   538→   538→  "casefile.broke": "击垮他的事",
+   539→   539→  "casefile.kryptonite": "克星",
+   540→   540→  "casefile.motivation": "动机",
+   541→   541→  "casefile.voice": "声音",
+   542→   542→  "casefile.theCase": "案件",
+   543→   543→  "casefile.territory": "活动范围",
+   544→   544→  "casefile.territoryIntro": "三部曲中出现的主要地点。一个从艺术区办公桌延伸到联邦政策报告脚注的机制。",
+   545→   545→  "casefile.updated": "更新于",
+   546→   546→  "casefile.status": "状态",
+   547→   547→  "casefile.active": "活跃",
+   548→   548→
+   549→   549→  // Podcast
+   550→   550→  "podcast.eyebrow": "// 来信 · 音频",
+   551→   551→  "podcast.title": "播客",
+   552→   552→  "podcast.intro": "关于技艺、体制，以及这座城市不愿说出口之事的对话。由西蒙·J·克莱瑞主持。",
+   553→   553→  "podcast.episode": "第",
+   554→   554→  "podcast.latest": "最新",
+   555→   555→  "podcast.comingSoon": "即将上线。",
+   556→   556→  "podcast.comingSoonDesc": "节目将在发布后显示于此。订阅下方来信，第一时间获知首期上线。",
+   557→   557→
+   558→   558→  // Events
+   559→   559→  "events.eyebrow": "// 露面",
+   560→   560→  "events.title": "活动",
+   561→   561→  "events.intro": "朗读会、座谈，以及偶尔的工作坊。待公布。",
+   562→   562→  "events.upcoming": "即将",
+   563→   563→  "events.past": "已过",
+   564→   564→  "events.tba": "待定",
+   565→   565→  "events.tbaDesc": "《Ghosts in the Ash》新书发布的露面、朗读及文学节日期将在确认后公布于此。订阅下方来信，第一时间获知。",
+   566→   566→  "events.upcomingTba": "即将 · 待定",
+   567→   567→  "events.upcomingTbaDesc": "新的活动安排将在确认后公布于此。",
+   568→   568→
+   569→   569→  // Journal
+   570→   570→  "journal.eyebrow": "// 来信",
+   571→   571→  "journal.title": "手记",
+   572→   572→  "journal.intro": "关于技艺、写作生涯，以及体制当下的所作所为的笔记。不定期。不发垃圾邮件。",
+   573→   573→  "journal.minRead": "分钟阅读",
+   574→   574→
+   575→   575→  // Newsletter
+   576→   576→  "newsletter.title": "免费阅读《Ghosts in the Ash》开篇。",
+   577→   577→  "newsletter.intro": "另有 The Savage Dispatch，西蒙不定期寄出的信件，谈技艺、写作生涯，以及体制当下的动态。不发垃圾邮件。随时取消订阅。",
+   578→   578→  "newsletter.name": "姓名（选填）",
+   579→   579→  "newsletter.email": "邮箱 *",
+   580→   580→  "newsletter.namePlaceholder": "萨维奇，杜克（据说）",
+   581→   581→  "newsletter.button": "把开篇发给我",
+   582→   582→  "newsletter.sending": "发送中…",
+   583→   583→  "newsletter.success": "请查收邮箱",
+   584→   584→  "newsletter.successDesc": "《Ghosts in the Ash》的开篇已在路上。几分钟后留意西蒙的邮件。",
+   585→   585→  "newsletter.sendAnother": "再发一封",
+   586→   586→  "newsletter.emailRequired": "邮箱为必填项",
+   587→   587→  "newsletter.emailRequiredDesc": "我们需要一个地址来发送开篇。",
+   588→   588→  "newsletter.emailInvalid": "这个邮箱看起来不对",
+   589→   589→  "newsletter.emailInvalidDesc": "再试一次 —— 我们保证不外泄。",
+   590→   590→  "newsletter.whatYouGet.opening": "《Ghosts in the Ash》完整开篇，PDF 格式。",
+   591→   591→  "newsletter.whatYouGet.dispatch": "The Savage Dispatch —— 西蒙不定期寄出的信件，谈技艺与写作生涯。",
+   592→   592→  "newsletter.whatYouGet.signed": "优先获得签名版上架与巡回活动信息。",
+   593→   593→
+   594→   594→  // Contact
+   595→   595→  "contact.title": "联系",
+   596→   596→  "contact.intro": "媒体、版权、活动，或只是想打个招呼。",
+   597→   597→  "contact.name": "姓名 *",
+   598→   598→  "contact.email": "邮箱 *",
+   599→   599→  "contact.subject": "主题",
+   600→   600→  "contact.message": "留言",
+   601→   601→  "contact.button": "发送留言",
+   602→   602→  "contact.sending": "发送中…",
+   603→   603→  "contact.success": "留言已收到",
+   604→   604→  "contact.successDesc": "西蒙每封必读，大部分会回复。",
+   605→   605→  "contact.error": "出了点问题",
+   606→   606→  "contact.errorDesc": "请稍后重试。",
+   607→   607→
+   608→   608→  // Footer
+   609→   609→  "footer.tagline": "文学犯罪小说。体制即武器。",
+   610→   610→  "footer.bio": "杜克·萨维奇三部曲。洛杉矶、巴尔的摩、阿灵顿 —— 以及学会隐匿的机制。",
+   611→   611→  "footer.index": "// 目录",
+   612→   612→  "footer.elsewhere": "// 其他平台",
+   613→   613→  "footer.copyright": "本站使用 Fraunces 与 Inter 字体",
+   614→   614→  "footer.madeWith": "以雨与灰烬铸成。",
+   615→   615→  "footer.admin": "管理",
+   616→   616→
+   617→   617→  // Theme toggle
+   618→   618→  "theme.toLight": "切换至浅色（纸张）主题",
+   619→   619→  "theme.toDark": "切换至深色（黑色电影）主题",
+   620→   620→
+   621→   621→  // Language
+   622→   622→  "lang.label": "语言",
+   623→   623→  "lang.switch": "切换语言",
+   624→   624→};
+   625→   625→
+   626→   626→const DICTS: Record<Lang, Dict> = { en, es, fr, zh };
+   627→   627→
+   628→   628→// ─────────────────────────────────────────────────────────────────────
+   629→   629→// Store
+   630→   630→// ─────────────────────────────────────────────────────────────────────
+   631→   631→
+   632→   632→type LangState = {
+   633→   633→  lang: Lang;
+   634→   634→  setLang: (l: Lang) => void;
+   635→   635→};
+   636→   636→
+   637→   637→export const useLangStore = create<LangState>()(
+   638→   638→  persist(
+   639→   639→    (set) => ({
+   640→   640→      lang: "en",
+   641→   641→      setLang: (lang) => set({ lang }),
+   642→   642→    }),
+   643→   643→    { name: "sjc-lang" }
+   644→   644→  )
+   645→   645→);
+   646→   646→
+   647→   647→// ─────────────────────────────────────────────────────────────────────
+   648→   648→// Hook
+   649→   649→// ─────────────────────────────────────────────────────────────────────
+   650→   650→
+   651→   651→export function useT() {
+   652→   652→  const lang = useLangStore((s) => s.lang);
+   653→   653→  return React.useCallback(
+   654→   654→    (key: string): string => {
+   655→   655→      const dict = DICTS[lang] ?? en;
+   656→   656→      return dict[key] ?? en[key] ?? key;
+   657→   657→    },
+   658→   658→    [lang]
+   659→   659→  );
+   660→   660→}
+   661→   661→
+   662→   662→export function useLang() {
+   663→   663→  return useLangStore((s) => s.lang);
+   664→   664→}
+   665→   665→
