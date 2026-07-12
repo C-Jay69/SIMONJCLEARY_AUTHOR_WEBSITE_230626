@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import Script from "next/script";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -73,11 +75,7 @@ export const metadata: Metadata = {
   // src/app/favicon.ico, src/app/icon.png, src/app/apple-icon.png
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -93,6 +91,17 @@ export default function RootLayout({
           {children}
           <Toaster position="bottom-right" richColors closeButton />
         </ThemeProvider>
+        <Script
+          src="https://cdn.hydragent.ai/widget.js"
+          strategy="afterInteractive"
+        />
+        <Script id="hydragent-init" strategy="afterInteractive">
+          {`
+            window.HydraAgentConfig = {
+              id: "cmrbl5dgm0000uu9qbl9bwpvt"
+            };
+          `}
+        </Script>
       </body>
     </html>
   );
