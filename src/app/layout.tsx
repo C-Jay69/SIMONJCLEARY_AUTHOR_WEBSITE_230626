@@ -93,23 +93,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         </ThemeProvider>
         <Script
           src="https://cdn.hydragent.ai/widget.js"
+          data-id="cmrbl5dgm0000uu9qbl9bwpvt"
           strategy="afterInteractive"
         />
-        <Script id="hydragent-init" strategy="afterInteractive">
-          {`
-            window.HydraAgentConfig = {
-              id: "cmrbl5dgm0000uu9qbl9bwpvt"
-            };
-          `}
-        </Script>
-
-         {/* Use a standard script tag to ensure data-id is preserved 
-       exactly as the widget expects */}
-        <script 
-          src="https://cdn.hydragent.ai/widget.js" 
-          data-id="cmrbl5dgm0000uu9qbl9bwpvt" 
-          async
-        ></script>
       </body>
     </html>
   );
