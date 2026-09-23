@@ -179,7 +179,13 @@ export default function ShatteredCityPage() {
           title="The debut is still there"
           intro="Ghosts in the Ash and the Duke Savage trilogy are live on the main page."
         >
-          <div>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/ghosts-in-the-ash"
+              className="rounded-md bg-accent px-6 py-2.5 font-mono text-sm uppercase tracking-widest text-accent-foreground transition-colors hover:bg-accent/90"
+            >
+              Read Ghosts in the Ash
+            </a>
             <a
               href="/"
               className="rounded-md border border-border/70 px-6 py-2.5 font-mono text-sm uppercase tracking-widest text-foreground transition-colors hover:border-gold/50 hover:text-gold"

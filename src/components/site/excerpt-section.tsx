@@ -21,11 +21,14 @@ type ExcerptSectionProps = {
   excerpt?: string | null;
   /** Book title for the section header. */
   title?: string;
+  /** Where the "read the rest" CTA points (homepage newsletter anchor by default). */
+  ctaHref?: string;
 };
 
 export function ExcerptSection({
   excerpt,
   title = "Ghosts in the Ash",
+  ctaHref = "/#newsletter",
 }: ExcerptSectionProps) {
   const t = useT();
   const body = excerpt?.trim() || FALLBACK_EXCERPT;
@@ -61,7 +64,7 @@ export function ExcerptSection({
             size="lg"
             className="h-11 rounded-md bg-accent text-accent-foreground hover:bg-accent/90"
           >
-            <Link href="#newsletter">
+            <Link href={ctaHref}>
               <BookOpen className="h-4 w-4" aria-hidden="true" />
               {t("excerpt.button")}
             </Link>

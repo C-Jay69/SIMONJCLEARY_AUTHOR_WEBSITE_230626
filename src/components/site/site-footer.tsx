@@ -9,7 +9,7 @@ import type { Podcast } from "@/components/site/types";
 import { useT } from "@/lib/i18n";
 
 const NAV_KEYS: { key: string; href: string }[] = [
-  { key: "nav.books", href: "#books" },
+  { key: "nav.novels", href: "#novels" },
   { key: "nav.about", href: "#about" },
   { key: "nav.journal", href: "#journal" },
   { key: "nav.events", href: "#events" },

@@ -3,17 +3,11 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { BookOpen, Clock } from "lucide-react";
+import { BookOpen, Library } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
-
-const HEADLINE = "Ghosts in the Ash";
-const TAGLINE =
-  "In a city that erases people with a transposed digit, one investigator was hired to find a woman who was never meant to be found.";
-const HOOK =
-  "Duke Savage — disgraced gonzo journalist turned analog private investigator — is hired at 3 a.m. to find a missing woman. She isn't missing by accident. She's been systematically erased by a power network that operates through bureaucracy, not violence. Nobody broke the law. The law was the mechanism.";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -25,15 +19,13 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative overflow-hidden"
     >
-      {/* Atmospheric background: faint oversized title + gradient wash */}
+      {/* Atmospheric background: faint oversized wordmark + gradient wash */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div
-          className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none font-serif text-[24vw] font-bold leading-none text-foreground/[0.025] sm:text-[18vw]"
-        >
-          SAVAGE
+        <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none font-serif text-[22vw] font-bold leading-none text-foreground/[0.025] sm:text-[16vw]">
+          CLEARY
         </div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,color-mix(in_oklch,var(--accent)_18%,transparent),transparent_55%)]" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
@@ -59,15 +51,20 @@ export function Hero() {
               "text-[clamp(2.75rem,8vw,5.75rem)]"
             )}
           >
-            {HEADLINE}
+            SIMON J.
+            <br />
+            CLEARY
           </h1>
 
           <p className="mt-6 max-w-xl font-serif text-xl italic leading-snug text-foreground/85 sm:text-2xl">
-            &ldquo;{TAGLINE}&rdquo;
+            &ldquo;Ghosts in the Ash&rdquo; &amp; &ldquo;The Shattered City&rdquo;
           </p>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {HOOK}
+            An Irish-born writer building thrillers about the machinery
+            underneath. He writes about the systems that process people, the
+            investigators who notice, and the cost of being the one who points
+            at the machine.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -76,8 +73,8 @@ export function Hero() {
               size="lg"
               className="h-11 rounded-md bg-accent px-6 text-accent-foreground hover:bg-accent/90"
             >
-              <Link href="#newsletter">
-                <Clock className="h-4 w-4" aria-hidden="true" />
+              <Link href="#novels">
+                <Library className="h-4 w-4" aria-hidden="true" />
                 {t("hero.comingSoon")}
               </Link>
             </Button>
@@ -87,7 +84,7 @@ export function Hero() {
               variant="outline"
               className="h-11 rounded-md border-border/70 bg-transparent px-6 text-foreground hover:bg-accent/10 hover:text-accent"
             >
-              <Link href="#newsletter">
+              <Link href="/the-shattered-city#chapter-one">
                 <BookOpen className="h-4 w-4" aria-hidden="true" />
                 {t("hero.readChapterFree")}
               </Link>
@@ -103,38 +100,59 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Right column — book cover */}
+        {/* Right column — the two novels */}
         <motion.div
           className="md:col-span-5"
           initial={reduce ? false : { opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
         >
-          <div className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-none">
-            {/* Ember glow */}
-            <div
-              aria-hidden="true"
-              className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--accent)_30%,transparent),transparent_70%)] blur-2xl"
-            />
-            <div className="relative aspect-[2/3] w-full rotate-[1.5deg] overflow-hidden rounded-md shadow-[0_30px_80px_-30px_rgba(0,0,0,0.85)] ring-1 ring-white/10 transition-transform duration-500 hover:rotate-0">
-              <img
-                src="/images/books/ghosts-in-the-ash.jpg"
-                alt="Ghosts in the Ash — A Duke Savage Novel by Simon J Cleary"
-                className="h-full w-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
-              {/* subtle inner border for depth */}
+          <div className="relative mx-auto flex w-full max-w-sm flex-col items-center gap-8 sm:max-w-md">
+            {/* Ghosts in the Ash — primary */}
+            <Link
+              href="/ghosts-in-the-ash"
+              className="group relative block w-full max-w-[220px]"
+              aria-label="Ghosts in the Ash — A Duke Savage Novel"
+            >
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-md ring-1 ring-inset ring-black/30"
+                className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--accent)_30%,transparent),transparent_70%)] blur-2xl"
               />
-            </div>
-            {/* tiny case-file tag under the cover */}
-            <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
-              <span className="h-1 w-1 rounded-full bg-accent" aria-hidden="true" />
-              {t("hero.fileTag")}
-            </div>
+              <div className="relative aspect-[2/3] w-full rotate-[-1.5deg] overflow-hidden rounded-md shadow-[0_30px_80px_-30px_rgba(0,0,0,0.85)] ring-1 ring-white/10 transition-transform duration-500 group-hover:rotate-0">
+                <img
+                  src="/images/books/ghosts-in-the-ash.jpg"
+                  alt="Ghosts in the Ash — A Duke Savage Novel by Simon J Cleary"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div className="pointer-events-none absolute inset-0 rounded-md ring-1 ring-inset ring-black/30" />
+              </div>
+              <span className="mt-3 block text-center font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-accent">
+                {t("hero.fileTag")}
+              </span>
+            </Link>
+
+            {/* Shattered City — secondary, offset */}
+            <Link
+              href="/the-shattered-city"
+              className="group relative block w-full max-w-[150px]"
+              aria-label="The Shattered City — Second Novel"
+            >
+              <div className="relative aspect-[2/3] w-full rotate-[2deg] overflow-hidden rounded-md shadow-[0_25px_60px_-25px_rgba(0,0,0,0.9)] ring-1 ring-gold/30 transition-transform duration-500 group-hover:rotate-0">
+                <img
+                  src="/images/books/the-shattered-city.png"
+                  alt="The Shattered City — Science-Fantasy Novel by Simon J Cleary"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="pointer-events-none absolute inset-0 rounded-md ring-1 ring-inset ring-black/30" />
+              </div>
+              <span className="mt-3 block text-center font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-gold">
+                The Shattered City · Book 02
+              </span>
+            </Link>
           </div>
         </motion.div>
       </div>

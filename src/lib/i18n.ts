@@ -25,7 +25,7 @@ type Dict = Record<string, string>;
 
 const en: Dict = {
   // Header / nav
-  "nav.books": "Books",
+  "nav.novels": "Novels",
   "nav.about": "About",
   "nav.journal": "Journal",
   "nav.events": "Events",
@@ -39,21 +39,23 @@ const en: Dict = {
   "nav.new": "New",
 
   // Hero
-  "hero.eyebrow": "// THE DEBUT DUKE SAVAGE NOVEL",
-  "hero.comingSoon": "Coming soon",
+  "hero.eyebrow": "// AUTHOR · NOVELIST",
+  "hero.comingSoon": "Explore the novels",
   "hero.readChapterFree": "Read Chapter 1 free",
-  "hero.seriesTag": "The Duke Savage Trilogy · Book 01 of 03",
+  "hero.seriesTag": "Irish-born · Thrillers about the machinery underneath",
   "hero.fileTag": "FILE 001 · DUKE SAVAGE · DEBUT",
 
   // Books
-  "books.eyebrow": "// THE BOOKS",
-  "books.title": "The Duke Savage Trilogy",
-  "books.intro": "Three novels. One investigator. A mechanism that learns to hide.",
+  "books.eyebrow": "// THE NOVELS",
+  "books.title": "The Novels",
+  "books.intro": "Two worlds to enter: the Duke Savage trilogy, and the science-fantasy second novel.",
   "books.new": "NEW",
   "books.forthcoming": "FORTHCOMING",
   "books.book": "Book",
   "books.comingSoon": "Coming soon",
   "books.notifyMe": "Notify me",
+  "books.readNovel": "Read the novel",
+  "books.readChapter": "Read Chapter 1 free",
 
   // About
   "about.eyebrow": "// ABOUT THE AUTHOR",
@@ -179,7 +181,7 @@ const en: Dict = {
 
 const es: Dict = {
   // Header / nav
-  "nav.books": "Libros",
+  "nav.novels": "Novelas",
   "nav.about": "Biografía",
   "nav.journal": "Diario",
   "nav.events": "Eventos",
@@ -193,21 +195,23 @@ const es: Dict = {
   "nav.new": "Nuevo",
 
   // Hero
-  "hero.eyebrow": "// LA PRIMERA NOVELA DE DUKE SAVAGE",
-  "hero.comingSoon": "Próximamente",
+  "hero.eyebrow": "// AUTOR · NOVELISTA",
+  "hero.comingSoon": "Explora las novelas",
   "hero.readChapterFree": "Lee el capítulo 1 gratis",
-  "hero.seriesTag": "La trilogía de Duke Savage · Libro 01 de 03",
+  "hero.seriesTag": "Nacido en Irlanda · Thrillers sobre la maquinaria invisible",
   "hero.fileTag": "EXPEDIENTE 001 · DUKE SAVAGE · DEBUT",
 
   // Books
-  "books.eyebrow": "// LOS LIBROS",
-  "books.title": "La trilogía de Duke Savage",
-  "books.intro": "Tres novelas. Un investigador. Un mecanismo que aprende a ocultarse.",
+  "books.eyebrow": "// LAS NOVELAS",
+  "books.title": "Las novelas",
+  "books.intro": "Dos mundos a los que entrar: la trilogía de Duke Savage y la ciencia-fantasía de la segunda novela.",
   "books.new": "NUEVO",
   "books.forthcoming": "PRÓXIMAMENTE",
   "books.book": "Libro",
   "books.comingSoon": "Próximamente",
   "books.notifyMe": "Avísame",
+  "books.readNovel": "Leer la novela",
+  "books.readChapter": "Lee el capítulo 1 gratis",
 
   // About
   "about.eyebrow": "// SOBRE EL AUTOR",
@@ -333,7 +337,7 @@ const es: Dict = {
 
 const fr: Dict = {
   // Header / nav
-  "nav.books": "Livres",
+  "nav.novels": "Romans",
   "nav.about": "Biographie",
   "nav.journal": "Journal",
   "nav.events": "Événements",
@@ -347,21 +351,23 @@ const fr: Dict = {
   "nav.new": "Nouveau",
 
   // Hero
-  "hero.eyebrow": "// LE PREMIER ROMAN DE DUKE SAVAGE",
-  "hero.comingSoon": "Bientôt disponible",
+  "hero.eyebrow": "// ROMANCIER",
+  "hero.comingSoon": "Découvrir les romans",
   "hero.readChapterFree": "Lire le chapitre 1 gratuitement",
-  "hero.seriesTag": "La trilogie Duke Savage · Livre 01 sur 03",
+  "hero.seriesTag": "Né en Irlande · Des thrillers sur la machinerie invisible",
   "hero.fileTag": "DOSSIER 001 · DUKE SAVAGE · PREMIER ROMAN",
 
   // Books
-  "books.eyebrow": "// LES LIVRES",
-  "books.title": "La trilogie Duke Savage",
-  "books.intro": "Trois romans. Un enquêteur. Un mécanisme qui apprend à se cacher.",
+  "books.eyebrow": "// LES ROMANS",
+  "books.title": "Les romans",
+  "books.intro": "Deux mondes où entrer : la trilogie Duke Savage et le second roman de science-fantasy.",
   "books.new": "NOUVEAU",
   "books.forthcoming": "À PARAÎTRE",
   "books.book": "Livre",
   "books.comingSoon": "Bientôt disponible",
   "books.notifyMe": "Prévenez-moi",
+  "books.readNovel": "Lire le roman",
+  "books.readChapter": "Lire le chapitre 1 gratuitement",
 
   // About
   "about.eyebrow": "// L'AUTEUR",
@@ -487,7 +493,7 @@ const fr: Dict = {
 
 const zh: Dict = {
   // Header / nav
-  "nav.books": "作品",
+  "nav.novels": "小说",
   "nav.about": "作者",
   "nav.journal": "手记",
   "nav.events": "活动",
@@ -501,21 +507,23 @@ const zh: Dict = {
   "nav.new": "新",
 
   // Hero
-  "hero.eyebrow": "// 杜克·萨维奇首部小说",
-  "hero.comingSoon": "即将上市",
+  "hero.eyebrow": "// 作者 · 小说家",
+  "hero.comingSoon": "浏览小说",
   "hero.readChapterFree": "免费阅读第一章",
-  "hero.seriesTag": "杜克·萨维奇三部曲 · 第 01 卷 / 共 03 卷",
+  "hero.seriesTag": "生于爱尔兰 · 关于隐形机器的惊悚小说",
   "hero.fileTag": "档案 001 · 杜克·萨维奇 · 处女作",
 
   // Books
-  "books.eyebrow": "// 作品",
-  "books.title": "杜克·萨维奇三部曲",
-  "books.intro": "三部小说。一个调查者。一个学会隐匿的机制。",
+  "books.eyebrow": "// 小说",
+  "books.title": "小说",
+  "books.intro": "两个可供沉浸的世界：杜克·萨维奇三部曲，以及第二部科学奇幻小说。",
   "books.new": "新作",
   "books.forthcoming": "即将出版",
   "books.book": "第",
   "books.comingSoon": "即将上市",
   "books.notifyMe": "到货通知",
+  "books.readNovel": "阅读小说",
+  "books.readChapter": "免费阅读第一章",
 
   // About
   "about.eyebrow": "// 关于作者",

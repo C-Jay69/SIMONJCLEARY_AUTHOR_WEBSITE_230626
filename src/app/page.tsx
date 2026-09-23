@@ -12,8 +12,6 @@ import { Hero } from "@/components/site/hero";
 import { PressStrip } from "@/components/site/press-strip";
 import { BooksSection } from "@/components/site/books-section";
 import { AboutSection } from "@/components/site/about-section";
-import { ExcerptSection } from "@/components/site/excerpt-section";
-import { CaseFileSection } from "@/components/site/case-file-section";
 import { JournalSection } from "@/components/site/journal-section";
 import { PodcastSection } from "@/components/site/podcast-section";
 import { EventsSection } from "@/components/site/events-section";
@@ -109,9 +107,6 @@ export default async function Home() {
   const serializedPress = pressItems.map(serializePress);
   const serializedPodcasts = podcasts.map(serializePodcast);
 
-  // Pass the Ghosts in the Ash excerpt to the Excerpt section.
-  const ghostsBook = serializedBooks.find((b) => b.featured);
-
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
@@ -126,10 +121,6 @@ export default async function Home() {
         <BooksSection books={serializedBooks} />
 
         <AboutSection />
-
-        <ExcerptSection excerpt={ghostsBook?.excerpt} title={ghostsBook?.title} />
-
-        <CaseFileSection />
 
         {serializedJournal.length > 0 && (
           <JournalSection posts={serializedJournal} />

@@ -8,26 +8,27 @@ import { BookOpen, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function ShatteredCityHero() {
+import { ghostsHero } from "@/content/ghosts-in-the-ash";
+
+export function GhostsHero() {
   const reduce = useReducedMotion();
   const [imgOk, setImgOk] = React.useState(true);
 
   return (
     <section
       id="top"
-      aria-labelledby="shattered-city-hero-title"
+      aria-labelledby="ghosts-hero-title"
       className="relative overflow-hidden"
     >
-      {/* Atmospheric background: faint oversized title + copper/wet-steel washes */}
+      {/* Atmospheric background: faint oversized title + ember wash */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none font-serif text-[26vw] font-bold leading-none text-foreground/[0.03] sm:text-[20vw]">
-          CITY
+        <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none font-serif text-[24vw] font-bold leading-none text-foreground/[0.03] sm:text-[18vw]">
+          SAVAGE
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_28%,color-mix(in_oklch,var(--copper)_22%,transparent),transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_85%,color-mix(in_oklch,var(--wetsteel)_30%,transparent),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_28%,color-mix(in_oklch,var(--accent)_22%,transparent),transparent_55%)]" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
@@ -40,65 +41,61 @@ export function ShatteredCityHero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <div className="flex items-center gap-3">
-            <span className="case-label text-gold">// THE SECOND NOVEL</span>
-            <span aria-hidden="true" className="steel-hairline" />
+            <span className="case-label text-accent/90">{ghostsHero.eyebrow}</span>
+            <span aria-hidden="true" className="ember-hairline" />
           </div>
 
           <h1
-            id="shattered-city-hero-title"
+            id="ghosts-hero-title"
             className={cn(
               "mt-5 font-serif font-semibold leading-[0.92] tracking-tight",
               "text-[clamp(2.75rem,8vw,5.75rem)]"
             )}
           >
-            THE
-            <br />
-            <span className="gold-gradient-text">SHATTERED</span>
-            <br />
-            CITY
+            {ghostsHero.title.map((line, i) => (
+              <span key={i} className="block">
+                {line}
+              </span>
+            ))}
           </h1>
 
           <p className="mt-6 max-w-xl font-serif text-xl italic leading-snug text-foreground/85 sm:text-2xl">
-            &ldquo;The city was not drowning them. It was mopping its floor.&rdquo;
+            &ldquo;{ghostsHero.tagline}&rdquo;
           </p>
 
           <div className="mt-6 flex items-center gap-3">
             <span
-              className="rounded-full border border-gold/40 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.25em] text-gold"
-              title="Adult science-fantasy"
+              className="rounded-full border border-accent/40 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.25em] text-accent"
+              title="Published — The Duke Savage Trilogy"
             >
-              Adult Science-Fantasy
+              {ghostsHero.positioning}
             </span>
           </div>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            When the transit platform collapses in the lower reaches of
-            Neo-Tethys, three sisters — Sophia, Kiera and Zoey — wake in a
-            buried deck with no water, no food, and no map. Each of them
-            carries a mark that did not exist at roll call this morning. Each
-            mark does something the city never agreed to let them do.
+            {ghostsHero.hook}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
               asChild
               size="lg"
-              className="h-11 rounded-md bg-gold px-6 text-background hover:bg-gold/90"
+              className="h-11 rounded-md bg-accent px-6 text-accent-foreground hover:bg-accent/90"
             >
-              <Link href="#chapter-one">
+              <Link href="#excerpt">
                 <BookOpen className="h-4 w-4" aria-hidden="true" />
-                Read Chapter One
+                Read the prologue
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-11 rounded-md border-border/70 bg-transparent px-6 text-foreground hover:bg-copper/10 hover:text-copper"
+              className="h-11 rounded-md border-border/70 bg-transparent px-6 text-foreground hover:bg-accent/10 hover:text-accent"
             >
               <Link href="/#novels">
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                The Duke Savage books
+                The main site
               </Link>
             </Button>
           </div>
@@ -106,7 +103,7 @@ export function ShatteredCityHero() {
           <div className="mt-10 flex items-center gap-3">
             <span aria-hidden="true" className="ember-hairline" />
             <p className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
-              THE SHATTERED CITY · SECOND NOVEL · FILE 002
+              {ghostsHero.fileTag}
             </p>
           </div>
         </motion.div>
@@ -119,19 +116,20 @@ export function ShatteredCityHero() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
         >
           <div className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-none">
+            {/* Ember glow */}
             <div
               aria-hidden="true"
-              className="copper-glow absolute -inset-6 -z-10 rounded-[2rem] blur-2xl"
+              className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--accent)_30%,transparent),transparent_70%)] blur-2xl"
             />
-            <div className="relative aspect-[2/3] w-full rotate-[1.5deg] overflow-hidden rounded-md shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] ring-1 ring-gold/30 transition-transform duration-500 hover:rotate-0">
+            <div className="relative aspect-[2/3] w-full rotate-[1.5deg] overflow-hidden rounded-md shadow-[0_30px_80px_-30px_rgba(0,0,0,0.85)] ring-1 ring-white/10 transition-transform duration-500 hover:rotate-0">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-800 to-black"
               />
               {imgOk ? (
                 <img
-                  src="/images/books/the-shattered-city.png"
-                  alt="The Shattered City — Science-Fantasy Novel by Simon J Cleary"
+                  src="/images/books/ghosts-in-the-ash.jpg"
+                  alt="Ghosts in the Ash — A Duke Savage Novel by Simon J Cleary"
                   className="relative h-full w-full object-cover"
                   loading="eager"
                   decoding="async"
@@ -140,13 +138,13 @@ export function ShatteredCityHero() {
               ) : (
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
                   <div className="flex items-start justify-between font-mono text-[0.55rem] uppercase tracking-[0.3em]">
-                    <span className="text-gold">A Simon J Cleary Novel</span>
-                    <span className="text-muted-foreground">Book 02</span>
+                    <span className="text-accent">A Duke Savage Novel</span>
+                    <span className="text-muted-foreground">Book 01</span>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <div aria-hidden className="steel-hairline" />
+                    <div aria-hidden className="ember-hairline" />
                     <h3 className="font-serif text-3xl font-semibold leading-[0.95] tracking-tight text-foreground">
-                      THE SHATTERED CITY
+                      Ghosts in the Ash
                     </h3>
                     <p className="font-serif text-sm italic leading-snug text-muted-foreground">
                       &ldquo;Cover art pending&rdquo;
@@ -160,8 +158,8 @@ export function ShatteredCityHero() {
               />
             </div>
             <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
-              <span className="h-1 w-1 rounded-full bg-gold" aria-hidden="true" />
-              FILE 002 · SCIENCE-FANTASY · SECOND NOVEL
+              <span className="h-1 w-1 rounded-full bg-accent" aria-hidden="true" />
+              THE DEBUT · NOW AVAILABLE
             </div>
           </div>
         </motion.div>
