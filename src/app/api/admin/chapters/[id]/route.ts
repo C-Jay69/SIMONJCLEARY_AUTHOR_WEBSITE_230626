@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
 
@@ -56,6 +57,8 @@ export async function PUT(
         ...(parsed.data.description !== undefined && { description: parsed.data.description ?? null }),
       },
     });
+    revalidatePath("/", "page");
+    revalidatePath("/ghosts-in-the-ash", "page");
     return NextResponse.json({ ok: true, book: updated });
   } catch (err) {
     console.error("[admin/chapters] update failed:", err);

@@ -14,6 +14,8 @@ import { BUY_LINKS } from "@/components/site/buy-links";
 
 import { ghostsStory, ghostsBuy } from "@/content/ghosts-in-the-ash";
 
+export const revalidate = 60;
+
 const pageDescription =
   "Ghosts in the Ash — the debut novel by Simon J. Cleary. Duke Savage, the debut installment of the Duke Savage trilogy. A city that erases people with a transposed digit, and the investigator who notices.";
 

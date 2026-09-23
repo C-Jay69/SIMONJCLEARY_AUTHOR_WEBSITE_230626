@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { BookText, Loader2, Lock, Mic, Save, Trash2, Upload, X } from "lucide-react";
+import { BookText, Loader2, Lock, Mic, PencilLine, PenLine, Save, Trash2, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ type AdminPanelProps = {
 };
 
 type Mode = "locked" | "unlocked";
-type Tab = "podcast" | "chapters";
+type Tab = "podcast" | "chapters" | "journal";
 
 type BookChapter = {
   id: string;
@@ -27,6 +27,17 @@ type BookChapter = {
   excerpt: string | null;
   tagline: string | null;
   description: string | null;
+};
+
+type JournalEntry = {
+  id: string;
+  title: string;
+  slug: string;
+  body: string;
+  excerpt: string | null;
+  category: string;
+  readMinutes: number;
+  date: string;
 };
 
 export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelProps) {
@@ -45,6 +56,20 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
   const [chapterDesc, setChapterDesc] = React.useState("");
   const [savingChapter, setSavingChapter] = React.useState(false);
   const [loadingBooks, setLoadingBooks] = React.useState(false);
+
+  // Journal management state
+  const [journal, setJournal] = React.useState<JournalEntry[]>([]);
+  const [loadingJournal, setLoadingJournal] = React.useState(false);
+  const [savingJournal, setSavingJournal] = React.useState(false);
+  const [editingJournalId, setEditingJournalId] = React.useState<string | null>(null);
+  const [jTitle, setJTitle] = React.useState("");
+  const [jCategory, setJCategory] = React.useState("Dispatch");
+  const [jReadMinutes, setJReadMinutes] = React.useState("4");
+  const [jDate, setJDate] = React.useState(() =>
+    new Date().toISOString().slice(0, 10)
+  );
+  const [jExcerpt, setJExcerpt] = React.useState("");
+  const [jBody, setJBody] = React.useState("");
 
   // Upload form state
   const [epNum, setEpNum] = React.useState("");
@@ -81,6 +106,125 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
       toast.error("Could not load chapters.");
     } finally {
       setLoadingBooks(false);
+    }
+  }
+
+  // Fetch journal posts when switching to the journal tab.
+  async function loadJournal() {
+    setLoadingJournal(true);
+    try {
+      const res = await fetch("/api/admin/journal", {
+        headers: { "x-admin-password": password },
+      });
+      const data = (await res.json()) as { ok?: boolean; posts?: JournalEntry[] };
+      if (data.ok && data.posts) {
+        setJournal(data.posts);
+      }
+    } catch (err) {
+      toast.error("Could not load journal posts.");
+    } finally {
+      setLoadingJournal(false);
+    }
+  }
+
+  function startNewJournal() {
+    setEditingJournalId(null);
+    setJTitle("");
+    setJCategory("Dispatch");
+    setJReadMinutes("4");
+    setJDate(new Date().toISOString().slice(0, 10));
+    setJExcerpt("");
+    setJBody("");
+  }
+
+  function editJournal(entry: JournalEntry) {
+    setEditingJournalId(entry.id);
+    setJTitle(entry.title);
+    setJCategory(entry.category);
+    setJReadMinutes(String(entry.readMinutes));
+    setJDate(entry.date.slice(0, 10));
+    setJExcerpt(entry.excerpt ?? "");
+    setJBody(entry.body);
+  }
+
+  async function saveJournal(e: React.FormEvent) {
+    e.preventDefault();
+    if (!jTitle.trim()) return toast.error("Title is required.");
+    if (!jBody.trim()) return toast.error("The post body is required.");
+    setSavingJournal(true);
+    try {
+      const payload = {
+        title: jTitle.trim(),
+        category: jCategory.trim() || "Dispatch",
+        readMinutes: parseInt(jReadMinutes, 10) || 4,
+        date: jDate || undefined,
+        excerpt: jExcerpt.trim() || undefined,
+        body: jBody.trim(),
+      };
+      const res = await fetch(
+        editingJournalId
+          ? `/api/admin/journal/${editingJournalId}`
+          : "/api/admin/journal",
+        {
+          method: editingJournalId ? "PATCH" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-admin-password": password,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        post?: JournalEntry;
+      };
+      if (!res.ok || !data.ok) throw new Error(data.error || "Save failed.");
+      if (editingJournalId) {
+        setJournal((prev) =>
+          prev
+            .map((p) => (p.id === data.post!.id ? data.post! : p))
+            .sort((a, b) => b.date.localeCompare(a.date))
+        );
+        toast.success("Post updated.", {
+          description: "The changes are live on the site.",
+        });
+      } else {
+        setJournal((prev) =>
+          [...prev, data.post as JournalEntry].sort((a, b) =>
+            b.date.localeCompare(a.date)
+          )
+        );
+        toast.success("Post published.", {
+          description: "Your journal entry is now live on the site.",
+        });
+      }
+      startNewJournal();
+    } catch (err) {
+      toast.error("Save failed", {
+        description: err instanceof Error ? err.message : "Try again.",
+      });
+    } finally {
+      setSavingJournal(false);
+    }
+  }
+
+  async function deleteJournal(id: string, postTitle: string) {
+    if (!confirm(`Delete journal post "${postTitle}"?`)) return;
+    try {
+      const res = await fetch(`/api/admin/journal/${id}`, {
+        method: "DELETE",
+        headers: { "x-admin-password": password },
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || "Delete failed.");
+      setJournal((prev) => prev.filter((p) => p.id !== id));
+      if (editingJournalId === id) startNewJournal();
+      toast.success("Post deleted.");
+    } catch (err) {
+      toast.error("Delete failed", {
+        description: err instanceof Error ? err.message : "Try again.",
+      });
     }
   }
 
@@ -293,8 +437,8 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
               {mode === "locked" ? (
                 <form onSubmit={unlock} className="flex flex-col gap-4">
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    Enter the admin password to manage podcast episodes and
-                    free chapter content.
+                    Enter the admin password to manage podcast episodes, free
+                    chapter content, and journal posts.
                   </p>
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="admin-pw" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
@@ -353,6 +497,21 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
                       )}
                     >
                       <BookText className="h-4 w-4" /> Chapters
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setTab("journal");
+                        loadJournal();
+                      }}
+                      className={cn(
+                        "flex flex-1 items-center justify-center gap-2 rounded px-3 py-2 text-sm font-medium transition-colors",
+                        tab === "journal"
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      <PenLine className="h-4 w-4" /> Journal
                     </button>
                   </div>
 
@@ -591,8 +750,183 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
                     </>
                   )}
 
+                  {tab === "journal" && (
+                    <>
+                      {loadingJournal ? (
+                        <div className="flex items-center justify-center py-12">
+                          <Loader2 className="h-6 w-6 animate-spin text-accent" />
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-6">
+                          <div className="flex items-center justify-between">
+                            <h3 className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-widest text-accent">
+                              <PenLine className="h-3.5 w-3.5" />
+                              {editingJournalId
+                                ? "Edit journal post"
+                                : "Publish a new post"}
+                            </h3>
+                            {editingJournalId && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="h-8"
+                                onClick={startNewJournal}
+                              >
+                                New post
+                              </Button>
+                            )}
+                          </div>
+
+                          <form
+                            onSubmit={saveJournal}
+                            className="flex flex-col gap-4"
+                          >
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="j-title" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                Title *
+                              </Label>
+                              <Input
+                                id="j-title"
+                                type="text"
+                                value={jTitle}
+                                onChange={(e) => setJTitle(e.target.value)}
+                                className="h-11"
+                                placeholder="Ghosts in the Ash — a dispatch from the river"
+                              />
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                              <div className="flex flex-col gap-2">
+                                <Label htmlFor="j-cat" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                  Category
+                                </Label>
+                                <Input
+                                  id="j-cat"
+                                  type="text"
+                                  value={jCategory}
+                                  onChange={(e) => setJCategory(e.target.value)}
+                                  className="h-11"
+                                  placeholder="Dispatch"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <Label htmlFor="j-read" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                  Read time (min)
+                                </Label>
+                                <Input
+                                  id="j-read"
+                                  type="number"
+                                  min={1}
+                                  max={240}
+                                  value={jReadMinutes}
+                                  onChange={(e) => setJReadMinutes(e.target.value)}
+                                  className="h-11"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <Label htmlFor="j-date" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                  Date
+                                </Label>
+                                <Input
+                                  id="j-date"
+                                  type="date"
+                                  value={jDate}
+                                  onChange={(e) => setJDate(e.target.value)}
+                                  className="h-11"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="j-excerpt" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                Excerpt (optional — shown on the journal card)
+                              </Label>
+                              <Textarea
+                                id="j-excerpt"
+                                value={jExcerpt}
+                                onChange={(e) => setJExcerpt(e.target.value)}
+                                rows={2}
+                                placeholder="A short teaser. Defaults to the first 200 characters of the body."
+                              />
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="j-body" className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                                Post body *
+                              </Label>
+                              <Textarea
+                                id="j-body"
+                                value={jBody}
+                                onChange={(e) => setJBody(e.target.value)}
+                                rows={12}
+                                className="font-serif text-base leading-relaxed"
+                                placeholder="Write your journal entry. Separate paragraphs with blank lines — readers see the post broken into paragraphs."
+                              />
+                            </div>
+
+                            <Button
+                              type="submit"
+                              disabled={savingJournal}
+                              className="h-11 w-full bg-accent text-accent-foreground hover:bg-accent/90"
+                            >
+                              {savingJournal ? (
+                                <><Loader2 className="h-4 w-4 animate-spin" /> Saving…</>
+                              ) : (
+                                <><Save className="h-4 w-4" /> {editingJournalId ? "Update post" : "Publish post"}</>
+                              )}
+                            </Button>
+                          </form>
+
+                          <div className="flex flex-col gap-3 border-t border-border/40 pt-6">
+                            <h3 className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+                              Published posts ({journal.length})
+                            </h3>
+                            {journal.length === 0 ? (
+                              <p className="text-sm italic text-muted-foreground">
+                                No journal posts yet. Publish your first one above.
+                              </p>
+                            ) : (
+                              <ul className="flex flex-col gap-2">
+                                {journal.map((post) => (
+                                  <li
+                                    key={post.id}
+                                    className="flex items-center gap-3 rounded-md border border-border/50 bg-background/40 px-3 py-2.5"
+                                  >
+                                    <span className="font-mono text-[0.6rem] uppercase tracking-widest text-accent">
+                                      {post.date.slice(0, 10)}
+                                    </span>
+                                    <span className="flex-1 truncate text-sm text-foreground/90">
+                                      {post.title}
+                                    </span>
+                                    <button
+                                      type="button"
+                                      onClick={() => editJournal(post)}
+                                      className="rounded p-1.5 text-muted-foreground transition-colors hover:text-accent"
+                                      aria-label={`Edit journal post: ${post.title}`}
+                                    >
+                                      <PencilLine className="h-4 w-4" />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => deleteJournal(post.id, post.title)}
+                                      className="rounded p-1.5 text-muted-foreground transition-colors hover:bg-destructive/15 hover:text-destructive"
+                                      aria-label={`Delete journal post: ${post.title}`}
+                                    >
+                                      <Trash2 className="h-4 w-4" />
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   <p className="border-t border-border/40 pt-4 text-center font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground/70">
-                    Changes are saved to the database and appear instantly on the live site
+                    Changes are saved to the database and appear on the live site instantly
                   </p>
                 </div>
               )}

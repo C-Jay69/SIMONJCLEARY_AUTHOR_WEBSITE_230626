@@ -27,6 +27,13 @@ import type {
 } from "@/components/site/types";
 
 /**
+ * The homepage is static, but journal posts and other DB content are edited
+ * live from the admin panel. ISR (60s) + on-demand revalidatePath() after
+ * admin mutations lets new posts appear without a full redeploy.
+ */
+export const revalidate = 60;
+
+/**
  * Serialize a Prisma Book row to a plain object safe to pass across the
  * Server/Client boundary (Date fields become ISO strings).
  */
