@@ -77,8 +77,8 @@ const en: Dict = {
   "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
   "excerpt.title": "The prologue from Ghosts in the Ash",
   "excerpt.intro": "The origin of everything that follows. The lamp that never goes out.",
-  "excerpt.cta": "Like what you read? The first chapter is on the house.",
-  "excerpt.button": "Read the rest — free",
+  "excerpt.cta": "The rest of the prologue and the opening chapters live in the book.",
+  "excerpt.button": "Keep reading",
 
   // Case file
   "casefile.eyebrow": "// CASE FILE 001",
@@ -233,8 +233,8 @@ const es: Dict = {
   "excerpt.eyebrow": "// PRÓLOGO · OMAHA, 1999",
   "excerpt.title": "El prólogo de Ghosts in the Ash",
   "excerpt.intro": "El origen de todo lo que sigue. La lámpara que nunca se apaga.",
-  "excerpt.cta": "¿Te gustó? El primer capítulo va por cuenta de la casa.",
-  "excerpt.button": "Lee el resto — gratis",
+  "excerpt.cta": "El resto del prólogo y los primeros capítulos están en el libro.",
+  "excerpt.button": "Seguir leyendo",
 
   // Case file
   "casefile.eyebrow": "// EXPEDIENTE 001",
@@ -389,8 +389,8 @@ const fr: Dict = {
   "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
   "excerpt.title": "Le prologue de Ghosts in the Ash",
   "excerpt.intro": "L'origine de tout ce qui suit. La lampe qui ne s'éteint jamais.",
-  "excerpt.cta": "Ça vous plaît ? Le premier chapitre est offert.",
-  "excerpt.button": "Lire la suite — gratuitement",
+  "excerpt.cta": "Le reste du prologue et les premiers chapitres sont dans le livre.",
+  "excerpt.button": "Continuer la lecture",
 
   // Case file
   "casefile.eyebrow": "// DOSSIER 001",
@@ -545,8 +545,8 @@ const zh: Dict = {
   "excerpt.eyebrow": "// 序章 · 奥马哈，1999",
   "excerpt.title": "《Ghosts in the Ash》序章",
   "excerpt.intro": "一切后续的起源。那盏永不熄灭的灯。",
-  "excerpt.cta": "喜欢吗？第一章免费奉送。",
-  "excerpt.button": "继续阅读 —— 免费",
+  "excerpt.cta": "序章其余部分与开篇章节都在书中。",
+  "excerpt.button": "继续阅读",
 
   // Case file
   "casefile.eyebrow": "// 档案 001",

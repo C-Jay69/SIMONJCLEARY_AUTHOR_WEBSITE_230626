@@ -23,16 +23,29 @@ type ExcerptSectionProps = {
   title?: string;
   /** Where the "read the rest" CTA points (homepage newsletter anchor by default). */
   ctaHref?: string;
+  /** Only show the first N paragraphs. 0/undefined shows the whole excerpt. */
+  maxParagraphs?: number;
 };
 
 export function ExcerptSection({
   excerpt,
   title = "Ghosts in the Ash",
   ctaHref = "/#newsletter",
+  maxParagraphs,
 }: ExcerptSectionProps) {
   const t = useT();
   const body = excerpt?.trim() || FALLBACK_EXCERPT;
-  const paragraphs = body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const allParagraphs = body
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  const truncated = Boolean(
+    maxParagraphs && maxParagraphs > 0 && allParagraphs.length > maxParagraphs
+  );
+  const paragraphs = truncated
+    ? allParagraphs.slice(0, maxParagraphs)
+    : allParagraphs;
 
   return (
     <Section
@@ -54,6 +67,19 @@ export function ExcerptSection({
             {p}
           </p>
         ))}
+
+        {truncated && (
+          <div
+            aria-hidden="true"
+            className="mt-2 flex items-center gap-3 text-muted-foreground"
+          >
+            <span className="steel-hairline" />
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em]">
+              …
+            </span>
+            <span className="steel-hairline" />
+          </div>
+        )}
 
         <div className="mt-8 flex flex-col items-start gap-4 border-l-2 border-accent/60 pl-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-serif text-base italic text-muted-foreground">

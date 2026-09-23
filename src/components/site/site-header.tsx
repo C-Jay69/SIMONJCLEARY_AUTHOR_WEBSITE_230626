@@ -63,8 +63,18 @@ export function SiteHeader() {
 
   // Lightweight active-section highlight via IntersectionObserver.
   React.useEffect(() => {
+    // Only observe targets that exist in this document. On subpages the nav
+    // anchors are "/#section" (homepage links) — not present here and not
+    // valid CSS selectors — so skip them instead of feeding querySelector.
     const sections = navItems
-      .map((n) => document.querySelector(n.href))
+      .map((n) => {
+        if (!n.href.startsWith("#")) return null;
+        try {
+          return document.querySelector(n.href);
+        } catch {
+          return null;
+        }
+      })
       .filter((el): el is Element => Boolean(el));
 
     if (!sections.length) return;

@@ -116,8 +116,12 @@ export default async function GhostsInTheAshPage() {
           </div>
         </Section>
 
-        {/* Prologue reading experience */}
-        <ExcerptSection excerpt={ghostBook?.excerpt} />
+        {/* Prologue reading experience — free hook, gated to the buy section */}
+        <ExcerptSection
+          excerpt={ghostBook?.excerpt}
+          ctaHref="#buy"
+          maxParagraphs={3}
+        />
 
         {/* Where to buy */}
         {buy && (
