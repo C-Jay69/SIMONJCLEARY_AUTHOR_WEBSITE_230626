@@ -713,3 +713,4 @@ The site uses Google Fonts (Inter, Fraunces, JetBrains Mono) via next/font. If d
 
 License
 This project is private. All rights reserved
+# SIMONJCLEARY_AUTHOR_WEBSITE_230926
