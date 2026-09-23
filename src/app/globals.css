@@ -28,6 +28,10 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ash: var(--ash);
+  --color-copper: var(--copper);
+  --color-wetsteel: var(--wetsteel);
+  --color-gold: var(--gold);
+  --color-ember: var(--accent);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
@@ -65,6 +69,11 @@
 
   --ash: oklch(0.6 0.004 75); /* cool ash-gray for redaction on paper */
 
+  /* Shattered City palette — light / paper */
+  --copper: oklch(0.58 0.13 50);
+  --wetsteel: oklch(0.44 0.03 235);
+  --gold: oklch(0.66 0.11 80);
+
   --grain-opacity: 0.04;
 }
 
@@ -90,6 +99,11 @@
   --ring: oklch(0.68 0.14 55);
 
   --ash: oklch(0.4 0.004 75); /* cool ash-gray for redaction on dark */
+
+  /* Shattered City palette — dark / noir */
+  --copper: oklch(0.74 0.13 55);
+  --wetsteel: oklch(0.5 0.025 235);
+  --gold: oklch(0.82 0.1 85);
 
   --grain-opacity: 0.05;
 }
@@ -165,6 +179,40 @@
     color-mix(in oklch, var(--accent) 30%, transparent)
   );
   border: 0;
+}
+
+/* Wet-steel hairline — cold blue rule, used on the Shattered City page */
+.steel-hairline {
+  height: 1px;
+  width: 2.5rem;
+  background: linear-gradient(
+    to right,
+    var(--wetsteel),
+    color-mix(in oklch, var(--wetsteel) 20%, transparent)
+  );
+  border: 0;
+}
+
+/* Weathered-gold gradient text — used on titles with a corroded-metal feel */
+.gold-gradient-text {
+  background: linear-gradient(
+    115deg,
+    var(--gold) 0%,
+    color-mix(in oklch, var(--gold) 60%, var(--copper)) 45%,
+    color-mix(in oklch, var(--gold) 35%, var(--wetsteel)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Copper ember glow — radial wash scaled to the Shattered City cover */
+.copper-glow {
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklch, var(--copper) 32%, transparent),
+    transparent 70%
+  );
 }
 
 /* Case-file mono label */

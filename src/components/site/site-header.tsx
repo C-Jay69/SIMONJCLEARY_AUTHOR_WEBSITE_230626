@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -25,13 +26,33 @@ const NAV_KEYS = [
   { key: "nav.events", href: "#events" },
 ] as const;
 
+const SHATTERED_CITY_HREF = "/the-shattered-city";
+
 export function SiteHeader() {
   const t = useT();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [active, setActive] = React.useState<string>("");
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const navItems = NAV_KEYS.map((n) => ({ ...n, label: t(n.key) }));
+  const isSubpage = Boolean(pathname && pathname !== "/");
+  const onShatteredCity = Boolean(
+    pathname && pathname.startsWith("/the-shattered-city")
+  );
+
+  // Section anchors only exist on the homepage. From any subpage, prefix
+  // them with "/" so they resolve to the homepage sections instead of dying.
+  const anchorHref = (href: string) =>
+    href.startsWith("#") && isSubpage ? `/${href}` : href;
+
+  const navItems = NAV_KEYS.map((n) => ({
+    ...n,
+    label: t(n.key),
+    href: anchorHref(n.href),
+  }));
+
+  // Free-chapter CTA: on the Shattered City page the opening is in-page.
+  const ctaHref = onShatteredCity ? "#chapter-one" : "#newsletter";
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -60,7 +81,7 @@ export function SiteHeader() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, [t]);
+  }, [t, isSubpage]);
 
   return (
     <header
@@ -74,7 +95,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         {/* Wordmark + logo */}
         <Link
-          href="#top"
+          href={isSubpage ? "/" : "#top"}
           className="group flex items-center gap-2.5"
           aria-label="Simon J Cleary — home"
         >
@@ -95,7 +116,7 @@ export function SiteHeader() {
           className="hidden items-center gap-1 md:flex"
         >
           {navItems.map((item) => {
-            const isActive = active === item.href;
+            const isActive = !isSubpage && active === item.href;
             return (
               <Link
                 key={item.href}
@@ -117,6 +138,18 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <Link
+            href={SHATTERED_CITY_HREF}
+            className="relative ml-1 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold"
+          >
+            {t("nav.shatteredCity")}
+            <span
+              aria-hidden="true"
+              className="rounded-sm border border-gold/40 px-1 py-0.5 font-mono text-[0.5rem] uppercase tracking-widest text-gold"
+            >
+              {t("nav.new")}
+            </span>
+          </Link>
         </nav>
 
         {/* Right rail */}
@@ -126,7 +159,7 @@ export function SiteHeader() {
             size="sm"
             className="hidden h-9 rounded-md bg-accent text-accent-foreground hover:bg-accent/90 sm:inline-flex"
           >
-            <Link href="#newsletter">{t("nav.freeChapter")}</Link>
+            <Link href={ctaHref}>{t("nav.freeChapter")}</Link>
           </Button>
           <LangSwitcher />
           <ThemeToggle />
@@ -162,6 +195,20 @@ export function SiteHeader() {
                     </Link>
                   </SheetClose>
                 ))}
+                <SheetClose asChild>
+                  <Link
+                    href={SHATTERED_CITY_HREF}
+                    className="flex items-center justify-between rounded-md px-3 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-gold/10 hover:text-gold"
+                  >
+                    {t("nav.shatteredCity")}
+                    <span
+                      aria-hidden="true"
+                      className="rounded-sm border border-gold/40 px-1.5 py-0.5 font-mono text-[0.5rem] uppercase tracking-widest text-gold"
+                    >
+                      {t("nav.new")}
+                    </span>
+                  </Link>
+                </SheetClose>
               </nav>
               <div className="mt-auto px-4 pb-6">
                 <SheetClose asChild>
@@ -169,7 +216,7 @@ export function SiteHeader() {
                     asChild
                     className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
                   >
-                    <Link href="#newsletter">{t("nav.readChapterFree")}</Link>
+                    <Link href={ctaHref}>{t("nav.readChapterFree")}</Link>
                   </Button>
                 </SheetClose>
                 <p className="mt-3 text-center font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bell, Clock } from "lucide-react";
+import { Bell, BookOpen, Clock } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,27 @@ import { formatYear } from "@/lib/date-utils";
 
 type BooksSectionProps = {
   books: Book[];
+};
+
+/**
+ * The Shattered City is presented as a static card (no database row needed).
+ * It links through to its own `/the-shattered-city` page.
+ */
+const SHATTERED_CITY_BOOK: Book = {
+  id: "the-shattered-city-static",
+  title: "The Shattered City",
+  series: "The Shattered City",
+  seriesIndex: 1,
+  subtitle: null,
+  tagline: "The city was not drowning them. It was mopping its floor.",
+  description:
+    "When the transit platform collapses in the lower sectors of Neo-Tethys, three sisters wake in the dark carrying marks that grant them new kinds of power — and start climbing toward a surface that wants its floor clean.",
+  excerpt: null,
+  releaseDate: null,
+  status: "forthcoming",
+  coverUrl: "/images/books/the-shattered-city.png",
+  featured: false,
+  createdAt: new Date(0).toISOString(),
 };
 
 function BookCover({ book }: { book: Book }) {
@@ -210,7 +231,13 @@ function BookCard({ book }: { book: Book }) {
 
 export function BooksSection({ books }: BooksSectionProps) {
   const t = useT();
-  if (!books.length) return null;
+
+  const alreadyShown =
+    books.some((b) => b.title.toLowerCase().includes("shattered")) ||
+    books.some((b) => b.id === SHATTERED_CITY_BOOK.id);
+  const showShatteredCity = !alreadyShown;
+
+  if (!books.length && !showShatteredCity) return null;
 
   return (
     <Section
@@ -224,6 +251,44 @@ export function BooksSection({ books }: BooksSectionProps) {
         {books.map((book) => (
           <BookCard key={book.id} book={book} />
         ))}
+        {showShatteredCity && (
+          <article className="flex flex-col gap-5">
+            <BookCover book={SHATTERED_CITY_BOOK} />
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                  {t("books.book")} 01 · {SHATTERED_CITY_BOOK.series}
+                </span>
+                <span className="font-mono text-[0.65rem] uppercase tracking-widest text-gold">
+                  {t("books.forthcoming")}
+                </span>
+              </div>
+              <h3 className="font-serif text-2xl font-semibold leading-tight tracking-tight transition-colors hover:text-gold">
+                <Link href="/the-shattered-city">
+                  {SHATTERED_CITY_BOOK.title}
+                </Link>
+              </h3>
+              <p className="font-serif text-base italic leading-snug text-foreground/80">
+                &ldquo;{SHATTERED_CITY_BOOK.tagline}&rdquo;
+              </p>
+              <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                {SHATTERED_CITY_BOOK.description}
+              </p>
+              <div className="mt-1">
+                <Button
+                  asChild
+                  size="sm"
+                  className="h-9 rounded-md bg-gold text-background hover:bg-gold/90"
+                >
+                  <Link href="/the-shattered-city#chapter-one">
+                    <BookOpen className="h-4 w-4" aria-hidden="true" />
+                    Read Chapter One free
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </article>
+        )}
       </div>
     </Section>
   );

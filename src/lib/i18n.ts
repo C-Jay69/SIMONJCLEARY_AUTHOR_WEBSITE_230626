@@ -35,6 +35,8 @@ const en: Dict = {
   "nav.noSpam": "No spam · Unsubscribe anytime",
   "nav.newsletter": "Newsletter",
   "nav.contact": "Contact",
+  "nav.shatteredCity": "The Shattered City",
+  "nav.new": "New",
 
   // Hero
   "hero.eyebrow": "// THE DEBUT DUKE SAVAGE NOVEL",
@@ -187,6 +189,8 @@ const es: Dict = {
   "nav.noSpam": "Nada de spam · Cancela cuando quieras",
   "nav.newsletter": "Boletín",
   "nav.contact": "Contacto",
+  "nav.shatteredCity": "The Shattered City",
+  "nav.new": "Nuevo",
 
   // Hero
   "hero.eyebrow": "// LA PRIMERA NOVELA DE DUKE SAVAGE",
@@ -339,6 +343,8 @@ const fr: Dict = {
   "nav.noSpam": "Pas de spam · Désabonnement à tout moment",
   "nav.newsletter": "Newsletter",
   "nav.contact": "Contact",
+  "nav.shatteredCity": "The Shattered City",
+  "nav.new": "Nouveau",
 
   // Hero
   "hero.eyebrow": "// LE PREMIER ROMAN DE DUKE SAVAGE",
@@ -491,6 +497,8 @@ const zh: Dict = {
   "nav.noSpam": "不发垃圾邮件 · 随时取消订阅",
   "nav.newsletter": "订阅",
   "nav.contact": "联系",
+  "nav.shatteredCity": "破碎之城",
+  "nav.new": "新",
 
   // Hero
   "hero.eyebrow": "// 杜克·萨维奇首部小说",

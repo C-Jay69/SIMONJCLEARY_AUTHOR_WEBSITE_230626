@@ -123,7 +123,7 @@ export default async function Home() {
           <PressStrip items={serializedPress} />
         )}
 
-        {serializedBooks.length > 0 && <BooksSection books={serializedBooks} />}
+        <BooksSection books={serializedBooks} />
 
         <AboutSection />
 
