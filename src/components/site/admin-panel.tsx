@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { supabaseBrowser } from "@/lib/browser-storage";
 import type { Podcast } from "@/components/site/types";
 
 type AdminPanelProps = {
@@ -329,24 +330,68 @@ export function AdminPanel({ children, episodes: initialEpisodes }: AdminPanelPr
 
     setUploading(true);
     try {
-      const fd = new FormData();
-      fd.append("title", title.trim());
-      fd.append("episodeNumber", String(num));
-      fd.append("description", description.trim());
-      fd.append("duration", duration.trim());
-      fd.append("audio", file);
-
-      const res = await fetch("/api/admin/upload", {
+      // 1. Stage the upload — the server mints a signed upload URL for storage.
+      const initRes = await fetch("/api/admin/upload", {
         method: "POST",
-        headers: { "x-admin-password": password },
-        body: fd,
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({
+          title: title.trim(),
+          episodeNumber: num,
+          description: description.trim(),
+          duration: duration.trim(),
+          fileName: file.name,
+        }),
       });
-      const data = (await res.json()) as {
+      const init = (await initRes.json()) as {
+        ok?: boolean;
+        error?: string;
+        bucket?: string;
+        path?: string;
+        token?: string;
+      };
+      if (!initRes.ok || !init.ok || !init.path || !init.token || !init.bucket) {
+        throw new Error(init.error || "Could not start the upload.");
+      }
+
+      // 2. Upload the file straight to Supabase Storage from the browser.
+      //    This bypasses Vercel's ~4.5MB serverless body limit, so full
+      //    episodes (often 10MB+) can be published.
+      if (!supabaseBrowser) {
+        throw new Error("Storage is not configured in the browser.");
+      }
+      const { error: storageError } = await supabaseBrowser.storage
+        .from(init.bucket)
+        .uploadToSignedUrl(init.path, init.token, file, {
+          contentType: file.type,
+        });
+      if (storageError) {
+        throw new Error(storageError.message || "Could not upload the audio.");
+      }
+
+      // 3. Publish the episode in the database.
+      const pubRes = await fetch("/api/admin/upload/confirm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({
+          title: title.trim(),
+          episodeNumber: num,
+          description: description.trim(),
+          duration: duration.trim(),
+          path: init.path,
+        }),
+      });
+      const data = (await pubRes.json()) as {
         ok?: boolean;
         error?: string;
         podcast?: Podcast;
       };
-      if (!res.ok || !data.ok || !data.podcast) {
+      if (!pubRes.ok || !data.ok || !data.podcast) {
         throw new Error(data.error || "Upload failed.");
       }
       setEpisodes((prev) =>

@@ -20,6 +20,33 @@ export const supabase: SupabaseClient | null =
 export const isSupabaseConfigured = Boolean(url && anonKey);
 
 /**
+ * Server-side Supabase client using the service_role key.
+ *
+ * Used only by admin routes (podcast upload staging / cleanup) so storage
+ * writes bypass RLS policies. Throws when SUPABASE_URL or
+ * SUPABASE_SERVICE_ROLE_KEY is missing, so routes can return a clean error.
+ *
+ * Never import this from a client component — the service_role key must stay
+ * server-only.
+ */
+export function createServerSupabase(): SupabaseClient {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceRoleKey) {
+    throw new Error(
+      "Supabase storage is not configured (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing)."
+    );
+  }
+  return createClient(url, serviceRoleKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
+
+/** Storage bucket for podcast audio files. */
+export function getStorageBucket(): string {
+  return process.env.SUPABASE_STORAGE_BUCKET || "simonjcleary-assets";
+}
+
+/**
  * SQL to run in the Supabase SQL Editor to create the subscribers table:
  *
  *   create table if not exists public.subscribers (
