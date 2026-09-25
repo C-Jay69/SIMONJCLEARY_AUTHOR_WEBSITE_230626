@@ -56,6 +56,9 @@ const en: Dict = {
   "books.notifyMe": "Notify me",
   "books.readNovel": "Read the novel",
   "books.readChapter": "Read Chapter 1 free",
+  "books.buyDirect": "Buy the book",
+  "books.buying": "Redirecting to checkout…",
+  "books.buyError": "Couldn't start checkout. Please try again.",
 
   // About
   "about.eyebrow": "// ABOUT THE AUTHOR",
@@ -212,6 +215,9 @@ const es: Dict = {
   "books.notifyMe": "Avísame",
   "books.readNovel": "Leer la novela",
   "books.readChapter": "Lee el capítulo 1 gratis",
+  "books.buyDirect": "Comprar el libro",
+  "books.buying": "Redirigiendo al pago…",
+  "books.buyError": "No se pudo iniciar el pago. Inténtalo de nuevo.",
 
   // About
   "about.eyebrow": "// SOBRE EL AUTOR",
@@ -368,6 +374,9 @@ const fr: Dict = {
   "books.notifyMe": "Prévenez-moi",
   "books.readNovel": "Lire le roman",
   "books.readChapter": "Lire le chapitre 1 gratuitement",
+  "books.buyDirect": "Acheter le livre",
+  "books.buying": "Redirection vers le paiement…",
+  "books.buyError": "Impossible de lancer le paiement. Réessayez.",
 
   // About
   "about.eyebrow": "// L'AUTEUR",
@@ -524,6 +533,9 @@ const zh: Dict = {
   "books.notifyMe": "到货通知",
   "books.readNovel": "阅读小说",
   "books.readChapter": "免费阅读第一章",
+  "books.buyDirect": "购买本书",
+  "books.buying": "正在跳转至结账…",
+  "books.buyError": "无法开始结账，请重试。",
 
   // About
   "about.eyebrow": "// 关于作者",

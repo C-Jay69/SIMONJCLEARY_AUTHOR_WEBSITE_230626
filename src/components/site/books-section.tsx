@@ -7,11 +7,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/site/section";
+import { BuyButton } from "@/components/site/buy-button";
 import { NEWSLETTER_HREF } from "@/components/site/buy-links";
 import type { Book } from "@/components/site/types";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import { formatYear } from "@/lib/date-utils";
+import { slugifyBookTitle } from "@/lib/slug";
 
 const GHOSTS_HREF = "/ghosts-in-the-ash";
 const SHATTERED_HREF = "/the-shattered-city";
@@ -185,11 +187,17 @@ type NovelCardProps = {
   hrefAnchor?: string;
   /** Button label. Falls back to an i18n key when not provided. */
   ctaLabel?: string;
+  /** When set, the card leads with a "buy direct" Stripe checkout button. */
+  buySlug?: string;
 };
 
-function NovelCard({ book, href, hrefAnchor, ctaLabel }: NovelCardProps) {
+function NovelCard({ book, href, hrefAnchor, ctaLabel, buySlug }: NovelCardProps) {
   const t = useT();
   const isForthcoming = book.status === "forthcoming";
+  const isShatteredCard = book.title.toLowerCase().includes("shattered");
+  const accentClass = isShatteredCard
+    ? "bg-gold text-background hover:bg-gold/90"
+    : "bg-accent text-accent-foreground hover:bg-accent/90";
   const year = formatYear(book.releaseDate);
   const target = href ? `${href}${hrefAnchor ?? ""}` : undefined;
 
@@ -239,7 +247,28 @@ function NovelCard({ book, href, hrefAnchor, ctaLabel }: NovelCardProps) {
         </p>
 
         <div className="mt-1">
-          {target ? (
+          {buySlug ? (
+            <div className="flex flex-wrap items-center gap-3">
+              <BuyButton
+                slug={buySlug}
+                label={t("books.buyDirect")}
+                className={cn("h-9 rounded-md px-5", accentClass)}
+              />
+              {target && (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="h-9 rounded-md border-border/70 text-foreground hover:border-accent/60 hover:text-accent"
+                >
+                  <Link href={target}>
+                    <BookOpen className="h-4 w-4" aria-hidden="true" />
+                    {ctaLabel ?? t("books.readNovel")}
+                  </Link>
+                </Button>
+              )}
+            </div>
+          ) : target ? (
             <Button
               asChild
               size="sm"
@@ -285,7 +314,14 @@ function NovelCard({ book, href, hrefAnchor, ctaLabel }: NovelCardProps) {
   );
 }
 
-export function BooksSection({ books }: { books: Book[] }) {
+export function BooksSection({
+  books,
+  buyableSlugs = [],
+}: {
+  books: Book[];
+  /** Price-catalog slugs that are configured for direct purchase. */
+  buyableSlugs?: string[];
+}) {
   const t = useT();
 
   const isGhost = (b: Book) =>
@@ -293,6 +329,7 @@ export function BooksSection({ books }: { books: Book[] }) {
   const isShattered = (b: Book) =>
     b.title?.toLowerCase().includes("shattered") || b.id === SHATTERED_CITY_BOOK.id;
 
+  const buyable = new Set(buyableSlugs);
   const dbGhost = books.find(isGhost);
   const dbShattered = books.find(isShattered);
   const others = books.filter((b) => !isGhost(b) && !isShattered(b));
@@ -309,11 +346,24 @@ export function BooksSection({ books }: { books: Book[] }) {
       intro={t("books.intro")}
     >
       <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        <NovelCard book={ghost} href={GHOSTS_HREF} />
+        <NovelCard
+          book={ghost}
+          href={GHOSTS_HREF}
+          buySlug={
+            buyable.has("ghosts-in-the-ash") ? "ghosts-in-the-ash" : undefined
+          }
+        />
 
-        {others.map((book) => (
-          <NovelCard key={book.id} book={book} />
-        ))}
+        {others.map((book) => {
+          const slug = slugifyBookTitle(book.title);
+          return (
+            <NovelCard
+              key={book.id}
+              book={book}
+              buySlug={buyable.has(slug) ? slug : undefined}
+            />
+          );
+        })}
 
         {showShattered && (
           <NovelCard
@@ -321,6 +371,11 @@ export function BooksSection({ books }: { books: Book[] }) {
             href={SHATTERED_HREF}
             hrefAnchor="#chapter-one"
             ctaLabel={t("books.readChapter")}
+            buySlug={
+              buyable.has("the-shattered-city")
+                ? "the-shattered-city"
+                : undefined
+            }
           />
         )}
       </div>

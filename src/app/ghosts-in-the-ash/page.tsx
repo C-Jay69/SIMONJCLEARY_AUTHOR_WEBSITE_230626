@@ -11,6 +11,7 @@ import { PressStrip } from "@/components/site/press-strip";
 import { ExcerptSection } from "@/components/site/excerpt-section";
 import { CaseFileSection } from "@/components/site/case-file-section";
 import { BUY_LINKS } from "@/components/site/buy-links";
+import { BuyButton } from "@/components/site/buy-button";
 
 import { ghostsStory, ghostsBuy } from "@/content/ghosts-in-the-ash";
 
@@ -133,6 +134,11 @@ export default async function GhostsInTheAshPage() {
             intro={ghostsBuy.intro}
           >
             <div className="mt-8 flex flex-wrap items-center gap-3">
+              <BuyButton
+                slug="ghosts-in-the-ash"
+                label="Buy the e-book"
+                className="bg-accent px-6 py-2.5 text-accent-foreground hover:bg-accent/90"
+              />
               {[
                 { href: buy.amazon, label: "Amazon" },
                 { href: buy.bookshop, label: "Bookshop.org" },
@@ -150,13 +156,13 @@ export default async function GhostsInTheAshPage() {
               ))}
               <a
                 href="/#newsletter"
-                className="rounded-md bg-accent px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-accent-foreground transition-colors hover:bg-accent/90"
+                className="rounded-md border border-border/70 px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-foreground transition-colors hover:border-accent/60 hover:text-accent"
               >
                 Signed copy
               </a>
             </div>
             <p className="mt-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
-              Signed-copy drops go out to the dispatch list first.
+              The e-book is delivered by email after checkout — secure payment handled by Stripe. Signed-copy drops go out to the dispatch list first.
             </p>
           </Section>
         )}

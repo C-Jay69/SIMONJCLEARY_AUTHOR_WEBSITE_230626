@@ -28,19 +28,34 @@ model ContactMessage {
 }
 
 model Book {
-  id          String   @id @default(cuid())
-  title       String
-  series      String   @default("Mike Savage")
-  seriesIndex Int
-  subtitle    String?
-  tagline     String?
-  description String
-  excerpt     String?
-  releaseDate DateTime?
-  status      String   @default("published") // published | forthcoming
-  coverUrl    String
-  featured    Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id            String   @id @default(cuid())
+  title         String
+  series        String   @default("Mike Savage")
+  seriesIndex   Int
+  subtitle      String?
+  tagline       String?
+  description   String
+  excerpt       String?
+  releaseDate   DateTime?
+  status        String   @default("published") // published | forthcoming
+  coverUrl      String
+  featured      Boolean  @default(false)
+  stripePriceId String?
+  priceCents    Int?
+  createdAt     DateTime @default(now())
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  stripeSessionId String   @unique // checkout.session.id from Stripe
+  customerEmail   String?
+  customerName    String?
+  bookTitle       String?
+  bookSlug        String?
+  amountTotal     Int?
+  currency        String?
+  status          String   @default("paid")
+  createdAt       DateTime @default(now())
 }
 
 model JournalPost {

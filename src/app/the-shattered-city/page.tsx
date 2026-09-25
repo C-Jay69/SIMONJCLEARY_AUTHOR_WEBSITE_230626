@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Section } from "@/components/site/section";
 import { ShatteredCityHero } from "@/components/site/shattered-city-hero";
+import { BuyButton } from "@/components/site/buy-button";
 
 import { chapterOne } from "@/content/shattered-city-chapter-one";
 import { cast, storyIntro } from "@/content/shattered-city-cast";
@@ -158,16 +159,23 @@ export default function ShatteredCityPage() {
               ))}
             </div>
 
-            <footer className="mt-10 flex flex-col items-start gap-3 border-t border-border/40 pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <footer className="mt-10 flex flex-col items-start gap-4 border-t border-border/40 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-md font-serif text-base italic leading-snug text-muted-foreground">
-                Like what you read? The sequel is on its way.
+                Like what you read? The full novel is ready now.
               </p>
-              <a
-                href="/#newsletter"
-                className="rounded-md bg-gold px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-background transition-colors hover:bg-gold/90"
-              >
-                Notify me
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <BuyButton
+                  slug="the-shattered-city"
+                  label="Buy the e-book"
+                  className="bg-gold px-5 py-2.5 text-background hover:bg-gold/90"
+                />
+                <a
+                  href="/#newsletter"
+                  className="rounded-md border border-wetsteel/40 px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-foreground transition-colors hover:border-gold/60 hover:text-gold"
+                >
+                  Notify me
+                </a>
+              </div>
             </footer>
           </article>
         </Section>
