@@ -29,6 +29,7 @@ const en: Dict = {
   "nav.about": "About",
   "nav.journal": "Journal",
   "nav.events": "Events",
+  "nav.podcast": "Podcast",
   "nav.freeChapter": "Free Chapter",
   "nav.menu": "Menu",
   "nav.readChapterFree": "Read Chapter 1 free",
@@ -36,6 +37,7 @@ const en: Dict = {
   "nav.newsletter": "Newsletter",
   "nav.contact": "Contact",
   "nav.shatteredCity": "The Shattered City",
+  "nav.ghostsInTheAsh": "Ghosts in the Ash",
   "nav.new": "New",
 
   // Hero
@@ -188,6 +190,7 @@ const es: Dict = {
   "nav.about": "Biografía",
   "nav.journal": "Diario",
   "nav.events": "Eventos",
+  "nav.podcast": "Podcast",
   "nav.freeChapter": "Capítulo gratis",
   "nav.menu": "Menú",
   "nav.readChapterFree": "Lee el capítulo 1 gratis",
@@ -195,6 +198,7 @@ const es: Dict = {
   "nav.newsletter": "Boletín",
   "nav.contact": "Contacto",
   "nav.shatteredCity": "The Shattered City",
+  "nav.ghostsInTheAsh": "Ghosts in the Ash",
   "nav.new": "Nuevo",
 
   // Hero
@@ -347,6 +351,7 @@ const fr: Dict = {
   "nav.about": "Biographie",
   "nav.journal": "Journal",
   "nav.events": "Événements",
+  "nav.podcast": "Podcast",
   "nav.freeChapter": "Chapitre gratuit",
   "nav.menu": "Menu",
   "nav.readChapterFree": "Lire le chapitre 1 gratuitement",
@@ -354,6 +359,7 @@ const fr: Dict = {
   "nav.newsletter": "Newsletter",
   "nav.contact": "Contact",
   "nav.shatteredCity": "The Shattered City",
+  "nav.ghostsInTheAsh": "Ghosts in the Ash",
   "nav.new": "Nouveau",
 
   // Hero
@@ -506,6 +512,7 @@ const zh: Dict = {
   "nav.about": "作者",
   "nav.journal": "手记",
   "nav.events": "活动",
+  "nav.podcast": "播客",
   "nav.freeChapter": "免费章节",
   "nav.menu": "菜单",
   "nav.readChapterFree": "免费阅读第一章",
@@ -513,6 +520,7 @@ const zh: Dict = {
   "nav.newsletter": "订阅",
   "nav.contact": "联系",
   "nav.shatteredCity": "破碎之城",
+  "nav.ghostsInTheAsh": "Ghosts in the Ash",
   "nav.new": "新",
 
   // Hero

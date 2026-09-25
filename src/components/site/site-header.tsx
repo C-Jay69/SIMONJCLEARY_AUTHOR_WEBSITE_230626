@@ -24,8 +24,10 @@ const NAV_KEYS = [
   { key: "nav.about", href: "#about" },
   { key: "nav.journal", href: "#journal" },
   { key: "nav.events", href: "#events" },
+  { key: "nav.podcast", href: "#podcast" },
 ] as const;
 
+const GHOSTS_HREF = "/ghosts-in-the-ash";
 const SHATTERED_CITY_HREF = "/the-shattered-city";
 
 export function SiteHeader() {
@@ -149,6 +151,12 @@ export function SiteHeader() {
             );
           })}
           <Link
+            href={GHOSTS_HREF}
+            className="relative ml-1 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold"
+          >
+            {t("nav.ghostsInTheAsh")}
+          </Link>
+          <Link
             href={SHATTERED_CITY_HREF}
             className="relative ml-1 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold"
           >
@@ -205,6 +213,14 @@ export function SiteHeader() {
                     </Link>
                   </SheetClose>
                 ))}
+                <SheetClose asChild>
+                  <Link
+                    href={GHOSTS_HREF}
+                    className="rounded-md px-3 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-gold/10 hover:text-gold"
+                  >
+                    {t("nav.ghostsInTheAsh")}
+                  </Link>
+                </SheetClose>
                 <SheetClose asChild>
                   <Link
                     href={SHATTERED_CITY_HREF}
