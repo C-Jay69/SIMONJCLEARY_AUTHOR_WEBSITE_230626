@@ -37,7 +37,7 @@ model Book {
   description   String
   excerpt       String?
   releaseDate   DateTime?
-  status        String   @default("published") // published | forthcoming
+  status        String   @default("private") // private | published | forthcoming
   coverUrl      String
   featured      Boolean  @default(false)
   stripePriceId String?

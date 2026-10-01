@@ -7,21 +7,21 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/site/section";
-import { BuyButton } from "@/components/site/buy-button";
 import { NEWSLETTER_HREF } from "@/components/site/buy-links";
 import type { Book } from "@/components/site/types";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import { formatYear } from "@/lib/date-utils";
-import { slugifyBookTitle } from "@/lib/slug";
 
 const GHOSTS_HREF = "/ghosts-in-the-ash";
 const SHATTERED_HREF = "/the-shattered-city";
 
 /**
- * Static fallbacks for the two routed novels. The Ghosts in the Ash row
- * normally comes from the database; these exist so the Novels section still
- * renders both routed books even if the database query is unavailable.
+ * Static definitions for the two routed novels. Both are unpublished
+ * manuscripts, so the homepage cards are intentionally NOT sourced from the
+ * database: no release date, price, release-status, or future-title row can
+ * override them. This static copy is the canonical presentation until there
+ * is something real to sell.
  */
 const GHOSTS_BOOK: Book = {
   id: "ghosts-in-the-ash-static",
@@ -30,14 +30,16 @@ const GHOSTS_BOOK: Book = {
   seriesIndex: 1,
   subtitle: "A Duke Savage Novel",
   tagline:
-    "In a city that erases people with a transposed digit, one investigator was hired to find a woman who was never meant to be found.",
+    "In a city that erases people with a transposed digit, one investigator is hired to find a woman who was never meant to be found.",
   description:
-    "Duke Savage is fifty-three — a former investigative journalist turned private investigator operating out of a cramped office above a pawnshop in Los Angeles. When an encrypted message warns that a young woman is running out of time, he begins searching for Sarah Chu, who has been systematically erased from the administrative systems that govern modern life.",
+    "Duke Savage is a former investigative journalist turned private investigator operating out of a cramped office above a pawnshop in Los Angeles. When an encrypted message warns that a young woman is running out of time, he begins searching for Sarah Chu, who has been systematically erased from the administrative systems that govern modern life.",
   excerpt: null,
   releaseDate: null,
-  status: "published",
+  status: "in-progress",
   coverUrl: "/images/books/ghosts-in-the-ash.jpg",
   featured: true,
+  stripePriceId: null,
+  priceCents: null,
   createdAt: new Date(0).toISOString(),
 };
 
@@ -52,9 +54,11 @@ const SHATTERED_CITY_BOOK: Book = {
     "When the transit platform collapses in the lower sectors of Neo-Tethys, three sisters wake in the dark carrying marks that grant them new kinds of power — and start climbing toward a surface that wants its floor clean.",
   excerpt: null,
   releaseDate: null,
-  status: "forthcoming",
+  status: "in-progress",
   coverUrl: "/images/books/the-shattered-city.png",
   featured: false,
+  stripePriceId: null,
+  priceCents: null,
   createdAt: new Date(0).toISOString(),
 };
 
@@ -62,6 +66,7 @@ function BookCover({ book }: { book: Book }) {
   const t = useT();
   const isFeatured = book.featured;
   const isForthcoming = book.status === "forthcoming";
+  const isInProgress = book.status === "in-progress";
   // The real cover (Ghosts in the Ash) is rendered as-is, no overlay.
   const isRealCover = isFeatured;
   const hasCoverArt = Boolean(book.coverUrl);
@@ -78,14 +83,20 @@ function BookCover({ book }: { book: Book }) {
       )}
     >
       {/* Status badges */}
-      {(isFeatured || isForthcoming) && (
+      {(isInProgress || isFeatured || isForthcoming) && (
         <div className="absolute left-3 top-3 z-20">
-          {isFeatured && (
+          {isInProgress ? (
+            <Badge
+              variant="outline"
+              className="border-accent/50 bg-background/70 text-accent backdrop-blur"
+            >
+              {t("books.inProgress")}
+            </Badge>
+          ) : isFeatured ? (
             <Badge className="bg-accent text-accent-foreground shadow-md hover:bg-accent">
               {t("books.new")}
             </Badge>
-          )}
-          {isForthcoming && (
+          ) : (
             <Badge
               variant="outline"
               className="border-accent/50 bg-background/70 text-accent backdrop-blur"
@@ -187,11 +198,9 @@ type NovelCardProps = {
   hrefAnchor?: string;
   /** Button label. Falls back to an i18n key when not provided. */
   ctaLabel?: string;
-  /** When set, the card leads with a "buy direct" Stripe checkout button. */
-  buySlug?: string;
 };
 
-function NovelCard({ book, href, hrefAnchor, ctaLabel, buySlug }: NovelCardProps) {
+function NovelCard({ book, href, hrefAnchor, ctaLabel }: NovelCardProps) {
   const t = useT();
   const isForthcoming = book.status === "forthcoming";
   const isShatteredCard = book.title.toLowerCase().includes("shattered");
@@ -247,37 +256,11 @@ function NovelCard({ book, href, hrefAnchor, ctaLabel, buySlug }: NovelCardProps
         </p>
 
         <div className="mt-1">
-          {buySlug ? (
-            <div className="flex flex-wrap items-center gap-3">
-              <BuyButton
-                slug={buySlug}
-                label={t("books.buyDirect")}
-                className={cn("h-9 rounded-md px-5", accentClass)}
-              />
-              {target && (
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="h-9 rounded-md border-border/70 text-foreground hover:border-accent/60 hover:text-accent"
-                >
-                  <Link href={target}>
-                    <BookOpen className="h-4 w-4" aria-hidden="true" />
-                    {ctaLabel ?? t("books.readNovel")}
-                  </Link>
-                </Button>
-              )}
-            </div>
-          ) : target ? (
+          {target ? (
             <Button
               asChild
               size="sm"
-              className={cn(
-                "h-9 rounded-md",
-                book.title.toLowerCase().includes("shattered")
-                  ? "bg-gold text-background hover:bg-gold/90"
-                  : "bg-accent text-accent-foreground hover:bg-accent/90"
-              )}
+              className={cn("h-9 rounded-md", accentClass)}
             >
               <Link href={target}>
                 <BookOpen className="h-4 w-4" aria-hidden="true" />
@@ -314,14 +297,7 @@ function NovelCard({ book, href, hrefAnchor, ctaLabel, buySlug }: NovelCardProps
   );
 }
 
-export function BooksSection({
-  books,
-  buyableSlugs = [],
-}: {
-  books: Book[];
-  /** Price-catalog slugs that are configured for direct purchase. */
-  buyableSlugs?: string[];
-}) {
+export function BooksSection({ books }: { books: Book[] }) {
   const t = useT();
 
   const isGhost = (b: Book) =>
@@ -329,13 +305,12 @@ export function BooksSection({
   const isShattered = (b: Book) =>
     b.title?.toLowerCase().includes("shattered") || b.id === SHATTERED_CITY_BOOK.id;
 
-  const buyable = new Set(buyableSlugs);
-  const dbGhost = books.find(isGhost);
-  const dbShattered = books.find(isShattered);
-  const others = books.filter((b) => !isGhost(b) && !isShattered(b));
-
-  const ghost = dbGhost ?? GHOSTS_BOOK;
-  const showShattered = !dbShattered;
+  // Extra DB rows may still appear, but only if an admin has explicitly
+  // marked them published — and they never get purchase buttons or the
+  // routed pages reserved for the two static projects above.
+  const others = books.filter(
+    (b) => !isGhost(b) && !isShattered(b) && b.status === "published"
+  );
 
   return (
     <Section
@@ -346,38 +321,18 @@ export function BooksSection({
       intro={t("books.intro")}
     >
       <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <NovelCard book={GHOSTS_BOOK} href={GHOSTS_HREF} />
+
+        {others.map((book) => (
+          <NovelCard key={book.id} book={book} />
+        ))}
+
         <NovelCard
-          book={ghost}
-          href={GHOSTS_HREF}
-          buySlug={
-            buyable.has("ghosts-in-the-ash") ? "ghosts-in-the-ash" : undefined
-          }
+          book={SHATTERED_CITY_BOOK}
+          href={SHATTERED_HREF}
+          hrefAnchor="#chapter-one"
+          ctaLabel={t("books.readChapter")}
         />
-
-        {others.map((book) => {
-          const slug = slugifyBookTitle(book.title);
-          return (
-            <NovelCard
-              key={book.id}
-              book={book}
-              buySlug={buyable.has(slug) ? slug : undefined}
-            />
-          );
-        })}
-
-        {showShattered && (
-          <NovelCard
-            book={SHATTERED_CITY_BOOK}
-            href={SHATTERED_HREF}
-            hrefAnchor="#chapter-one"
-            ctaLabel={t("books.readChapter")}
-            buySlug={
-              buyable.has("the-shattered-city")
-                ? "the-shattered-city"
-                : undefined
-            }
-          />
-        )}
       </div>
     </Section>
   );

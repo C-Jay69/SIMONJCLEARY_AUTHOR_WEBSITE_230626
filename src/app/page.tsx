@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { getPurchaseableSlugs } from "@/lib/store";
 import type {
   Book as BookRow,
   JournalPost as JournalPostRow,
@@ -126,10 +125,7 @@ export default async function Home() {
           <PressStrip items={serializedPress} />
         )}
 
-        <BooksSection
-          books={serializedBooks}
-          buyableSlugs={getPurchaseableSlugs()}
-        />
+        <BooksSection books={serializedBooks} />
 
         <AboutSection />
 

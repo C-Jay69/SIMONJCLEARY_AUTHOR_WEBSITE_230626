@@ -28,7 +28,7 @@ const fontMono = JetBrains_Mono({
 });
 
 const siteDescription =
-  "Simon J. Cleary is an Irish-born writer and the author of Ghosts in the Ash — the debut novel in the Duke Savage trilogy, a literary crime series about how power learns to be invisible.";
+  "Simon J. Cleary is an Irish-born writer working on Ghosts in the Ash — an adult literary crime novel about institutional power, erasure, and the investigator who notices.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://simonjcleary.com"),
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     "Ghosts in the Ash",
     "noir fiction",
     "literary thriller",
-    "debut novel",
+    "literary crime novel",
   ],
   authors: [{ name: "Simon J Cleary" }],
   creator: "Simon J Cleary",

@@ -40,7 +40,7 @@ export function ShatteredCityHero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <div className="flex items-center gap-3">
-            <span className="case-label text-gold">// THE SECOND NOVEL</span>
+            <span className="case-label text-gold">// SCIENCE-FANTASY PROJECT</span>
             <span aria-hidden="true" className="steel-hairline" />
           </div>
 
@@ -106,7 +106,7 @@ export function ShatteredCityHero() {
           <div className="mt-10 flex items-center gap-3">
             <span aria-hidden="true" className="ember-hairline" />
             <p className="font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
-              THE SHATTERED CITY · SECOND NOVEL · FILE 002
+              THE SHATTERED CITY · SCIENCE-FANTASY · FILE 002
             </p>
           </div>
         </motion.div>
@@ -161,7 +161,7 @@ export function ShatteredCityHero() {
             </div>
             <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
               <span className="h-1 w-1 rounded-full bg-gold" aria-hidden="true" />
-              FILE 002 · SCIENCE-FANTASY · SECOND NOVEL
+              FILE 002 · SCIENCE-FANTASY · CHAPTER ONE FREE
             </div>
           </div>
         </motion.div>

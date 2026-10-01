@@ -7,10 +7,10 @@ const db = new PrismaClient();
  * Idempotent: clears all tables, then re-creates the canonical content.
  * Run with: `bun run prisma:seed`
  *
- * Content reflects the real Duke Savage trilogy:
- *   Book 1 — Ghosts in the Ash (published)
- *   Book 2 — Residue (forthcoming)
- *   Book 3 — The Record (forthcoming)
+ * Content reflects reality: Ghosts in the Ash is an UNPUBLISHED manuscript
+ * (private, no release date). Future Duke Savage volumes (Residue, The
+ * Record) are intentionally NOT seeded — the site must not present
+ * unwritten/unpublished titles as forthcoming books.
  */
 
 async function main() {
@@ -37,40 +37,10 @@ async function main() {
         "Duke Savage is fifty-three — a former investigative journalist turned private investigator operating out of a cramped office above a pawnshop in Los Angeles. Estranged from his daughter Julie and struggling to stay ahead of the addictions and regrets accumulated across decades, Duke survives by taking the cases nobody else wants. When an encrypted message warns that a young woman is running out of time, he begins searching for Sarah Chu, a twenty-seven-year-old data analyst who appears to have vanished without explanation. What he discovers is more disturbing than a disappearance: Sarah has been systematically erased from the administrative systems that govern modern life — employment records, housing data, medical access, financial history — transformed from a living person into what the system classifies as an administrative variance. The trail leads to Victoria Cross, a former insider exposing a powerful network known as the Babylon Circuit, which has developed a method for quietly displacing vulnerable people from valuable property corridors while remaining entirely within the law. Nobody broke the law. The law was the mechanism.",
       excerpt:
         "The house was a rental on Fontenelle Boulevard, the kind of property that existed in the kind of neglected rental where weeds choked the lawn and the furnace groaned like it was already spring. Two bedrooms, a yard that had given up, and the same furnace that ran three months behind the weather.\n\nThe man who lived there had been renting it for eleven months under a lease that was due for renewal in six weeks, though the lease would not be renewed. That had already been decided by people who would never see the property or know its address. The decision existed in a different document, in a different city, filed under a category that had no official name.\n\nThe street was quiet at 2 a.m. It was the kind of quiet that a Midwestern winter produced — not peaceful, but sealed. The cold kept people inside and kept sound close to the ground and kept the city's overnight processes running without witnesses.\n\nThe man inside the house had a daughter. Eight years old. She slept in the back bedroom with a lamp on — not from fear, but from habit, the specific comfort of a child who had learned that darkness was negotiable and light was a decision you could make for yourself. The lamp threw a warm stripe under the closed door. In the hallway, it looked like a signal.\n\nThe man was at his desk when they came through the door. He had a transcript in front of him, forty-three pages, double-spaced, the testimony of a man who had agreed to speak on the condition that his name would never appear in print and his family would never be endangered. The man at the desk had made all three promises. He had meant them. He had not yet understood that promises required infrastructure to keep, and that his infrastructure was already compromised.\n\nThe door came in on the second impact. Thirty seconds was enough. The man put the transcript in the furnace on his way through the kitchen. That was the right decision and he knew it and made it without hesitation, which was the last clean decision of the evening.\n\nWhat followed was not clean. It lasted four minutes. The intention was communication. The message was: you are not protected. Your promises are not infrastructure. The story does not exist. The message was delivered.\n\nWhat had not been factored — what existed in no document, no operational brief, no risk assessment — was the child. She appeared at the top of the stairs at the two-minute mark, drawn by the noise the way kids are drawn to anything that sounds wrong. She stood at the top of the stairs in her nightgown with the lamp light behind her and she looked down at the hallway. She could not tell them apart.\n\nThe variable had a daughter. The daughter had a wound now that had no name yet, that would take years to surface and longer to understand, that would express itself as distance and then as the specific vocabulary of a woman who had learned to say what she meant because the alternative — the elaborate interior architecture of not saying it — had been built by her father and she had watched what it cost him.\n\nThe men left. The man on the floor of his hallway got up. This was also noted — that he got up, that he always got up, that this quality in him was both his value and his problem. A man who didn't get up was a solved problem. A man who got up was a variable that required ongoing management.\n\nHe would require ongoing management for the next twenty-five years.\n\nThe transcript was ash. The informant would be dead in six days. The story did not run. The organisation noted the outcome in its records under the category it used for resolved operational risks: MANAGED. VARIABLE CONTAINED. MONITORING ONGOING.\n\nThe child went back to her room.\n\nShe left the lamp on.",
-      releaseDate: new Date("2026-09-15"),
-      status: "published",
+      releaseDate: null,
+      status: "private",
       coverUrl: "/images/books/ghosts-in-the-ash.jpg",
       featured: true,
-    },
-    {
-      title: "Residue",
-      series: "Duke Savage",
-      seriesIndex: 2,
-      subtitle: "A Duke Savage Novel",
-      tagline:
-        "Power doesn't hide. It franchises. The mechanism Duke wounded in Book 1 has learned to hide better — and this time it's running on healthcare.",
-      description:
-        "The heat of the first case turns colder. More institutional. More dangerous. Duke is no longer operating in a case he controls; he's operating inside an architecture that was designed around people like him. When adults in supportive housing programs begin disappearing — their records scrambled by a new data platform called CONTINUUM — Duke traces the same architecture he exposed in Book 1, now franchised into healthcare and deployed across seven states. The man who designed the model is Thomas R. Carver, and he watched the first prosecution as a learning event. Meanwhile, Duke's daughter Julie has been running her own parallel investigation for eleven weeks without telling him. The case closes. The federal record exists. The audit is never closed.",
-      excerpt: null,
-      releaseDate: new Date("2027-05-01"),
-      status: "forthcoming",
-      coverUrl: "",
-      featured: false,
-    },
-    {
-      title: "The Record",
-      series: "Duke Savage",
-      seriesIndex: 3,
-      subtitle: "A Duke Savage Novel",
-      tagline:
-        "The mechanism doesn't fear exposure. It fears irrelevance. The final case goes after the federal policy framework itself.",
-      description:
-        "Colder than the second book. Quieter. More personal. The gonzo paranoia has been replaced by something surgical. Duke is older. The case is bigger. The cost is closer to home. Carver's play is no longer a housing corridor or a healthcare platform — it is the federal data governance framework itself. A single line of policy Carver signed in 2019 is about to become the foundation of a new federal data integration standard applied across eleven agencies and forty-two states. If it passes, the architecture Duke has spent two books exposing becomes the operating system for the government's interaction with the most vulnerable populations in the country. Not a corridor. Not a platform. A standard. The mechanism doesn't hide in companies anymore. It hides in policy. And the weapon Duke reaches for is one he put down fifteen years ago: journalism.",
-      excerpt: null,
-      releaseDate: new Date("2028-03-01"),
-      status: "forthcoming",
-      coverUrl: "",
-      featured: false,
     },
   ];
 

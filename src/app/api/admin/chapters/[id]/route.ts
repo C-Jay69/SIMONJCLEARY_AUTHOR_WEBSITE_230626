@@ -13,7 +13,9 @@ function checkPassword(req: Request): boolean {
 const schema = z.object({
   excerpt: z.string().nullable(),
   tagline: z.string().nullable().optional(),
-  description: z.string().nullable().optional(),
+  // Book.description is a required (non-nullable) column, so an update must
+  // never write null into it — omit the field to leave it unchanged.
+  description: z.string().min(1).optional(),
 });
 
 /** PUT /api/admin/chapters/[id] — update a book's excerpt/tagline/description. */
@@ -54,7 +56,7 @@ export async function PUT(
       data: {
         excerpt: parsed.data.excerpt ?? null,
         ...(parsed.data.tagline !== undefined && { tagline: parsed.data.tagline ?? null }),
-        ...(parsed.data.description !== undefined && { description: parsed.data.description ?? null }),
+        ...(parsed.data.description !== undefined && { description: parsed.data.description }),
       },
     });
     revalidatePath("/", "page");

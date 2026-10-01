@@ -137,7 +137,7 @@ export function Hero() {
             <Link
               href="/the-shattered-city"
               className="group relative block w-full max-w-[150px]"
-              aria-label="The Shattered City — Second Novel"
+              aria-label="The Shattered City — Science-Fantasy Project"
             >
               <div className="relative aspect-[2/3] w-full rotate-[2deg] overflow-hidden rounded-md shadow-[0_25px_60px_-25px_rgba(0,0,0,0.9)] ring-1 ring-gold/30 transition-transform duration-500 group-hover:rotate-0">
                 <img
@@ -150,7 +150,7 @@ export function Hero() {
                 <div className="pointer-events-none absolute inset-0 rounded-md ring-1 ring-inset ring-black/30" />
               </div>
               <span className="mt-3 block text-center font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-gold">
-                The Shattered City · Book 02
+                The Shattered City · Chapter One
               </span>
             </Link>
           </div>

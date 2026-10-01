@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { BookMarked, Feather, Globe, MapPin, Newspaper, PenLine } from "lucide-react";
 
 import { Section } from "@/components/site/section";
@@ -10,7 +9,7 @@ import { useT } from "@/lib/i18n";
 
 const BIO_PARAGRAPHS = [
   "Simon J. Cleary is an Irish-born writer and entrepreneur. His fascination with institutional systems, public narratives, and the hidden mechanisms that shape modern life informed the creation of GHOSTS IN THE ASH — written across twenty-seven drafts and exploring administrative power, personal responsibility, and the cost of pursuing truth when the people closest to you are paying the price.",
-  "He didn't fully understand what he'd written until the night his wife's friends went quiet listening to it and told him: \u201CThe dry, sarcastic, notices-everything cynic — that's one hundred percent you.\u201D GHOSTS IN THE ASH is his debut novel and the first installment in the Duke Savage trilogy.",
+  "He didn't fully understand what he'd written until the night his wife's friends went quiet listening to it and told him: \u201CThe dry, sarcastic, notices-everything cynic — that's one hundred percent you.\u201D GHOSTS IN THE ASH is his first novel and the opening of the Duke Savage trilogy — a completed manuscript currently being queried with literary agents.",
 ];
 
 const VITAL_STATS: {
@@ -25,12 +24,8 @@ const VITAL_STATS: {
   { icon: MapPin, labelKey: "about.setting", valueKey: "about.settingValue" },
 ];
 
-const SOCIALS: { label: string; href: string; handle: string }[] = [
-  { label: "Twitter / X", href: "#", handle: "@simonjcleary" },
-  { label: "Instagram", href: "#", handle: "@simonjcleary" },
-  { label: "Goodreads", href: "#", handle: "Simon J Cleary" },
-  { label: "Substack", href: "#", handle: "The Savage Dispatch" },
-];
+// Social links are intentionally hidden until the real profiles exist —
+// placeholder "#" hrefs must never ship.
 
 export function AboutSection() {
   const t = useT();
@@ -100,24 +95,6 @@ export function AboutSection() {
               </div>
             ))}
           </dl>
-
-          {/* Socials */}
-          <div className="flex flex-wrap items-center gap-3">
-            {SOCIALS.map((s) => (
-              <Link
-                key={s.label}
-                href={s.href}
-                className="group rounded-md border border-border/60 bg-card/30 px-3 py-2 text-xs font-medium text-foreground/80 transition-colors hover:border-accent/50 hover:text-accent"
-              >
-                <span className="font-mono uppercase tracking-widest">
-                  {s.label}
-                </span>
-                <span className="ml-2 text-muted-foreground group-hover:text-accent/80">
-                  {s.handle}
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </Section>

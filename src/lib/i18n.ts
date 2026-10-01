@@ -38,25 +38,25 @@ const en: Dict = {
   "nav.contact": "Contact",
   "nav.shatteredCity": "The Shattered City",
   "nav.ghostsInTheAsh": "Ghosts in the Ash",
-  "nav.new": "New",
 
   // Hero
   "hero.eyebrow": "// AUTHOR · NOVELIST",
   "hero.comingSoon": "Explore the novels",
   "hero.readChapterFree": "Read Chapter 1 free",
   "hero.seriesTag": "Irish-born · Thrillers about the machinery underneath",
-  "hero.fileTag": "FILE 001 · DUKE SAVAGE · DEBUT",
+  "hero.fileTag": "FILE 001 · DUKE SAVAGE",
 
   // Books
   "books.eyebrow": "// THE NOVELS",
   "books.title": "The Novels",
-  "books.intro": "Two worlds to enter: the Duke Savage trilogy, and the science-fantasy second novel.",
+  "books.intro": "Two worlds in progress: the Duke Savage crime trilogy, and the science-fantasy of The Shattered City.",
   "books.new": "NEW",
   "books.forthcoming": "FORTHCOMING",
+  "books.inProgress": "IN PROGRESS",
   "books.book": "Book",
   "books.comingSoon": "Coming soon",
   "books.notifyMe": "Notify me",
-  "books.readNovel": "Read the novel",
+  "books.readNovel": "Explore the project",
   "books.readChapter": "Read Chapter 1 free",
   "books.buyDirect": "Buy the book",
   "books.buying": "Redirecting to checkout…",
@@ -65,10 +65,10 @@ const en: Dict = {
   // About
   "about.eyebrow": "// ABOUT THE AUTHOR",
   "about.title": "Irish-born. Los Angeles-set. Writing the system.",
-  "about.intro": "A debut novelist exploring how power learns to be invisible.",
+  "about.intro": "A novelist exploring how power learns to be invisible — first novel currently on submission.",
   "about.born": "Born",
   "about.background": "Background",
-  "about.debut": "Debut",
+  "about.debut": "First novel",
   "about.series": "Series",
   "about.setting": "Setting",
   "about.caption": "Simon J Cleary · Author photo",
@@ -82,7 +82,7 @@ const en: Dict = {
   "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
   "excerpt.title": "The prologue from Ghosts in the Ash",
   "excerpt.intro": "The origin of everything that follows. The lamp that never goes out.",
-  "excerpt.cta": "The rest of the prologue and the opening chapters live in the book.",
+  "excerpt.cta": "The rest of the prologue lives in the manuscript — join the dispatch to read it.",
   "excerpt.button": "Keep reading",
 
   // Case file
@@ -123,7 +123,7 @@ const en: Dict = {
   "events.upcoming": "Upcoming",
   "events.past": "Past",
   "events.tba": "T.B.A.",
-  "events.tbaDesc": "Appearances, readings, and festival dates for the Ghosts in the Ash launch will be posted here as they are confirmed. Join the dispatch below to be the first to know.",
+  "events.tbaDesc": "Appearances, readings, and festival dates will be posted here as they are confirmed. Join the dispatch below to be the first to know.",
   "events.upcomingTba": "Upcoming · T.B.A.",
   "events.upcomingTbaDesc": "New appearances will be posted here as they are confirmed.",
 
@@ -150,7 +150,7 @@ const en: Dict = {
   "newsletter.emailInvalidDesc": "Try again — we promise not to share it.",
   "newsletter.whatYouGet.opening": "The complete opening of Ghosts in the Ash, as a PDF.",
   "newsletter.whatYouGet.dispatch": "The Savage Dispatch — a sporadic letter from Simon on craft and the writing life.",
-  "newsletter.whatYouGet.signed": "First crack at signed-copy drops and tour dates.",
+  "newsletter.whatYouGet.signed": "Early word on readings, new chapters, and project news.",
 
   // Contact
   "contact.title": "Get in touch",
@@ -199,25 +199,25 @@ const es: Dict = {
   "nav.contact": "Contacto",
   "nav.shatteredCity": "The Shattered City",
   "nav.ghostsInTheAsh": "Ghosts in the Ash",
-  "nav.new": "Nuevo",
 
   // Hero
   "hero.eyebrow": "// AUTOR · NOVELISTA",
   "hero.comingSoon": "Explora las novelas",
   "hero.readChapterFree": "Lee el capítulo 1 gratis",
   "hero.seriesTag": "Nacido en Irlanda · Thrillers sobre la maquinaria invisible",
-  "hero.fileTag": "EXPEDIENTE 001 · DUKE SAVAGE · DEBUT",
+  "hero.fileTag": "EXPEDIENTE 001 · DUKE SAVAGE",
 
   // Books
   "books.eyebrow": "// LAS NOVELAS",
   "books.title": "Las novelas",
-  "books.intro": "Dos mundos a los que entrar: la trilogía de Duke Savage y la ciencia-fantasía de la segunda novela.",
+  "books.intro": "Dos mundos en gestación: la trilogía criminal de Duke Savage y la ciencia-fantasía de The Shattered City.",
   "books.new": "NUEVO",
   "books.forthcoming": "PRÓXIMAMENTE",
+  "books.inProgress": "EN CURSO",
   "books.book": "Libro",
   "books.comingSoon": "Próximamente",
   "books.notifyMe": "Avísame",
-  "books.readNovel": "Leer la novela",
+  "books.readNovel": "Explorar el proyecto",
   "books.readChapter": "Lee el capítulo 1 gratis",
   "books.buyDirect": "Comprar el libro",
   "books.buying": "Redirigiendo al pago…",
@@ -226,10 +226,10 @@ const es: Dict = {
   // About
   "about.eyebrow": "// SOBRE EL AUTOR",
   "about.title": "Nacido en Irlanda. Ambientada en Los Ángeles. Escribiendo el sistema.",
-  "about.intro": "Un novelista debut que explora cómo el poder aprende a hacerse invisible.",
+  "about.intro": "Un novelista que explora cómo el poder aprende a hacerse invisible; su primera novela está en proceso de presentación a agencias.",
   "about.born": "Nacido en",
   "about.background": "Formación",
-  "about.debut": "Debut",
+  "about.debut": "Primera novela",
   "about.series": "Serie",
   "about.setting": "Ambientación",
   "about.caption": "Simon J Cleary · Foto del autor",
@@ -243,7 +243,7 @@ const es: Dict = {
   "excerpt.eyebrow": "// PRÓLOGO · OMAHA, 1999",
   "excerpt.title": "El prólogo de Ghosts in the Ash",
   "excerpt.intro": "El origen de todo lo que sigue. La lámpara que nunca se apaga.",
-  "excerpt.cta": "El resto del prólogo y los primeros capítulos están en el libro.",
+  "excerpt.cta": "El resto del prólogo vive en el manuscrito — únete al dispatch para leerlo.",
   "excerpt.button": "Seguir leyendo",
 
   // Case file
@@ -284,7 +284,7 @@ const es: Dict = {
   "events.upcoming": "Próximos",
   "events.past": "Pasados",
   "events.tba": "P. A. C.",
-  "events.tbaDesc": "Las apariciones, lecturas y fechas de festivales para el lanzamiento de Ghosts in the Ash se publicarán aquí a medida que se confirmen. Únete al dispatch para ser el primero en saberlo.",
+  "events.tbaDesc": "Las apariciones, lecturas y fechas de festivales se publicarán aquí a medida que se confirmen. Únete al dispatch para ser el primero en saberlo.",
   "events.upcomingTba": "Próximos · P. A. C.",
   "events.upcomingTbaDesc": "Las nuevas apariciones se publicarán aquí a medida que se confirmen.",
 
@@ -311,7 +311,7 @@ const es: Dict = {
   "newsletter.emailInvalidDesc": "Inténtalo de nuevo — prometemos no compartirlo.",
   "newsletter.whatYouGet.opening": "El inicio completo de Ghosts in the Ash, en PDF.",
   "newsletter.whatYouGet.dispatch": "The Savage Dispatch — una carta esporádica de Simon sobre el oficio y la vida de escritor.",
-  "newsletter.whatYouGet.signed": "Primer acceso a copias firmadas y fechas de gira.",
+  "newsletter.whatYouGet.signed": "Noticias anticipadas sobre lecturas, capítulos y novedades del proyecto.",
 
   // Contact
   "contact.title": "Ponte en contacto",
@@ -360,25 +360,25 @@ const fr: Dict = {
   "nav.contact": "Contact",
   "nav.shatteredCity": "The Shattered City",
   "nav.ghostsInTheAsh": "Ghosts in the Ash",
-  "nav.new": "Nouveau",
 
   // Hero
   "hero.eyebrow": "// ROMANCIER",
   "hero.comingSoon": "Découvrir les romans",
   "hero.readChapterFree": "Lire le chapitre 1 gratuitement",
   "hero.seriesTag": "Né en Irlande · Des thrillers sur la machinerie invisible",
-  "hero.fileTag": "DOSSIER 001 · DUKE SAVAGE · PREMIER ROMAN",
+  "hero.fileTag": "DOSSIER 001 · DUKE SAVAGE",
 
   // Books
   "books.eyebrow": "// LES ROMANS",
   "books.title": "Les romans",
-  "books.intro": "Deux mondes où entrer : la trilogie Duke Savage et le second roman de science-fantasy.",
+  "books.intro": "Deux mondes en gestation : la trilogie policière Duke Savage et la science-fantasy de The Shattered City.",
   "books.new": "NOUVEAU",
   "books.forthcoming": "À PARAÎTRE",
+  "books.inProgress": "EN COURS",
   "books.book": "Livre",
   "books.comingSoon": "Bientôt disponible",
   "books.notifyMe": "Prévenez-moi",
-  "books.readNovel": "Lire le roman",
+  "books.readNovel": "Découvrir le projet",
   "books.readChapter": "Lire le chapitre 1 gratuitement",
   "books.buyDirect": "Acheter le livre",
   "books.buying": "Redirection vers le paiement…",
@@ -387,7 +387,7 @@ const fr: Dict = {
   // About
   "about.eyebrow": "// L'AUTEUR",
   "about.title": "Né en Irlande. L'action à Los Angeles. Écrire le système.",
-  "about.intro": "Un romancier du premier roman qui explore comment le pouvoir apprend à devenir invisible.",
+  "about.intro": "Un romancier qui explore comment le pouvoir apprend à devenir invisible — premier roman en cours de présentation aux agents.",
   "about.born": "Né en",
   "about.background": "Parcours",
   "about.debut": "Premier roman",
@@ -404,7 +404,7 @@ const fr: Dict = {
   "excerpt.eyebrow": "// PROLOGUE · OMAHA, 1999",
   "excerpt.title": "Le prologue de Ghosts in the Ash",
   "excerpt.intro": "L'origine de tout ce qui suit. La lampe qui ne s'éteint jamais.",
-  "excerpt.cta": "Le reste du prologue et les premiers chapitres sont dans le livre.",
+  "excerpt.cta": "La suite du prologue vit dans le manuscrit — rejoignez le dispatch pour la lire.",
   "excerpt.button": "Continuer la lecture",
 
   // Case file
@@ -445,7 +445,7 @@ const fr: Dict = {
   "events.upcoming": "À venir",
   "events.past": "Passés",
   "events.tba": "À annoncer",
-  "events.tbaDesc": "Les apparitions, lectures et dates de festivals pour le lancement de Ghosts in the Ash seront publiées ici au fur et à mesure de leur confirmation. Inscrivez-vous au dispatch pour être le premier informé.",
+  "events.tbaDesc": "Les apparitions, lectures et dates de festivals seront publiées ici au fur et à mesure de leur confirmation. Inscrivez-vous au dispatch pour être le premier informé.",
   "events.upcomingTba": "À venir · À annoncer",
   "events.upcomingTbaDesc": "Les nouvelles apparitions seront publiées ici au fur et à mesure de leur confirmation.",
 
@@ -472,7 +472,7 @@ const fr: Dict = {
   "newsletter.emailInvalidDesc": "Réessayez — nous promettons de ne pas le partager.",
   "newsletter.whatYouGet.opening": "Le début complet de Ghosts in the Ash, en PDF.",
   "newsletter.whatYouGet.dispatch": "The Savage Dispatch — une lettre sporadique de Simon sur l'art et la vie d'écrivain.",
-  "newsletter.whatYouGet.signed": "Accès en avant-première aux exemplaires dédicacés et aux dates de tournée.",
+  "newsletter.whatYouGet.signed": "Des nouvelles en avant-première : lectures, chapitres et actualités du projet.",
 
   // Contact
   "contact.title": "Prendre contact",
@@ -521,25 +521,25 @@ const zh: Dict = {
   "nav.contact": "联系",
   "nav.shatteredCity": "破碎之城",
   "nav.ghostsInTheAsh": "Ghosts in the Ash",
-  "nav.new": "新",
 
   // Hero
   "hero.eyebrow": "// 作者 · 小说家",
   "hero.comingSoon": "浏览小说",
   "hero.readChapterFree": "免费阅读第一章",
   "hero.seriesTag": "生于爱尔兰 · 关于隐形机器的惊悚小说",
-  "hero.fileTag": "档案 001 · 杜克·萨维奇 · 处女作",
+  "hero.fileTag": "档案 001 · 杜克·萨维奇",
 
   // Books
   "books.eyebrow": "// 小说",
   "books.title": "小说",
-  "books.intro": "两个可供沉浸的世界：杜克·萨维奇三部曲，以及第二部科学奇幻小说。",
+  "books.intro": "两个正在孕育的世界：杜克·萨维奇犯罪三部曲，以及《破碎之城》的科学奇幻。",
   "books.new": "新作",
   "books.forthcoming": "即将出版",
+  "books.inProgress": "创作中",
   "books.book": "第",
   "books.comingSoon": "即将上市",
   "books.notifyMe": "到货通知",
-  "books.readNovel": "阅读小说",
+  "books.readNovel": "了解项目",
   "books.readChapter": "免费阅读第一章",
   "books.buyDirect": "购买本书",
   "books.buying": "正在跳转至结账…",
@@ -548,10 +548,10 @@ const zh: Dict = {
   // About
   "about.eyebrow": "// 关于作者",
   "about.title": "生于爱尔兰。以洛杉矶为背景。书写体制。",
-  "about.intro": "一位探索权力如何学会隐形的处女作小说家。",
+  "about.intro": "一位探索权力如何学会隐形的小说家——首部长篇正在投稿中。",
   "about.born": "出生地",
   "about.background": "背景",
-  "about.debut": "处女作",
+  "about.debut": "首部长篇",
   "about.series": "系列",
   "about.setting": "背景地",
   "about.caption": "西蒙·J·克莱瑞 · 作者照片",
@@ -565,7 +565,7 @@ const zh: Dict = {
   "excerpt.eyebrow": "// 序章 · 奥马哈，1999",
   "excerpt.title": "《Ghosts in the Ash》序章",
   "excerpt.intro": "一切后续的起源。那盏永不熄灭的灯。",
-  "excerpt.cta": "序章其余部分与开篇章节都在书中。",
+  "excerpt.cta": "序章的其余部分藏于手稿之中——订阅来信即可阅读。",
   "excerpt.button": "继续阅读",
 
   // Case file
@@ -606,7 +606,7 @@ const zh: Dict = {
   "events.upcoming": "即将",
   "events.past": "已过",
   "events.tba": "待定",
-  "events.tbaDesc": "《Ghosts in the Ash》新书发布的露面、朗读及文学节日期将在确认后公布于此。订阅下方来信，第一时间获知。",
+  "events.tbaDesc": "露面、朗读会及文学节日程将在确认后公布于此。订阅下方来信，第一时间获知。",
   "events.upcomingTba": "即将 · 待定",
   "events.upcomingTbaDesc": "新的活动安排将在确认后公布于此。",
 
@@ -633,7 +633,7 @@ const zh: Dict = {
   "newsletter.emailInvalidDesc": "再试一次 —— 我们保证不外泄。",
   "newsletter.whatYouGet.opening": "《Ghosts in the Ash》完整开篇，PDF 格式。",
   "newsletter.whatYouGet.dispatch": "The Savage Dispatch —— 西蒙不定期寄出的信件，谈技艺与写作生涯。",
-  "newsletter.whatYouGet.signed": "优先获得签名版上架与巡回活动信息。",
+  "newsletter.whatYouGet.signed": "优先获得朗读会、章节与项目动态的消息。",
 
   // Contact
   "contact.title": "联系",

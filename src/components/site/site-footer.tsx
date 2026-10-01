@@ -17,12 +17,8 @@ const NAV_KEYS: { key: string; href: string }[] = [
   { key: "nav.contact", href: "#contact" },
 ];
 
-const SOCIALS: { label: string; href: string }[] = [
-  { label: "Twitter / X", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Goodreads", href: "#" },
-  { label: "Substack", href: "#" },
-];
+// Social links are intentionally hidden until the real profiles exist —
+// placeholder "#" hrefs must never ship.
 
 type SiteFooterProps = {
   className?: string;
@@ -66,7 +62,7 @@ export function SiteFooter({ className, podcastEpisodes = [] }: SiteFooterProps)
           {/* Nav */}
           <nav
             aria-label="Footer"
-            className="md:col-span-4"
+            className="md:col-span-7"
           >
             <span className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
               {t("footer.index")}
@@ -84,25 +80,6 @@ export function SiteFooter({ className, podcastEpisodes = [] }: SiteFooterProps)
               ))}
             </ul>
           </nav>
-
-          {/* Socials */}
-          <div className="md:col-span-3">
-            <span className="font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
-              {t("footer.elsewhere")}
-            </span>
-            <ul className="mt-4 flex flex-col gap-2">
-              {SOCIALS.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    className="text-sm text-foreground/80 transition-colors hover:text-accent"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-border/40 pt-6 sm:flex-row sm:items-center sm:justify-between">

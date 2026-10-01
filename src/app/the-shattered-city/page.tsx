@@ -4,22 +4,21 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Section } from "@/components/site/section";
 import { ShatteredCityHero } from "@/components/site/shattered-city-hero";
-import { BuyButton } from "@/components/site/buy-button";
 
 import { chapterOne } from "@/content/shattered-city-chapter-one";
 import { cast, storyIntro } from "@/content/shattered-city-cast";
 
 const pageDescription =
-  "The Shattered City — the second novel by Simon J. Cleary. An adult science-fantasy tale of ruin and the people who carry its power. Read Chapter One free.";
+  "The Shattered City — an adult science-fantasy project by Simon J. Cleary. A tale of ruin and the people who carry its power. Read Chapter One free.";
 
 export const metadata: Metadata = {
-  title: "The Shattered City — Second Novel",
+  title: "The Shattered City — Science-Fantasy Project",
   description: pageDescription,
   openGraph: {
     type: "website",
     url: "https://simonjcleary.com/the-shattered-city",
     siteName: "Simon J Cleary — Author",
-    title: "The Shattered City — Second Novel",
+    title: "The Shattered City — Science-Fantasy Project",
     description: pageDescription,
     images: [
       {
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Shattered City — Second Novel",
+    title: "The Shattered City — Science-Fantasy Project",
     description: pageDescription,
     images: ["/images/books/the-shattered-city.png"],
   },
@@ -114,7 +113,7 @@ export default function ShatteredCityPage() {
           width="default"
           eyebrow="// CHAPTER ONE · READ FREE"
           title="Read the opening of The Shattered City"
-          intro="The full first chapter, on the house. Same deal as the debut: if it earns your attention, the rest of the story follows."
+          intro="The complete first chapter, free to read — a sample from an unpublished manuscript."
         >
           <article className="mx-auto mt-8 w-full max-w-3xl rounded-lg border border-wetsteel/20 bg-card/30 p-8 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.8)] md:p-12">
             <header className="flex items-start justify-between gap-4 border-b border-border/40 pb-6">
@@ -161,14 +160,11 @@ export default function ShatteredCityPage() {
 
             <footer className="mt-10 flex flex-col items-start gap-4 border-t border-border/40 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-md font-serif text-base italic leading-snug text-muted-foreground">
-                Like what you read? The full novel is ready now.
+                That was Chapter One — a free sample of an unpublished
+                manuscript. The Shattered City stays online while the book
+                finds its home.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <BuyButton
-                  slug="the-shattered-city"
-                  label="Buy the e-book"
-                  className="bg-gold px-5 py-2.5 text-background hover:bg-gold/90"
-                />
                 <a
                   href="/#newsletter"
                   className="rounded-md border border-wetsteel/40 px-5 py-2.5 font-mono text-sm uppercase tracking-widest text-foreground transition-colors hover:border-gold/60 hover:text-gold"
@@ -183,9 +179,9 @@ export default function ShatteredCityPage() {
         {/* Return to the main site */}
         <Section
           align="center"
-          eyebrow="// BACK TO THE STACK"
-          title="The debut is still there"
-          intro="Ghosts in the Ash and the Duke Savage trilogy are live on the main page."
+          eyebrow="// ANOTHER PROJECT"
+          title="Explore Ghosts in the Ash"
+          intro="An adult literary crime thriller about institutional power, erasure, and the investigator who notices."
         >
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a

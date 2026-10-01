@@ -66,7 +66,7 @@ export function GhostsHero() {
           <div className="mt-6 flex items-center gap-3">
             <span
               className="rounded-full border border-accent/40 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.25em] text-accent"
-              title="Published — The Duke Savage Trilogy"
+              title="Adult literary crime thriller"
             >
               {ghostsHero.positioning}
             </span>
@@ -159,7 +159,7 @@ export function GhostsHero() {
             </div>
             <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground">
               <span className="h-1 w-1 rounded-full bg-accent" aria-hidden="true" />
-              THE DEBUT · NOW AVAILABLE
+              A DUKE SAVAGE NOVEL · UNPUBLISHED
             </div>
           </div>
         </motion.div>

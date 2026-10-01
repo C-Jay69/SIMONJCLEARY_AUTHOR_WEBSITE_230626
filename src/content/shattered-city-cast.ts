@@ -7,7 +7,7 @@
  */
 
 export const storyIntro = {
-  eyebrow: "// THE SECOND NOVEL",
+  eyebrow: "// SCIENCE-FANTASY PROJECT",
   positioning: "ADULT SCIENCE-FANTASY",
   title: "A city that flushes its failures on schedule. Three sisters climb out of the wreckage.",
   body: [

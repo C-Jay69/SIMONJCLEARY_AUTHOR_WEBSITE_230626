@@ -161,12 +161,6 @@ export function SiteHeader() {
             className="relative ml-1 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-gold"
           >
             {t("nav.shatteredCity")}
-            <span
-              aria-hidden="true"
-              className="rounded-sm border border-gold/40 px-1 py-0.5 font-mono text-[0.5rem] uppercase tracking-widest text-gold"
-            >
-              {t("nav.new")}
-            </span>
           </Link>
         </nav>
 
@@ -227,12 +221,6 @@ export function SiteHeader() {
                     className="flex items-center justify-between rounded-md px-3 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-gold/10 hover:text-gold"
                   >
                     {t("nav.shatteredCity")}
-                    <span
-                      aria-hidden="true"
-                      className="rounded-sm border border-gold/40 px-1.5 py-0.5 font-mono text-[0.5rem] uppercase tracking-widest text-gold"
-                    >
-                      {t("nav.new")}
-                    </span>
                   </Link>
                 </SheetClose>
               </nav>
